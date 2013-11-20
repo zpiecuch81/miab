@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Message In A Bottle</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_leaveMsg">Leave a message</string>
+    <string name="button_throwMsg">Throw a message</string>
+    <string name="button_GPS">GPS</string>
+    <string name="button_net">Network</string>
+
+</resources>
