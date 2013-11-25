@@ -8,6 +8,5 @@
     <string name="button_GPS">GPS</string>
     <string name="button_net">Network</string>
     <string name="title_activity_message_create">Message In A Bottle</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>
