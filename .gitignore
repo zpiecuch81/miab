@@ -1,2 +1,3 @@
 .metadata/*
-MIAB/bin/classes/*
+MIAB/bin/*
+MIAB/gen/*
