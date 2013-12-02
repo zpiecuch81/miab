@@ -1,3 +1,5 @@
 .metadata/*
 MIAB/bin/*
 MIAB/gen/*
+MIAB_test/bin/*
+MIAB_test/gen/*

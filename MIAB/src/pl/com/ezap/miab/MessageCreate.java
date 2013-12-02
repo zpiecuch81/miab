@@ -15,6 +15,7 @@ public class MessageCreate extends Activity {
 		setContentView(R.layout.activity_message_create);
 		EditText text = (EditText)findViewById(R.id.editTextMessage);
 		text.setFilters( new InputFilter[] { new InputFilter.LengthFilter(10)} );
+
 	}
 
 	@Override
