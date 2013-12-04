@@ -17,7 +17,7 @@ import android.widget.CheckBox;
 public class MainActivity extends Activity{
 
 	private GPSDealer m_GPS;
-	private boolean m_GPS_OK; 
+	private boolean m_GPS_OK;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
