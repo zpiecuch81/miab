@@ -3,3 +3,7 @@ MIAB/bin/*
 MIAB/gen/*
 MIAB_test/bin/*
 MIAB_test/gen/*
+MIAB_Front/bin/*
+MIAB_Front/gen/*
+MIAB_Front-AppEngine/bin/*
+MIAB_Front-AppEngine/gen/*
