@@ -38,7 +38,7 @@ public class MIAB {
 	public void setLocation(GeoPoint m_location) {
 		this.m_location = m_location;
 	}
-	public boolean isFlowing() {
+	public boolean getIsFlowing() {
 		return m_isFlowing;
 	}
 	public void setIsFlowing(boolean m_isFlowing) {

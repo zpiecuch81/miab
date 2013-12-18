@@ -40,7 +40,7 @@ public class MessageCreate extends Activity {
 			MIAB miab = new MIAB();
 			miab.setDeviceRegistrationID( Long.toString(new java.util.Date().getTime()) );
 			miab.setMessage( message.m_message );
-			miab.setFlowing( message.m_isFlowing );
+			miab.setIsFlowing( message.m_isFlowing );
 			miab.setTimeStamp( new java.util.Date().getTime() );
 //			GeoPoint point = new GeoPoint();
 //			if( message.m_location == null ) {

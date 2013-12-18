@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ykhqEJ_LDFBNzs2RnXtIc2-QyAc/PtO31Tyz20sTwI21NHc-WuycgpE\"",
+ "etag": "\"ykhqEJ_LDFBNzs2RnXtIc2-QyAc/zKZPdfCKZLtEkVZ89FBoXkEgeHM\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -107,9 +107,6 @@
    "properties": {
     "deviceRegistrationID": {
      "type": "string"
-    },
-    "flowing": {
-     "type": "boolean"
     },
     "isFlowing": {
      "type": "boolean"
