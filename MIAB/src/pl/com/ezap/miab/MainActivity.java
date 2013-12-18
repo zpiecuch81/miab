@@ -75,7 +75,7 @@ public class MainActivity extends Activity{
     }
 
     private void startMessageCreation(boolean isFlowing) {
-    	MIAB.getInstance().m_isFlowing = isFlowing;
+    	Message.getInstance().m_isFlowing = isFlowing;
 
     	Intent intent = new Intent(this, MessageCreate.class);
     	startActivity(intent);

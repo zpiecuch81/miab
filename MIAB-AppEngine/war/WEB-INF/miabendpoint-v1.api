@@ -1,0 +1,216 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://message-in-bottle.appspot.com/_ah/api",
+  "name" : "miabendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://message-in-bottle.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "com.pl",
+  "ownerName" : "com.pl",
+  "packagePath" : "ezap.miab",
+  "methods" : {
+    "miabendpoint.updateMIAB" : {
+      "path" : "miab",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.updateMIAB",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "miabendpoint.getMIAB" : {
+      "path" : "miab/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.getMIAB",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "miabendpoint.listMIAB" : {
+      "path" : "miab",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.listMIAB",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "miabendpoint.removeMIAB" : {
+      "path" : "miab/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.removeMIAB",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "miabendpoint.insertMIAB" : {
+      "path" : "miab",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.insertMIAB",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "MIAB" : {
+        "id" : "MIAB",
+        "type" : "object",
+        "properties" : {
+          "deviceRegistrationID" : {
+            "type" : "string"
+          },
+          "location" : {
+            "$ref" : "GeoPoint"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "timeStamp" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "flowing" : {
+            "type" : "boolean"
+          },
+          "isFlowing" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "GeoPoint" : {
+        "id" : "GeoPoint",
+        "type" : "object",
+        "properties" : {
+          "latitude" : {
+            "type" : "number"
+          },
+          "longitude" : {
+            "type" : "number"
+          }
+        }
+      },
+      "CollectionResponse_MIAB" : {
+        "id" : "CollectionResponse_MIAB",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "MIAB"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "pl.com.ezap.miab.MIABEndpoint.updateMIAB" : {
+        "request" : {
+          "$ref" : "MIAB"
+        },
+        "response" : {
+          "$ref" : "MIAB"
+        }
+      },
+      "pl.com.ezap.miab.MIABEndpoint.getMIAB" : {
+        "response" : {
+          "$ref" : "MIAB"
+        }
+      },
+      "pl.com.ezap.miab.MIABEndpoint.listMIAB" : {
+        "response" : {
+          "$ref" : "CollectionResponse_MIAB"
+        }
+      },
+      "pl.com.ezap.miab.MIABEndpoint.removeMIAB" : {
+      },
+      "pl.com.ezap.miab.MIABEndpoint.insertMIAB" : {
+        "request" : {
+          "$ref" : "MIAB"
+        },
+        "response" : {
+          "$ref" : "MIAB"
+        }
+      }
+    }
+  }
+}

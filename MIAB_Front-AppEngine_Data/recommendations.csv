@@ -1,5 +1,0 @@
-description,key,title,imageUrl,expiration
-nie kupuj tu wiesniaku,1,Brand X dresses are on sale,http://url_to_an_image_for_the_offer.jpg,12/31/2099
-drogo ze ja pierdziele!!!,2,15% off Shoes matching your purse,http://url_to_an_image_for_the_offer.jpg,12/31/2099
-The price of this XYZ dress was $%1$d when you recently did price check for it. Since then the price has been reduced to $%2$d,template1,Lower price on XYZ dress;XYZ dress,http://url_template_to_an_image_for_the_personalized_offer%d.jpg
-
