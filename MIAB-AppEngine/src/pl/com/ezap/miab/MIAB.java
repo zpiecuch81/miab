@@ -5,55 +5,83 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.google.appengine.api.search.GeoPoint;
+import com.google.appengine.api.datastore.GeoPt;
 
 @Entity
 public class MIAB {
 
-	private String m_message;
-	private GeoPoint m_location;
-	private boolean m_isFlowing;
-	private long m_timeStamp;
+	private String message;
+	private GeoPt location;
+	private GeoPt deltaLocation;
+	private boolean isFlowing;
+	private long timeStamp;
+	private long geoIndex;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String deviceRegistrationID;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private int ID;
 
 	public MIAB() {
 		setMessage("");
 		setLocation(null);
-		setIsFlowing(false);
+		setFlowing(false);
 		setTimeStamp(0);
+		setGeoIndex(0);
 	}
 
 	public String getMessage() {
-		return m_message;
+		return message;
 	}
-	public void setMessage(String m_message) {
-		this.m_message = m_message;
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public GeoPoint getLocation() {
-		return m_location;
+
+	public GeoPt getLocation() {
+		return location;
 	}
-	public void setLocation(GeoPoint m_location) {
-		this.m_location = m_location;
+
+	public void setLocation(GeoPt location) {
+		this.location = location;
 	}
-	public boolean getIsFlowing() {
-		return m_isFlowing;
+
+	public GeoPt getDeltaLocation() {
+		return deltaLocation;
 	}
-	public void setIsFlowing(boolean m_isFlowing) {
-		this.m_isFlowing = m_isFlowing;
+
+	public void setDeltaLocation(GeoPt deltaLocation) {
+		this.deltaLocation = deltaLocation;
 	}
+
+	public boolean isFlowing() {
+		return isFlowing;
+	}
+
+	public void setFlowing(boolean isFlowing) {
+		this.isFlowing = isFlowing;
+	}
+
 	public long getTimeStamp() {
-		return m_timeStamp;
+		return timeStamp;
 	}
-	public void setTimeStamp(long m_timeStamp) {
-		this.m_timeStamp = m_timeStamp;
+
+	public void setTimeStamp(long timeStamp) {
+		this.timeStamp = timeStamp;
 	}
-	public String getDeviceRegistrationID() {
-		return deviceRegistrationID;
+
+	public long getGeoIndex() {
+		return geoIndex;
 	}
-	public void setDeviceRegistrationID(String deviceRegistrationID) {
-		this.deviceRegistrationID = deviceRegistrationID;
+
+	public void setGeoIndex(long geoIndex) {
+		this.geoIndex = geoIndex;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int geoIndex) {
+		this.ID = geoIndex;
 	}
 }

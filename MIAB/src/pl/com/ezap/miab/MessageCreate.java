@@ -8,7 +8,7 @@ import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
-import pl.com.ezap.miab.miabendpoint.model.GeoPoint;
+import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MIAB;
 import android.location.Location;
 import android.location.LocationManager;
@@ -38,19 +38,24 @@ public class MessageCreate extends Activity {
 			Miabendpoint endpoint = CloudEndpointUtils.updateBuilder( endpointBuilder ).build();
 			Message message = Message.getInstance();
 			MIAB miab = new MIAB();
-			miab.setDeviceRegistrationID( Long.toString(new java.util.Date().getTime()) );
 			miab.setMessage( message.m_message );
-			miab.setIsFlowing( message.m_isFlowing );
+			miab.setFlowing( message.m_isFlowing );
 			miab.setTimeStamp( new java.util.Date().getTime() );
-//			GeoPoint point = new GeoPoint();
-//			if( message.m_location == null ) {
-//				point.setLatitude( 356.0 );
-//				point.setLongitude( 123.0 );
-//			} else {
-//				point.setLatitude( message.m_location.getLatitude() );
-//				point.setLongitude( message.m_location.getLongitude() );
-//			}
-			miab.setLocation( null );
+			GeoPt geoPt = new GeoPt();
+			if( message.m_location == null ) {
+				geoPt.setLatitude( (float)56.0 );
+				geoPt.setLongitude( (float) 130 );
+				miab.setGeoIndex( (long)0 );
+			} else {
+				geoPt.setLatitude( (float)message.m_location.getLatitude() );
+				geoPt.setLongitude( (float)message.m_location.getLongitude() );
+				GeoIndex geoIndex = new GeoIndex();
+				miab.setGeoIndex( geoIndex.getIndex( 
+						message.m_location.getLatitude(),
+						message.m_location.getLongitude() ) );
+			}
+			miab.setLocation( geoPt );
+			miab.setDeltaLocation( null );
 			try{
 				endpoint.insertMIAB(miab).execute();
 			} catch (IOException e) {

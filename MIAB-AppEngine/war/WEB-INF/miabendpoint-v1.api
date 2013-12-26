@@ -54,7 +54,7 @@
       "request" : {
         "parameters" : {
           "id" : {
-            "type" : "string",
+            "type" : "int64",
             "required" : true
           }
         },
@@ -100,7 +100,7 @@
       "request" : {
         "parameters" : {
           "id" : {
-            "type" : "string",
+            "type" : "int64",
             "required" : true
           }
         },
@@ -133,33 +133,42 @@
         "id" : "MIAB",
         "type" : "object",
         "properties" : {
-          "deviceRegistrationID" : {
+          "message" : {
             "type" : "string"
           },
           "location" : {
-            "$ref" : "GeoPoint"
+            "$ref" : "GeoPt"
           },
-          "message" : {
-            "type" : "string"
+          "deltaLocation" : {
+            "$ref" : "GeoPt"
           },
           "timeStamp" : {
             "type" : "string",
             "format" : "int64"
           },
-          "isFlowing" : {
+          "geoIndex" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "flowing" : {
             "type" : "boolean"
           }
         }
       },
-      "GeoPoint" : {
-        "id" : "GeoPoint",
+      "GeoPt" : {
+        "id" : "GeoPt",
         "type" : "object",
         "properties" : {
           "latitude" : {
-            "type" : "number"
+            "type" : "number",
+            "format" : "float"
           },
           "longitude" : {
-            "type" : "number"
+            "type" : "number",
+            "format" : "float"
           }
         }
       },

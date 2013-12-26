@@ -75,7 +75,7 @@ public class MIABEndpoint {
 	 * @return The entity with primary key id.
 	 */
 	@ApiMethod(name = "getMIAB")
-	public MIAB getMIAB(@Named("id") String id) {
+	public MIAB getMIAB(@Named("id") Long id) {
 		EntityManager mgr = getEntityManager();
 		MIAB miab = null;
 		try {
@@ -137,7 +137,7 @@ public class MIABEndpoint {
 	 * @param id the primary key of the entity to be deleted.
 	 */
 	@ApiMethod(name = "removeMIAB")
-	public void removeMIAB(@Named("id") String id) {
+	public void removeMIAB(@Named("id") Long id) {
 		EntityManager mgr = getEntityManager();
 		try {
 			MIAB miab = mgr.find(MIAB.class, id);
@@ -151,7 +151,7 @@ public class MIABEndpoint {
 		EntityManager mgr = getEntityManager();
 		boolean contains = true;
 		try {
-			MIAB item = mgr.find(MIAB.class, miab.getDeviceRegistrationID());
+			MIAB item = mgr.find(MIAB.class, miab.getID());
 			if (item == null) {
 				contains = false;
 			}
