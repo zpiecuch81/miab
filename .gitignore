@@ -1,9 +1,4 @@
 .metadata/*
 MIAB/bin/*
-MIAB/gen/*
-MIAB/endpoint-libs/*
 MIAB_test/bin/*
-MIAB_test/gen/*
 MIAB-AppEngine/bin/*
-MIAB-AppEngine/gen/*
-MIAB-AppEngine/war/WEB-INF/classes/*
