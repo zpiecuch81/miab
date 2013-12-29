@@ -87,10 +87,14 @@ public class GPSDealer {
 			m_locationManager.removeUpdates(m_locationListener);
 		}
 		m_locationListener = new MyLocationListener( listener );
-		m_locationManager.requestLocationUpdates(
+//		m_locationManager.requestLocationUpdates(
+//				LocationManager.GPS_PROVIDER,
+//				100, 0,
+//				m_locationListener );
+		m_locationManager.requestSingleUpdate(
 				LocationManager.GPS_PROVIDER,
-				0, 0,
-				m_locationListener );
+				m_locationListener,
+				null );
 	}
 
 	public void setSimpleLocationListener( GPSLocationProvider listener )
@@ -100,10 +104,14 @@ public class GPSDealer {
 			m_locationManager.removeUpdates(m_locationListener);
 		}
 		m_locationListener = new MyLocationListener( listener );
-		m_locationManager.requestLocationUpdates(
+//		m_locationManager.requestLocationUpdates(
+//				LocationManager.GPS_PROVIDER,
+//				100, 0,
+//				m_locationListener );
+		m_locationManager.requestSingleUpdate(
 				LocationManager.GPS_PROVIDER,
-				0, 0,
-				m_locationListener );
+				m_locationListener,
+				null );
 	}
 
 	public boolean isGPSAvailable()

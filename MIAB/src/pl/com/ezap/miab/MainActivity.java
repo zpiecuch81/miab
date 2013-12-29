@@ -53,55 +53,55 @@ public class MainActivity extends Activity{
 		});
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		//getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-    @Override
-    public void onStart()
-    {
-    	super.onStart();
-    	m_GPS_OK = m_GPS.isGPSAvailable();
-    	updateStatuses();
-    }
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		m_GPS_OK = m_GPS.isGPSAvailable();
+		updateStatuses();
+	}
 
-    @Override
-    public void onStop()
-    {
-    	super.onStop();
-    }
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+	}
 
-    private void startMessageCreation(boolean isFlowing) {
-    	Message.getInstance().m_isFlowing = isFlowing;
+	private void startMessageCreation(boolean isFlowing) {
+		Message.getInstance().m_isFlowing = isFlowing;
 
-    	Intent intent = new Intent(this, MessageCreate.class);
-    	startActivity(intent);
-    }
+		Intent intent = new Intent(this, CreateMessage.class);
+		startActivity(intent);
+	}
 
-    private void checkGooglePlayServicesAvailability()
-    {
-    	if( GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS) {
-    		AlertDialog ad = new AlertDialog.Builder(this).create();
-    		ad.setMessage(getString(R.string.playServicesNotAvailable));
-    		ad.setButton( DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-    		    @Override
-    		    public void onClick(DialogInterface dialog, int which) {  
-    		        dialog.dismiss();
-    		    }
-    		});
-    		ad.show();
+	private void checkGooglePlayServicesAvailability()
+	{
+		if( GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS) {
+			AlertDialog ad = new AlertDialog.Builder(this).create();
+			ad.setMessage(getString(R.string.playServicesNotAvailable));
+			ad.setButton( DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {  
+					dialog.dismiss();
+				}
+			});
+			ad.show();
 			this.finish();
 		}
-    }
+	}
 
-    private void updateStatuses()
-    {
-    	//update GPS chec box
-    	CheckBox checkBox = (CheckBox)(findViewById(R.id.checkBox_GPS));
-    	checkBox.setChecked(m_GPS_OK);
-    }
+	private void updateStatuses()
+	{
+		//update GPS checkbox
+		CheckBox checkBox = (CheckBox)(findViewById(R.id.checkBox_GPS));
+		checkBox.setChecked(m_GPS_OK);
+	}
 
 }

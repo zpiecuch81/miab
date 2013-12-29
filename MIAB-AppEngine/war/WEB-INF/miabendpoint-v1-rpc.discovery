@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ykhqEJ_LDFBNzs2RnXtIc2-QyAc/FFYb0j4JtZVtJ_tU4Q9eY4jrFrs\"",
+ "etag": "\"ykhqEJ_LDFBNzs2RnXtIc2-QyAc/GCM-aPTIKcpUiJ1znOEvopqfzDI\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -105,6 +105,9 @@
    "id": "MIAB",
    "type": "object",
    "properties": {
+    "burried": {
+     "type": "boolean"
+    },
     "deltaLocation": {
      "$ref": "GeoPt"
     },
@@ -116,8 +119,8 @@
      "format": "int64"
     },
     "id": {
-     "type": "integer",
-     "format": "int32"
+     "type": "string",
+     "format": "int64"
     },
     "location": {
      "$ref": "GeoPt"

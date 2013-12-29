@@ -211,18 +211,21 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
-        public static final int action_settings=0x7f05000d;
-        public static final int button_leave=0x7f05000a;
-        public static final int button_leaveMsg=0x7f050005;
-        public static final int button_throwMsg=0x7f050006;
-        public static final int checkBox_GPS=0x7f050007;
-        public static final int checkBox_net=0x7f050008;
-        public static final int editTextMessage=0x7f050009;
+        public static final int action_settings=0x7f050010;
+        public static final int buttonMessageReady=0x7f050006;
+        public static final int button_leave=0x7f05000c;
+        public static final int button_leaveMsg=0x7f050007;
+        public static final int button_throwMsg=0x7f050008;
+        public static final int checkBox_GPS=0x7f050009;
+        public static final int checkBox_net=0x7f05000a;
+        public static final int editMessageText=0x7f050005;
+        public static final int editSendText=0x7f05000f;
+        public static final int editTextMessage=0x7f05000b;
         public static final int hybrid=0x7f050004;
-        public static final int msgView=0x7f05000b;
+        public static final int msgView=0x7f05000d;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int regButton=0x7f05000c;
+        public static final int regButton=0x7f05000e;
         public static final int satellite=0x7f050002;
         public static final int terrain=0x7f050003;
     }
@@ -230,13 +233,17 @@ containing a value of this type.
         public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_message_create=0x7f030001;
-        public static final int activity_register=0x7f030002;
+        public static final int activity_create_message=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int activity_message_create=0x7f030002;
+        public static final int activity_register=0x7f030003;
+        public static final int activity_sending_message=0x7f030004;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
-        public static final int message_create=0x7f0a0001;
+        public static final int create_message=0x7f0a0000;
+        public static final int main=0x7f0a0001;
+        public static final int message_create=0x7f0a0002;
+        public static final int sending_message=0x7f0a0003;
     }
     public static final class string {
         public static final int action_settings=0x7f06001b;
@@ -264,6 +271,7 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
+        public static final int buttonMessageReady=0x7f060023;
         public static final int button_GPS=0x7f06001e;
         public static final int button_leaveMsg=0x7f06001c;
         public static final int button_net=0x7f06001f;
@@ -339,8 +347,15 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
+        public static final int msgBurryingMessage=0x7f060027;
+        public static final int msgLeavingMessage=0x7f060026;
+        public static final int msgRetrivingCurrentLocation=0x7f060028;
+        public static final int msgSendingDone=0x7f060029;
+        public static final int msgThrowingMessage=0x7f060025;
         public static final int playServicesNotAvailable=0x7f060021;
+        public static final int title_activity_create_message=0x7f060022;
         public static final int title_activity_message_create=0x7f060020;
+        public static final int title_activity_sending_message=0x7f060024;
     }
     public static final class style {
         /** 

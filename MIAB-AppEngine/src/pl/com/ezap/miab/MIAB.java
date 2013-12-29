@@ -14,17 +14,19 @@ public class MIAB {
 	private GeoPt location;
 	private GeoPt deltaLocation;
 	private boolean isFlowing;
+	private boolean isBurried;
 	private long timeStamp;
 	private long geoIndex;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int ID;
+	private long ID;
 
 	public MIAB() {
 		setMessage("");
 		setLocation(null);
 		setFlowing(false);
+		setBurried(false);
 		setTimeStamp(0);
 		setGeoIndex(0);
 	}
@@ -77,11 +79,19 @@ public class MIAB {
 		this.geoIndex = geoIndex;
 	}
 
-	public int getID() {
+	public long getID() {
 		return ID;
 	}
 
-	public void setID(int geoIndex) {
-		this.ID = geoIndex;
+	public void setID(long ID) {
+		this.ID = ID;
+	}
+
+	public boolean isBurried() {
+		return isBurried;
+	}
+
+	public void setBurried(boolean isBurried) {
+		this.isBurried = isBurried;
 	}
 }

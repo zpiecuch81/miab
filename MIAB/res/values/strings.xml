@@ -8,6 +8,14 @@
     <string name="button_GPS">GPS</string>
     <string name="button_net">Network</string>
     <string name="title_activity_message_create">Message In A Bottle</string>
-    <string name="playServicesNotAvailable">Google Play Services required to run this application :(</string>
+    <string name="playServicesNotAvailable">Google Play Services is required to run this application :(</string>
+    <string name="title_activity_create_message">Create Message</string>
+    <string name="buttonMessageReady">Leave message</string>
+    <string name="title_activity_sending_message">Sending Message</string>
+    <string name="msgThrowingMessage">Throwing bottle</string>
+    <string name="msgLeavingMessage">Leaving bottle</string>
+    <string name="msgBurryingMessage">Burrying bottle</string>
+    <string name="msgRetrivingCurrentLocation">Retriving current location</string>
+    <string name="msgSendingDone">Done</string>
 
 </resources>

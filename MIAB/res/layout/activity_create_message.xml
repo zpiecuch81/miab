@@ -8,24 +8,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".WriteMessage" >
+    tools:context=".CreateMessage" >
 
     <EditText
-        android:id="@+id/editTextMessage"
+        android:id="@+id/editMessageText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine" >
-
         <requestFocus />
     </EditText>
 
     <Button
-        android:id="@+id/button_leave"
+        android:id="@+id/buttonMessageReady"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_leaveMsg" />
+        android:text="@string/buttonMessageReady" />
 
 </LinearLayout>

@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MessageCreate extends Activity {
+public class WriteMessage extends Activity {
 
 	private class SendMessage extends AsyncTask<Context, Integer, Long> {
 
@@ -71,7 +71,7 @@ public class MessageCreate extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_message_create);
 		EditText text = (EditText)findViewById(R.id.editTextMessage);
-		text.setFilters( new InputFilter[] { new InputFilter.LengthFilter(1000)} );
+		text.setFilters( new InputFilter[] { new InputFilter.LengthFilter(3000)} );
 
 		findViewById(R.id.button_leave).setOnClickListener(
 				new View.OnClickListener() {
