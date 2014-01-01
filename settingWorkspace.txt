@@ -1,0 +1,25 @@
+1. Create new ADT workspace in folder c:\miab
+2. Setting git hub on the c:\miab folder
+	- git init
+	- git config --global user.name "Your Name Here"
+	- git config --global user.email "your_email@example.com"
+	- git remote add origin https://github.com/zpiecuch81/miab2.git
+	- git config --global credential.helper "cache --timeout=3600"
+	- git fetch origin
+	
+3. Add google play sirvices library in ADT:
+	- File/Import...
+	- General/Existing Projects into Workspace
+	- "Select root directory" - browse where the google play services lib is
+	- DON'T copy into workspace
+	- Finish
+
+4. Create Android project:
+	-
+	
+	
+	
+	
+	
+usefull:
+message-in-bottle.appspot.com/_ah/api/explorer
