@@ -52,10 +52,10 @@
             float lng = point.getLongitude();
             pageContext.setAttribute("strLng", Float.toString(lng));
             ++i;
-            String stringI=Integer.toString(i);
+            pageContext.setAttribute("counter", Integer.toString(i));
         %>
             var myLatlng = new google.maps.LatLng(${strLat}, ${strLng});
-            var marker${stringI} = new google.maps.Marker({
+            var marker${counter} = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
                 title:"${fn:escapeXml(miabMessage)}" });
