@@ -35,7 +35,7 @@ public class SendingMessage extends Activity {
 			miab.setMessage( message.m_message );
 			miab.setFlowing( message.m_isFlowing );
 			miab.setTimeStamp( new java.util.Date().getTime() );
-			//ID just can't be 0/null, app engine will assign a number to it anyway
+			//ID can't be 0/null, app engine will assign a number to it anyway
 			miab.setId( miab.getTimeStamp() );
 			GeoPt geoPt = new GeoPt();
 			geoPt.setLatitude( (float)message.m_location.getLatitude() );
