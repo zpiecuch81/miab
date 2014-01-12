@@ -5,6 +5,7 @@ import java.io.IOException;
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MIAB;
+import pl.com.ezap.miab.shared.Message;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
@@ -15,6 +16,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
@@ -78,6 +80,9 @@ public class SendingMessage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sending_message);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.hide();
 
 		getGPSposition();
 	}

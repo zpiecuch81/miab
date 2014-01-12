@@ -1,5 +1,8 @@
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.service.MIABService;
+import pl.com.ezap.miab.shared.Message;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -43,6 +46,8 @@ public class MainActivity extends Activity{
 					}
 				});
 
+		startService(new Intent( getApplicationContext(), MIABService.class ));
+
 		m_GPS = new GPSDealer( (LocationManager)this.getApplicationContext().getSystemService(Context.LOCATION_SERVICE) );
 		m_GPS.setSimpleStatusListener( new GPSDealer.GPSSimpleStatus() {
 			@Override
@@ -56,7 +61,7 @@ public class MainActivity extends Activity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -72,6 +77,7 @@ public class MainActivity extends Activity{
 	public void onStop()
 	{
 		super.onStop();
+		stopService(new Intent( getApplicationContext(), MIABService.class ));
 	}
 
 	private void startMessageCreation(boolean isFlowing) {

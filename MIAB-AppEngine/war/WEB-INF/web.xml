@@ -26,7 +26,7 @@
   <url-pattern>/adminServlet/*</url-pattern>
  </servlet-mapping>
 
- <!-- <security-constraint>
+ <security-constraint>
   <web-resource-collection>
    <web-resource-name>admin</web-resource-name>
    <url-pattern>/admin/*</url-pattern>
@@ -34,7 +34,7 @@
   <auth-constraint>
    <role-name>admin</role-name>
   </auth-constraint>
- </security-constraint>-->
+ </security-constraint>
  <security-constraint>
   <web-resource-collection>
    <web-resource-name>AdminServlet</web-resource-name>

@@ -1,8 +1,10 @@
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.shared.Message;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +22,10 @@ public class CreateMessage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_message);
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+
 		EditText text = (EditText)findViewById(R.id.editMessageText);
 		text.setFilters( new InputFilter[] { new InputFilter.LengthFilter(3000)} );
 
