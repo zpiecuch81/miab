@@ -2,7 +2,6 @@ package pl.com.ezap.miab.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -28,6 +27,12 @@ public class MIABService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+	}
+
+	@Override
+	public void onDestroy() {
+		Toast.makeText( getApplicationContext(), "MIAB Service stopped", Toast.LENGTH_LONG ).show();
+		super.onDestroy();
 	}
 
 	@Override

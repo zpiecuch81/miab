@@ -5,8 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="button_leaveMsg">Leave a message</string>
     <string name="button_throwMsg">Throw a message</string>
-    <string name="button_GPS">GPS</string>
-    <string name="button_net">Network</string>
     <string name="playServicesNotAvailable">Google Play Services is required to run this application :(</string>
     <string name="title_activity_create_message">Create Message</string>
     <string name="buttonMessageReady">Leave message</string>
@@ -16,5 +14,6 @@
     <string name="msgBurryingMessage">Burrying bottle</string>
     <string name="msgRetrivingCurrentLocation">Retriving current location</string>
     <string name="msgSendingDone">Done</string>
+    <string name="msgEnableGPSToast">Enable GPS</string>
 
 </resources>

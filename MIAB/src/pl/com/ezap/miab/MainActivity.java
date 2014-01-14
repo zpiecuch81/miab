@@ -14,13 +14,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.Toast;
 
 public class MainActivity extends Activity{
-
-	private GPSDealer m_GPS;
-	private boolean m_GPS_OK;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +46,6 @@ public class MainActivity extends Activity{
 
 		startService(new Intent( getApplicationContext(), MIABService.class ));
 
-		m_GPS = new GPSDealer( (LocationManager)this.getApplicationContext().getSystemService(Context.LOCATION_SERVICE) );
-		m_GPS.setSimpleStatusListener( new GPSDealer.GPSSimpleStatus() {
-			@Override
-			public void GPSAvailabilityChanged(boolean available) {
-				m_GPS_OK = available;
-				updateStatuses();
-			}
-		});
 	}
 
 	@Override
@@ -69,8 +59,7 @@ public class MainActivity extends Activity{
 	public void onStart()
 	{
 		super.onStart();
-		m_GPS_OK = m_GPS.isGPSAvailable();
-		updateStatuses();
+		checkGPSEnabled();
 	}
 
 	@Override
@@ -80,10 +69,23 @@ public class MainActivity extends Activity{
 		stopService(new Intent( getApplicationContext(), MIABService.class ));
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 	private void startMessageCreation(boolean isFlowing) {
 		Message.getInstance().m_isFlowing = isFlowing;
 
-		Intent intent = new Intent(this, CreateMessage.class);
+		Intent intent = new Intent(this, CreateMessageActivity.class);
 		startActivity(intent);
 	}
 
@@ -103,11 +105,11 @@ public class MainActivity extends Activity{
 		}
 	}
 
-	private void updateStatuses()
+	private void checkGPSEnabled()
 	{
-		//update GPS checkbox
-		CheckBox checkBox = (CheckBox)(findViewById(R.id.checkBox_GPS));
-		checkBox.setChecked(m_GPS_OK);
+		final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+		if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+			Toast.makeText( getApplicationContext(), R.string.msgEnableGPSToast, Toast.LENGTH_LONG ).show();
+		}
 	}
-
 }

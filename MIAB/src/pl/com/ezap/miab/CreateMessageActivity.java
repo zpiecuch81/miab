@@ -1,12 +1,9 @@
 package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.shared.Message;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.view.Menu;
@@ -14,9 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreateMessage extends Activity {
-
-	private GPSDealer m_gps = null;
+public class CreateMessageActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +31,6 @@ public class CreateMessage extends Activity {
 					messageReady();
 				}
 			});
-
-		//GPS created just to make sure GPS signal is still searched for
-		m_gps = new GPSDealer( (LocationManager)this.getApplicationContext().getSystemService(Context.LOCATION_SERVICE) );
-		m_gps.setSimpleStatusListener( new GPSDealer.GPSLocationProvider() {
-			@Override
-			public void GPSLocationChanged(Location location) {
-			}
-			@Override
-			public void GPSAvailabilityChanged(boolean available) {
-			}
-		});
 	}
 
 	@Override
@@ -83,7 +67,7 @@ public class CreateMessage extends Activity {
 		Message message = Message.getInstance();
 		message.m_message = text.getText().toString();
 
-		Intent intent = new Intent(this, SendingMessage.class);
+		Intent intent = new Intent(this, SendingMessageActivity.class);
 		startActivity(intent);
 	}
 }

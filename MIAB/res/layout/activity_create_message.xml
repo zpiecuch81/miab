@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".CreateMessage" >
+    tools:context=".CreateMessageActivity" >
 
     <EditText
         android:id="@+id/editMessageText"

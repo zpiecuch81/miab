@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_message_searching">Look out for MIABs</string>
+    <string name="pref_description_message_searching">Enable looking out for MIABs. Requires GPS.</string>
+</resources>

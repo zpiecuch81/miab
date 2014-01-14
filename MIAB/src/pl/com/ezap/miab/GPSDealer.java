@@ -80,6 +80,12 @@ public class GPSDealer {
 		m_locationManager = manager;
 	}
 
+	public void close() {
+		if( m_locationListener != null ) {
+			m_locationManager.removeUpdates(m_locationListener);
+		}
+	}
+
 	public void setSimpleStatusListener( GPSSimpleStatus listener )
 	{
 		assert( listener != null );

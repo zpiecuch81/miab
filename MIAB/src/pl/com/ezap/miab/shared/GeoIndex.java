@@ -1,4 +1,4 @@
-package pl.com.ezap.miab;
+package pl.com.ezap.miab.shared;
 
 final class DeltaLatLong
 {

@@ -154,10 +154,10 @@
             "type" : "string",
             "format" : "int64"
           },
-          "flowing" : {
+          "burried" : {
             "type" : "boolean"
           },
-          "burried" : {
+          "flowing" : {
             "type" : "boolean"
           }
         }

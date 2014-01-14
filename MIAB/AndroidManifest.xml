@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pl.com.ezap.miab.CreateMessage"
+            android:name="pl.com.ezap.miab.CreateMessageActivity"
             android:label="@string/title_activity_create_message"
             android:parentActivityName="pl.com.ezap.miab.MainActivity" >
 
@@ -36,14 +36,18 @@
                 android:value="pl.com.ezap.miab.MainActivity" />
         </activity>
         <activity
-            android:name="pl.com.ezap.miab.SendingMessage"
+            android:name="pl.com.ezap.miab.SendingMessageActivity"
             android:label="@string/title_activity_sending_message"
-            android:parentActivityName="pl.com.ezap.miab.CreateMessage" >
+            android:parentActivityName="pl.com.ezap.miab.CreateMessageActivity" >
 
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.com.ezap.miab.CreateMessage" />
+        </activity>
+        <activity
+            android:name="pl.com.ezap.miab.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
 
         <meta-data
@@ -52,6 +56,11 @@
 
         <service
             android:name="pl.com.ezap.miab.service.MIABService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <service
+            android:name="pl.com.ezap.miab.service.GPSDealerService"
             android:enabled="true"
             android:exported="false" >
         </service>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MIAB;
+import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.Message;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -22,7 +23,7 @@ import android.content.Context;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class SendingMessage extends Activity {
+public class SendingMessageActivity extends Activity {
 
 	private GPSDealer m_gps = null;
 
