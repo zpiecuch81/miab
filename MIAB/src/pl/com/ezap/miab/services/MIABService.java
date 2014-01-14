@@ -1,4 +1,4 @@
-package pl.com.ezap.miab.service;
+package pl.com.ezap.miab.services;
 
 import android.app.Service;
 import android.content.Intent;

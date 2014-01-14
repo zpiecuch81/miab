@@ -49,18 +49,27 @@
             android:name="pl.com.ezap.miab.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="pl.com.ezap.miab.GooglePlayServicesMissingActivity"
+            android:label="@string/title_activity_google_services_missing" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name="pl.com.ezap.miab.service.MIABService"
+            android:name="pl.com.ezap.miab.services.MIABService"
             android:enabled="true"
             android:exported="false" >
         </service>
         <service
-            android:name="pl.com.ezap.miab.service.GPSDealerService"
+            android:name="pl.com.ezap.miab.services.GPSDealerService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+        <service
+            android:name="pl.com.ezap.miab.services.SenderService"
             android:enabled="true"
             android:exported="false" >
         </service>

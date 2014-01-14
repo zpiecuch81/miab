@@ -15,5 +15,7 @@
     <string name="msgRetrivingCurrentLocation">Retriving current location</string>
     <string name="msgSendingDone">Done</string>
     <string name="msgEnableGPSToast">Enable GPS</string>
+    <string name="title_activity_google_services_missing">Google Play Services Missing</string>
+    <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
 
 </resources>

@@ -13,7 +13,7 @@ public class Message {
 		m_instance = new Message();
 		return m_instance;
 	}
-	private Message() {
+	public Message() {
 		m_isBurried = false;
 		m_isFlowing = false;
 		m_location = null;

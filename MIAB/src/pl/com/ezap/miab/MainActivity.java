@@ -1,6 +1,6 @@
 package pl.com.ezap.miab;
 
-import pl.com.ezap.miab.service.MIABService;
+import pl.com.ezap.miab.services.MIABService;
 import pl.com.ezap.miab.shared.Message;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -9,9 +9,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,16 +90,8 @@ public class MainActivity extends Activity{
 	private void checkGooglePlayServicesAvailability()
 	{
 		if( GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS) {
-			AlertDialog ad = new AlertDialog.Builder(this).create();
-			ad.setMessage(getString(R.string.playServicesNotAvailable));
-			ad.setButton( DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {  
-					dialog.dismiss();
-				}
-			});
-			ad.show();
-			this.finish();
+			Intent intent = new Intent(this, GooglePlayServicesMissingActivity.class);
+			startActivity(intent);
 		}
 	}
 

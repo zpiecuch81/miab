@@ -228,8 +228,9 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_create_message=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_sending_message=0x7f030002;
+        public static final int activity_google_services_missing=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_sending_message=0x7f030003;
     }
     public static final class menu {
         public static final int create_message=0x7f0b0000;
@@ -339,19 +340,21 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int msgBurryingMessage=0x7f070024;
         public static final int msgEnableGPSToast=0x7f070027;
+        public static final int msgGoogleServicesMissing=0x7f070029;
         public static final int msgLeavingMessage=0x7f070023;
         public static final int msgRetrivingCurrentLocation=0x7f070025;
         public static final int msgSendingDone=0x7f070026;
         public static final int msgThrowingMessage=0x7f070022;
         public static final int playServicesNotAvailable=0x7f07001e;
-        public static final int pref_description_message_searching=0x7f07002b;
+        public static final int pref_description_message_searching=0x7f07002d;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f070029;
-        public static final int pref_title_message_searching=0x7f07002a;
+        public static final int pref_header_general=0x7f07002b;
+        public static final int pref_title_message_searching=0x7f07002c;
         public static final int title_activity_create_message=0x7f07001f;
+        public static final int title_activity_google_services_missing=0x7f070028;
         public static final int title_activity_sending_message=0x7f070021;
-        public static final int title_activity_settings=0x7f070028;
+        public static final int title_activity_settings=0x7f07002a;
     }
     public static final class style {
         /** 
