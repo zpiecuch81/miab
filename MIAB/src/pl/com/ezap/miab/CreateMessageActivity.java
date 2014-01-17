@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class CreateMessageActivity extends Activity {
@@ -52,7 +53,8 @@ public class CreateMessageActivity extends Activity {
 		EditText text = (EditText)findViewById(R.id.editMessageText);
 		text.setText(miab.m_message);
 		if( miab.m_isFlowing ) {
-			text.setBackgroundResource(R.drawable.background_see);
+			LinearLayout layout= (LinearLayout)findViewById(R.id.createMessageLayout);
+			layout.setBackgroundResource(R.drawable.bkg_throw);
 			Button buttonLeave = (Button)(findViewById(R.id.buttonMessageReady));
 			buttonLeave.setText(R.string.button_throwMsg);
 		}
@@ -82,7 +84,7 @@ public class CreateMessageActivity extends Activity {
 		sendMessageIntent.putExtra( SenderService.IS_BURRIED_KEY, message.m_isBurried );
 		sendMessageIntent.putExtra( SenderService.MESSAGE_KEY, message.m_message );
 		startService( sendMessageIntent );
-//		Intent intent = new Intent(this, SendingMessageActivity.class);
-//		startActivity(intent);
+		Message.resetInstance();
+		onBackPressed();
 	}
 }

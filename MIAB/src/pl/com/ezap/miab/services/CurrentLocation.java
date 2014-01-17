@@ -28,31 +28,34 @@ public class CurrentLocation {
 
 			@Override
 			public void onProviderDisabled(String provider) {
-				gpsDisabled = true;
+				if( provider.equals(LocationManager.GPS_PROVIDER) ) {
+					gpsDisabled = true;
+				}
 			}
 
 			@Override
 			public void onProviderEnabled(String provider) {
-				gpsDisabled = false;
+				if( provider.equals(LocationManager.GPS_PROVIDER) ) {
+					gpsDisabled = false;
+				}
 			}
 
 			@Override
 			public void onStatusChanged(String provider,
 					int status,
 					Bundle extras) {
-				if( provider.compareToIgnoreCase( LocationManager.GPS_PROVIDER ) == 0 ) {
-					return;
-				}
-				switch( status ) {
-				case LocationProvider.OUT_OF_SERVICE:
-					gpsDisabled = true;
-					break;
-				case LocationProvider.TEMPORARILY_UNAVAILABLE:
-					gpsDisabled = true;
-					break;
-				case LocationProvider.AVAILABLE:
-					gpsDisabled = false;
-					break;
+				if( provider.equals(LocationManager.GPS_PROVIDER) ) {
+					switch( status ) {
+					case LocationProvider.OUT_OF_SERVICE:
+						gpsDisabled = true;
+						break;
+					case LocationProvider.TEMPORARILY_UNAVAILABLE:
+						gpsDisabled = true;
+						break;
+					case LocationProvider.AVAILABLE:
+						gpsDisabled = false;
+						break;
+					}
 				}
 			}
 
