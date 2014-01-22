@@ -16,15 +16,16 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:text="@string/button_leaveMsg" />
+        android:background="@drawable/rounded"
+        android:text="@string/button_leaveMsg"
+        android:layout_marginRight="@dimen/activity_horizontal_margin" />
 
     <Button
         android:id="@+id/button_throwMsg"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        android:background="@drawable/rounded"
         android:text="@string/button_throwMsg" />
 
 </LinearLayout>

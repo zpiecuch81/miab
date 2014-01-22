@@ -14,7 +14,6 @@ import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MIAB;
 import pl.com.ezap.miab.shared.GeoIndex;
-import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import android.location.LocationProvider;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -67,9 +65,9 @@ public class SenderService extends Service {
 		protected void onPostExecute(Long result) {
 			if( result == 0 ) {
 				messages2send.remove( 0 );
-				Toast.makeText( getApplicationContext(), "Message send correctly", Toast.LENGTH_SHORT).show();
+				Toast.makeText( getApplicationContext(), R.string.msgSendingDone, Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText( getApplicationContext(), "Error sending message", Toast.LENGTH_LONG).show();
+				Toast.makeText( getApplicationContext(), R.string.msgSendingError, Toast.LENGTH_LONG).show();
 			}
 			isSending = false;
 		}
@@ -94,6 +92,8 @@ public class SenderService extends Service {
 		if( intent == null ) {
 			return START_STICKY;
 		}
+
+		//fill basic MIAB data 
 		MIAB miabMessage = new MIAB();
 		miabMessage.setMessage( intent.getStringExtra( MESSAGE_KEY ) );
 		miabMessage.setBurried( intent.getBooleanExtra( IS_BURRIED_KEY, false ) );
@@ -101,8 +101,17 @@ public class SenderService extends Service {
 		miabMessage.setTimeStamp( new java.util.Date().getTime() );
 		//ID can't be 0/null, app engine will assign a number to it anyway
 		miabMessage.setId( miabMessage.getTimeStamp() );
+
+		int displayMessageID = miabMessage.getBurried() ? R.string.msgBurryingMessage :
+								miabMessage.getFlowing() ? R.string.msgThrowingMessage :
+								R.string.msgLeavingMessage;
+		Toast.makeText( getApplicationContext(), displayMessageID, Toast.LENGTH_LONG).show();
+
+		//add message to send it when position will be known
 		Log.i( "SenderService", "Adding message to queue" );
 		messages2send.add( miabMessage );
+
+		//start searching location if not searching already
 		startLocationListener();
 		return START_STICKY;
 	}
@@ -112,16 +121,16 @@ public class SenderService extends Service {
 			return;		//already started
 		}
 
-		NotificationCompat.Builder mBuilder =
-				new NotificationCompat.Builder(this)
-					.setSmallIcon(R.drawable.ic_launcher)
-					.setContentTitle("Sending message")
-					.setContentText("Retriving current location...");
-		NotificationManager mNotificationManager =
-				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		mNotificationManager.notify(1, mBuilder.build());
+		//TODO: make correct notifications
+//		NotificationCompat.Builder mBuilder =
+//				new NotificationCompat.Builder(this)
+//					.setSmallIcon(R.drawable.ic_launcher)
+//					.setContentTitle("Sending message")
+//					.setContentText("Retrieving current location...");
+//		NotificationManager mNotificationManager =
+//				(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//		mNotificationManager.notify(1, mBuilder.build());
 
-		Toast.makeText( getApplicationContext(), "Retriving GPS data...", Toast.LENGTH_LONG ).show();
 		maxGPSFoundTrials = 5;
 		locationListener = new LocationListener() {
 

@@ -7,6 +7,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -58,6 +60,7 @@ public class MainActivity extends Activity{
 	{
 		super.onStart();
 		checkGPSEnabled();
+		checkIsOnline();
 	}
 
 	@Override
@@ -100,6 +103,15 @@ public class MainActivity extends Activity{
 		final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 		if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 			Toast.makeText( getApplicationContext(), R.string.msgEnableGPSToast, Toast.LENGTH_LONG ).show();
+		}
+	}
+
+	private void checkIsOnline()
+	{
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo == null || !netInfo.isConnectedOrConnecting()) {
+			Toast.makeText( getApplicationContext(), R.string.msgEnableNetToast, Toast.LENGTH_LONG ).show();
 		}
 	}
 }

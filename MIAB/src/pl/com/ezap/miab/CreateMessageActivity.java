@@ -3,6 +3,8 @@ package pl.com.ezap.miab;
 import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.Message;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -72,6 +74,12 @@ public class CreateMessageActivity extends Activity {
 		final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 		if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 			Toast.makeText( getApplicationContext(), R.string.msgEnableGPSToast, Toast.LENGTH_LONG ).show();
+			return;
+		}
+		final ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo == null || !netInfo.isConnected()) {
+			Toast.makeText( getApplicationContext(), R.string.msgEnableNetToast, Toast.LENGTH_LONG ).show();
 			return;
 		}
 

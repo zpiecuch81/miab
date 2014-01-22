@@ -26,6 +26,7 @@
         android:id="@+id/buttonMessageReady"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/buttonMessageReady" />
+        android:text="@string/buttonMessageReady"
+        android:background="@drawable/rounded" />
 
 </LinearLayout>
