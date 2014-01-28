@@ -1,5 +1,6 @@
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.services.MIABService;
 import pl.com.ezap.miab.shared.Message;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,9 +44,6 @@ public class MainActivity extends Activity{
 						startMessageCreation(true);
 					}
 				});
-
-		//startService(new Intent( getApplicationContext(), MIABService.class ));
-
 	}
 
 	@Override
@@ -66,7 +65,6 @@ public class MainActivity extends Activity{
 	public void onStop()
 	{
 		super.onStop();
-		//stopService(new Intent( getApplicationContext(), MIABService.class ));
 	}
 
 	@Override
@@ -77,9 +75,24 @@ public class MainActivity extends Activity{
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
+		case R.id.action_scanning:
+			switchMIABService();
+			invalidateOptionsMenu();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		SharedPreferences settings = getPreferences(0);
+		if(settings.getBoolean("MIABServiceOn", true)) {
+			menu.getItem(0).setIcon(R.drawable.action_scanning);
+		} else {
+			menu.getItem(0).setIcon(R.drawable.action_notscanning);
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	private void startMessageCreation(boolean isFlowing) {
@@ -111,6 +124,20 @@ public class MainActivity extends Activity{
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
 		if (netInfo == null || !netInfo.isConnectedOrConnecting()) {
 			Toast.makeText( getApplicationContext(), R.string.msgEnableNetToast, Toast.LENGTH_LONG ).show();
+		}
+	}
+
+	private void switchMIABService()
+	{
+		SharedPreferences settings = getPreferences(0);
+		SharedPreferences.Editor settingsEditor = settings.edit();
+		boolean enableNow = !settings.getBoolean("MIABServiceOn", true);
+		settingsEditor.putBoolean("MIABServiceOn", enableNow);
+		settingsEditor.commit();
+		if( enableNow ) {
+			startService(new Intent( getApplicationContext(), MIABService.class ));
+		} else {
+			stopService(new Intent( getApplicationContext(), MIABService.class ));
 		}
 	}
 }

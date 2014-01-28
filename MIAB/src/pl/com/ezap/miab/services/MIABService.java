@@ -2,27 +2,10 @@ package pl.com.ezap.miab.services;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.widget.Toast;
 
 public class MIABService extends Service {
-
-	static final int MSG_TURN_OFF_SERVICE = 1;
-
-	class IncomingHandler extends Handler {
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case MSG_TURN_OFF_SERVICE:
-				stopSelf();
-				break;
-			default:
-				super.handleMessage(msg);
-			}
-		}
-	}
 
 	@Override
 	public void onCreate() {
