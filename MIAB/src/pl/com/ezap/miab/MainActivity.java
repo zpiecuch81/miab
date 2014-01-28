@@ -1,6 +1,5 @@
 package pl.com.ezap.miab;
 
-import pl.com.ezap.miab.services.MIABService;
 import pl.com.ezap.miab.shared.Message;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -44,7 +43,7 @@ public class MainActivity extends Activity{
 					}
 				});
 
-		startService(new Intent( getApplicationContext(), MIABService.class ));
+		//startService(new Intent( getApplicationContext(), MIABService.class ));
 
 	}
 
@@ -67,7 +66,7 @@ public class MainActivity extends Activity{
 	public void onStop()
 	{
 		super.onStop();
-		stopService(new Intent( getApplicationContext(), MIABService.class ));
+		//stopService(new Intent( getApplicationContext(), MIABService.class ));
 	}
 
 	@Override

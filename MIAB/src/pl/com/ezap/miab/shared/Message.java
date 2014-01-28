@@ -10,6 +10,7 @@ public class Message {
 		return m_instance;
 	}
 	public static Message resetInstance() {
+		m_instance = null;
 		m_instance = new Message();
 		return m_instance;
 	}
