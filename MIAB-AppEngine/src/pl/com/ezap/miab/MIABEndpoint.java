@@ -149,6 +149,9 @@ public class MIABEndpoint {
 
 	private boolean containsMIAB(MIAB miab) {
 		EntityManager mgr = getEntityManager();
+		if( miab.getID() == null ) {
+			return false;
+		}
 		boolean contains = true;
 		try {
 			MIAB item = mgr.find(MIAB.class, miab.getID());

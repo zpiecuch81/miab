@@ -20,7 +20,7 @@ public class MIAB {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private long ID;
+	private Long ID;
 
 	public MIAB() {
 		setMessage("");
@@ -79,11 +79,11 @@ public class MIAB {
 		this.geoIndex = geoIndex;
 	}
 
-	public long getID() {
+	public Long getID() {
 		return ID;
 	}
 
-	public void setID(long ID) {
+	public void setID(Long ID) {
 		this.ID = ID;
 	}
 

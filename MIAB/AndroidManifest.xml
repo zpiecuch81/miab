@@ -66,11 +66,6 @@
             android:exported="false" >
         </service>
         <service
-            android:name="pl.com.ezap.miab.services.GPSDealerService"
-            android:enabled="true"
-            android:exported="false" >
-        </service>
-        <service
             android:name="pl.com.ezap.miab.services.SenderService"
             android:enabled="true"
             android:exported="false" >

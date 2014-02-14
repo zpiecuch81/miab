@@ -63,6 +63,7 @@ public class SenderService extends Service {
 
 		@Override
 		protected void onPostExecute(Long result) {
+			Log.d( "SendMessageTask", "onPostExecute, result " + result);
 			if( result == 0 ) {
 				messages2send.remove( 0 );
 				Toast.makeText( getApplicationContext(), R.string.msgSendingDone, Toast.LENGTH_LONG).show();
@@ -113,6 +114,7 @@ public class SenderService extends Service {
 
 		//start searching location if not searching already
 		startLocationListener();
+		//sendNextMessage( locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) );
 		return START_STICKY;
 	}
 
@@ -188,7 +190,7 @@ public class SenderService extends Service {
 		return false;
 	}
 
-	private void sendNextMessage( Location location) {
+	private void sendNextMessage( Location location ) {
 		if( isSending ) {
 			return;
 		}
