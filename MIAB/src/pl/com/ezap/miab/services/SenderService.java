@@ -113,8 +113,12 @@ public class SenderService extends Service {
 		messages2send.add( miabMessage );
 
 		//start searching location if not searching already
-		startLocationListener();
-		//sendNextMessage( locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) );
+		//startLocationListener();
+		Location test = new Location(LocationManager.GPS_PROVIDER);
+		test.setLatitude(0);
+		test.setLongitude(0);
+		test.setAccuracy(0.1f);
+		sendNextMessage( test );
 		return START_STICKY;
 	}
 

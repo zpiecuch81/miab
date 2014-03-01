@@ -6,9 +6,8 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
-import com.google.appengine.api.datastore.Cursor;
-import com.google.appengine.datanucleus.query.JPACursorHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -16,7 +15,14 @@ import javax.inject.Named;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 
 @Api(name = "miabendpoint", namespace = @ApiNamespace(ownerDomain = "com.pl", ownerName = "com.pl", packagePath = "ezap.miab"))
 public class MIABEndpoint {
@@ -28,40 +34,28 @@ public class MIABEndpoint {
 	 * @return A CollectionResponse class containing the list of all entities
 	 * persisted and a cursor to the next page.
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
 	@ApiMethod(name = "listMIAB")
 	public CollectionResponse<MIAB> listMIAB(
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("limit") Integer limit) {
 
-		EntityManager mgr = null;
-		Cursor cursor = null;
-		List<MIAB> execute = null;
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Query allEntities = new Query("MIAB");
+		allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(140) ) );
+		PreparedQuery pq = datastore.prepare(allEntities);
 
-		try {
-			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from MIAB as MIAB");
-			if (cursorString != null && cursorString != "") {
-				cursor = Cursor.fromWebSafeString(cursorString);
-				query.setHint(JPACursorHelper.CURSOR_HINT, cursor);
-			}
+		List<MIAB> execute = new ArrayList<MIAB>();
 
-			if (limit != null) {
-				query.setFirstResult(0);
-				query.setMaxResults(limit);
-			}
+		MIAB artificial = new MIAB();
+		artificial.setMessage("artificial one, result count: " + pq.countEntities() );
+		artificial.setBurried( true );
+		artificial.setGeoIndex(999L);
+		execute.add(artificial);
 
-			execute = (List<MIAB>) query.getResultList();
-			cursor = JPACursorHelper.getCursor(execute);
-			if (cursor != null)
-				cursorString = cursor.toWebSafeString();
-
-			// Tight loop for fetching all entities from datastore and accomodate
-			// for lazy fetch.
-			for (MIAB obj : execute)
-				;
-		} finally {
-			mgr.close();
+		for ( Entity entity : pq.asIterable() ) {
+			MIAB miab = new MIAB();
+			miab.setMessage( (String)entity.getProperty("message") );
+			execute.add(miab);
 		}
 
 		return CollectionResponse.<MIAB> builder().setItems(execute)
@@ -148,10 +142,10 @@ public class MIABEndpoint {
 	}
 
 	private boolean containsMIAB(MIAB miab) {
-		EntityManager mgr = getEntityManager();
 		if( miab.getID() == null ) {
 			return false;
 		}
+		EntityManager mgr = getEntityManager();
 		boolean contains = true;
 		try {
 			MIAB item = mgr.find(MIAB.class, miab.getID());

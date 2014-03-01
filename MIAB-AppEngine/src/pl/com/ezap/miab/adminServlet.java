@@ -10,6 +10,8 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 
 public class adminServlet extends HttpServlet {
 
@@ -23,6 +25,7 @@ public class adminServlet extends HttpServlet {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query allEntities = new Query("MIAB");
+		allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(140) ) );
 		PreparedQuery pq = datastore.prepare(allEntities);
 		String str = new String();
 		str = " Number of messages: " + Integer.toString( pq.countEntities() );

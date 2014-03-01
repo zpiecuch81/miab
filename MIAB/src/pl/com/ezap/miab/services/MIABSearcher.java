@@ -28,10 +28,7 @@ public class MIABSearcher {
 
 			List<MIAB> miabs = new ArrayList<MIAB>();
 			try{
-				//miabs = endpoint.listMIAB().set("geoIndex", Long.toString(index) ).execute().getItems();
-				//miabs = endpoint.listMIAB().set("geoIndex", Long.toString(155417) ).execute().getItems();
-				miabs.add( endpoint.getMIAB(1392411879222L).execute() );// .listMIAB().set("Name", "1392411879222" ).execute().getItems();
-				//miabs = endpoint.listMIAB().execute().getItems();
+				miabs = endpoint.listMIAB().execute().getItems();
 				Log.d( "SearchMessageTask", "Received " + miabs.size() + " MIABs");
 			} catch (IOException e) {
 				e.printStackTrace();

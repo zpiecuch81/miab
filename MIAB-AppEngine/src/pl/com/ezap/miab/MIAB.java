@@ -5,18 +5,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.datanucleus.api.jpa.annotations.Extension;
+
 import com.google.appengine.api.datastore.GeoPt;
 
 @Entity
 public class MIAB {
 
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private String message;
+
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private GeoPt location;
+
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private GeoPt deltaLocation;
 	private boolean isFlowing;
 	private boolean isBurried;
-	private long timeStamp;
-	private long geoIndex;
+	private Long timeStamp;
+
+	private Long geoIndex;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,8 +35,8 @@ public class MIAB {
 		setLocation(null);
 		setFlowing(false);
 		setBurried(false);
-		setTimeStamp(0);
-		setGeoIndex(0);
+		setTimeStamp(0L);
+		setGeoIndex(0L);
 	}
 
 	public String getMessage() {
@@ -63,19 +71,19 @@ public class MIAB {
 		this.isFlowing = isFlowing;
 	}
 
-	public long getTimeStamp() {
+	public Long getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(long timeStamp) {
+	public void setTimeStamp(Long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
-	public long getGeoIndex() {
+	public Long getGeoIndex() {
 		return geoIndex;
 	}
 
-	public void setGeoIndex(long geoIndex) {
+	public void setGeoIndex(Long geoIndex) {
 		this.geoIndex = geoIndex;
 	}
 
