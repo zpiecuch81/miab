@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/GCM-aPTIKcpUiJ1znOEvopqfzDI\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/Rj_xBwXvvXhLyocYbd21hZwHB90\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -180,11 +180,24 @@
     "cursor": {
      "type": "string"
     },
+    "geoIndex": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "isBurried": {
+     "type": "boolean",
+     "required": true
+    },
     "limit": {
      "type": "integer",
      "format": "int32"
     }
    },
+   "parameterOrder": [
+    "geoIndex",
+    "isBurried"
+   ],
    "returns": {
     "$ref": "CollectionResponse_MIAB"
    },

@@ -65,7 +65,7 @@
       }
     },
     "miabendpoint.listMIAB" : {
-      "path" : "miab",
+      "path" : "miab/{geoIndex}/{isBurried}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -74,6 +74,14 @@
       "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.listMIAB",
       "request" : {
         "parameters" : {
+          "geoIndex" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "isBurried" : {
+            "type" : "boolean",
+            "required" : true
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -154,10 +162,10 @@
             "type" : "string",
             "format" : "int64"
           },
-          "burried" : {
+          "flowing" : {
             "type" : "boolean"
           },
-          "flowing" : {
+          "burried" : {
             "type" : "boolean"
           }
         }

@@ -19,10 +19,11 @@ import javax.persistence.EntityManager;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.GeoPt;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 
 @Api(name = "miabendpoint", namespace = @ApiNamespace(ownerDomain = "com.pl", ownerName = "com.pl", packagePath = "ezap.miab"))
 public class MIABEndpoint {
@@ -36,25 +37,31 @@ public class MIABEndpoint {
 	 */
 	@ApiMethod(name = "listMIAB")
 	public CollectionResponse<MIAB> listMIAB(
+			@Named("geoIndex") long geoIndex,
+			@Named("isBurried") boolean isBurried,
 			@Nullable @Named("cursor") String cursorString,
 			@Nullable @Named("limit") Integer limit) {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query allEntities = new Query("MIAB");
-		allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(140) ) );
+		//allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(geoIndex) ) );
+		allEntities.setFilter( CompositeFilterOperator.and(
+				FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
+				FilterOperator.EQUAL.of( "isBurried", Boolean.valueOf(isBurried) ) ) );
 		PreparedQuery pq = datastore.prepare(allEntities);
 
 		List<MIAB> execute = new ArrayList<MIAB>();
 
-		MIAB artificial = new MIAB();
-		artificial.setMessage("artificial one, result count: " + pq.countEntities() );
-		artificial.setBurried( true );
-		artificial.setGeoIndex(999L);
-		execute.add(artificial);
-
 		for ( Entity entity : pq.asIterable() ) {
 			MIAB miab = new MIAB();
 			miab.setMessage( (String)entity.getProperty("message") );
+			miab.setLocation( (GeoPt)entity.getProperty("location") );
+			miab.setBurried( (boolean)entity.getProperty("isBurried") );
+			miab.setFlowing( (boolean)entity.getProperty("isFlowing") );
+			miab.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
+			miab.setGeoIndex( (long)entity.getProperty("geoIndex") );
+			miab.setTimeStamp( (long)entity.getProperty("timeStamp") );
+			miab.setID( (long)entity.getKey().getId() );
 			execute.add(miab);
 		}
 

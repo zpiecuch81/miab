@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/GCM-aPTIKcpUiJ1znOEvopqfzDI\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/Rj_xBwXvvXhLyocYbd21hZwHB90\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -177,12 +177,23 @@
   },
   "listMIAB": {
    "id": "miabendpoint.listMIAB",
-   "path": "miab",
+   "path": "miab/{geoIndex}/{isBurried}",
    "httpMethod": "GET",
    "parameters": {
     "cursor": {
      "type": "string",
      "location": "query"
+    },
+    "geoIndex": {
+     "type": "string",
+     "required": true,
+     "format": "int64",
+     "location": "path"
+    },
+    "isBurried": {
+     "type": "boolean",
+     "required": true,
+     "location": "path"
     },
     "limit": {
      "type": "integer",
@@ -190,6 +201,10 @@
      "location": "query"
     }
    },
+   "parameterOrder": [
+    "geoIndex",
+    "isBurried"
+   ],
    "response": {
     "$ref": "CollectionResponse_MIAB"
    },

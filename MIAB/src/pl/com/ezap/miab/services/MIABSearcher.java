@@ -13,7 +13,6 @@ import pl.com.ezap.miab.shared.GeoIndex;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
-//import com.appspot.message-in-bottle.
 
 public class MIABSearcher {
 
@@ -26,9 +25,13 @@ public class MIABSearcher {
 			builder.setApplicationName("message-in-bottle");
 			Miabendpoint endpoint = builder.build();
 
+			long geoIndex = new GeoIndex().getIndex(
+					location2Check[0].getLatitude(),
+					location2Check[0].getLongitude() );
+
 			List<MIAB> miabs = new ArrayList<MIAB>();
 			try{
-				miabs = endpoint.listMIAB().execute().getItems();
+				miabs = endpoint.listMIAB( geoIndex, false ).execute().getItems();
 				Log.d( "SearchMessageTask", "Received " + miabs.size() + " MIABs");
 			} catch (IOException e) {
 				e.printStackTrace();
