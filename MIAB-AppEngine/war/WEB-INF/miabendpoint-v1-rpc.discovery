@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/Rj_xBwXvvXhLyocYbd21hZwHB90\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/RdSIFaVlCoqzHdIoYbmPTg0D4uc\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -110,6 +110,10 @@
     },
     "deltaLocation": {
      "$ref": "GeoPt"
+    },
+    "flowStamp": {
+     "type": "string",
+     "format": "int64"
     },
     "flowing": {
      "type": "boolean"

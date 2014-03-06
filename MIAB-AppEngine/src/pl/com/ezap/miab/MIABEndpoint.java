@@ -2,19 +2,17 @@ package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.EMF;
 
-import com.google.api.server.spi.config.Api;
-import com.google.api.server.spi.config.ApiMethod;
-import com.google.api.server.spi.config.ApiNamespace;
-import com.google.api.server.spi.response.CollectionResponse;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Nullable;
 import javax.inject.Named;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityManager;
+
+import com.google.api.server.spi.config.Api;
+import com.google.api.server.spi.config.ApiMethod;
+import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.response.CollectionResponse;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -44,13 +42,12 @@ public class MIABEndpoint {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query allEntities = new Query("MIAB");
-		//allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(geoIndex) ) );
 		allEntities.setFilter( CompositeFilterOperator.and(
 				FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
 				FilterOperator.EQUAL.of( "isBurried", Boolean.valueOf(isBurried) ) ) );
 		PreparedQuery pq = datastore.prepare(allEntities);
 
-		List<MIAB> execute = new ArrayList<MIAB>();
+		ArrayList<MIAB> execute = new ArrayList<MIAB>();
 
 		for ( Entity entity : pq.asIterable() ) {
 			MIAB miab = new MIAB();
@@ -60,6 +57,7 @@ public class MIABEndpoint {
 			miab.setFlowing( (boolean)entity.getProperty("isFlowing") );
 			miab.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
 			miab.setGeoIndex( (long)entity.getProperty("geoIndex") );
+			miab.setFlowStamp( (long)entity.getProperty("flowStamp") );
 			miab.setTimeStamp( (long)entity.getProperty("timeStamp") );
 			miab.setID( (long)entity.getKey().getId() );
 			execute.add(miab);

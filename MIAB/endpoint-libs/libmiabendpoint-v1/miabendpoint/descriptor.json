@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/miabendpoint/v1/20140302102515/java/1.16.0-rc/com.pl-miabendpoint-v1-20140302102515-java-1.16.0-rc-sources.jar", 
-      "path": "com.pl-miabendpoint-v1-20140302102515-java-1.16.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/miabendpoint/v1/20140306183554/java/1.16.0-rc/com.pl-miabendpoint-v1-20140306183554-java-1.16.0-rc-sources.jar", 
+      "path": "com.pl-miabendpoint-v1-20140306183554-java-1.16.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-03-02 10:25"
+      "timestamp": "2014-03-06 18:35"
     }, 
     {
-      "path": "com.pl-miabendpoint-v1-20140302102515-java-1.16.0-rc.jar.properties", 
+      "path": "com.pl-miabendpoint-v1-20140306183554-java-1.16.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -702,5 +702,5 @@
   "packagePath": "ezap.miab", 
   "language_version": "1.16.0-rc", 
   "id": "miabendpoint:v1", 
-  "revision": 20140302102515
+  "revision": 20140306183554
 }

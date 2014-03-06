@@ -14,16 +14,18 @@ public class MIAB {
 
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private String message;
-
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private GeoPt location;
-
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private GeoPt deltaLocation;
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private boolean isFlowing;
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private boolean isBurried;
+	private Long flowStamp;
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private Long timeStamp;
-
+	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private Long geoIndex;
 
 	@Id
@@ -73,6 +75,14 @@ public class MIAB {
 
 	public Long getTimeStamp() {
 		return timeStamp;
+	}
+
+	public void setFlowStamp(Long flowStamp) {
+		this.flowStamp = flowStamp;
+	}
+
+	public Long getFlowStamp() {
+		return flowStamp;
 	}
 
 	public void setTimeStamp(Long timeStamp) {
