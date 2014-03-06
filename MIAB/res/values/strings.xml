@@ -20,5 +20,6 @@
     <string name="msgEnableNetToast">Enable network access</string>
     <string name="title_activity_google_services_missing">Google Play Services Missing</string>
     <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
+    <string name="msgNoMessages">No MIABs found</string>
 
 </resources>
