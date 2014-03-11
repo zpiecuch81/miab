@@ -19,8 +19,8 @@ public class MIABContentProvider extends ContentProvider {
 	private MIABSQLiteHelper database;
 
 	// used for the UriMacher
-	private static final int TODOS = 10;
-	private static final int TODO_ID = 20;
+	private static final int MIABS = 10;
+	private static final int MIAB_ID = 20;
 
 	private static final String AUTHORITY = "pl.com.ezap.miab.store.contentProvider";
 
@@ -35,8 +35,8 @@ public class MIABContentProvider extends ContentProvider {
 
 	private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 	static {
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH, TODOS);
-		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", TODO_ID);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH, MIABS);
+		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MIAB_ID);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class MIABContentProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 
-		// Uisng SQLiteQueryBuilder instead of query() method
+		// Using SQLiteQueryBuilder instead of query() method
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
 		// check if the caller has requested a column which does not exists
@@ -60,9 +60,9 @@ public class MIABContentProvider extends ContentProvider {
 
 		int uriType = sURIMatcher.match(uri);
 		switch (uriType) {
-		case TODOS:
+		case MIABS:
 			break;
-		case TODO_ID:
+		case MIAB_ID:
 			// adding the ID to the original query
 			queryBuilder.appendWhere(MIABSQLiteHelper.COLUMN_ID + "="
 					+ uri.getLastPathSegment());
@@ -71,6 +71,9 @@ public class MIABContentProvider extends ContentProvider {
 			throw new IllegalArgumentException("Unknown URI: " + uri);
 		}
 
+		if( sortOrder == null ){
+			sortOrder = MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP + " desc";
+		}
 		SQLiteDatabase db = database.getWritableDatabase();
 		Cursor cursor = queryBuilder.query(db, projection, selection,
 				selectionArgs, null, null, sortOrder);
@@ -91,7 +94,7 @@ public class MIABContentProvider extends ContentProvider {
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
 		long id = 0;
 		switch (uriType) {
-		case TODOS:
+		case MIABS:
 			id = sqlDB.insert(MIABSQLiteHelper.TABLE_MIABS, null, values);
 			break;
 		default:
@@ -107,11 +110,11 @@ public class MIABContentProvider extends ContentProvider {
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
 		int rowsDeleted = 0;
 		switch (uriType) {
-		case TODOS:
+		case MIABS:
 			rowsDeleted = sqlDB.delete(MIABSQLiteHelper.TABLE_MIABS, selection,
 					selectionArgs);
 			break;
-		case TODO_ID:
+		case MIAB_ID:
 			String id = uri.getLastPathSegment();
 			if (TextUtils.isEmpty(selection)) {
 				rowsDeleted = sqlDB.delete(MIABSQLiteHelper.TABLE_MIABS,
@@ -139,13 +142,13 @@ public class MIABContentProvider extends ContentProvider {
 		SQLiteDatabase sqlDB = database.getWritableDatabase();
 		int rowsUpdated = 0;
 		switch (uriType) {
-		case TODOS:
+		case MIABS:
 			rowsUpdated = sqlDB.update(MIABSQLiteHelper.TABLE_MIABS, 
 					values, 
 					selection,
 					selectionArgs);
 			break;
-		case TODO_ID:
+		case MIAB_ID:
 			String id = uri.getLastPathSegment();
 			if (TextUtils.isEmpty(selection)) {
 				rowsUpdated = sqlDB.update(MIABSQLiteHelper.TABLE_MIABS, 
@@ -171,11 +174,12 @@ public class MIABContentProvider extends ContentProvider {
 	private void checkColumns(String[] projection) {
 		String[] available = {
 				MIABSQLiteHelper.COLUMN_MESSAGE,
-				MIABSQLiteHelper.COLUMN_WAS_FLOWING,
-				MIABSQLiteHelper.COLUMN_WAS_DIG,
+				MIABSQLiteHelper.COLUMN_HEAD,
+				MIABSQLiteHelper.COLUMN_MESSAGE_FLAG,
 				MIABSQLiteHelper.COLUMN_DROP_TIME_STAMP,
 				MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP,
-				MIABSQLiteHelper.COLUMN_LOCATION,
+				MIABSQLiteHelper.COLUMN_LONGITUDE,
+				MIABSQLiteHelper.COLUMN_LATITUDE,
 				MIABSQLiteHelper.COLUMN_ID };
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));

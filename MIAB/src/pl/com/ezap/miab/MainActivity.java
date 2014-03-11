@@ -79,6 +79,10 @@ public class MainActivity extends Activity{
 			switchMIABService();
 			invalidateOptionsMenu();
 			return true;
+		case R.id.action_foundMIABs:
+			Intent viewMIABs = new Intent(this, MessageListActivity.class);
+			startActivity(viewMIABs);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

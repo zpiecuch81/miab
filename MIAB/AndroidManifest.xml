@@ -76,8 +76,9 @@
             android:exported="false" >
         </service>
 
+
         <provider
-            android:name=".contentprovider.MIABContentProvider"
+            android:name="pl.com.ezap.miab.store.MIABContentProvider"
             android:authorities="pl.com.ezap.miab.store.contentProvider"
             android:exported="false" >
         </provider>

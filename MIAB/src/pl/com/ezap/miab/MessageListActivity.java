@@ -8,6 +8,8 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -31,27 +33,33 @@ public class MessageListActivity extends ListActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_miab_list);
 		this.getListView().setDividerHeight(2);
+
+		MIABSQLiteHelper helper = new MIABSQLiteHelper( getApplicationContext() );
+		helper.recreateTable();
+
 		fillData();
 		registerForContextMenu(getListView());
 	}
 
-	// create the menu based on the XML defintion
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.listmenu, menu);
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
-	// Reaction to the menu selection
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-//		switch (item.getItemId()) {
-//		case R.id.insert:
-//			createTodo();
-//			return true;
-//		}
-		return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case R.id.action_scanning:
+			return true;
+		case R.id.action_foundMIABs:
+			MIABSQLiteHelper helper = new MIABSQLiteHelper( getApplicationContext() );
+			helper.storeMessage( "added Test message :)", 1L, true, false, new Location(LocationManager.GPS_PROVIDER) ); 
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override
@@ -86,13 +94,12 @@ public class MessageListActivity extends ListActivity implements
 
 		// Fields from the database (projection)
 		// Must include the _id column for the adapter to work
-		String[] from = new String[] { MIABSQLiteHelper.COLUMN_MESSAGE };
+		String[] from = new String[] { MIABSQLiteHelper.COLUMN_HEAD };
 		// Fields on the UI to which we map
 		int[] to = new int[] { R.id.label };
 
 		getLoaderManager().initLoader(0, null, this);
-		adapter = new SimpleCursorAdapter(this, R.layout.miab_row, null, from,
-				to, 0);
+		adapter = new SimpleCursorAdapter(this, R.layout.miab_row, null, from, to, 0);
 
 		setListAdapter(adapter);
 	}
@@ -107,7 +114,7 @@ public class MessageListActivity extends ListActivity implements
 	// creates a new loader after the initLoader () call
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		String[] projection = { MIABSQLiteHelper.COLUMN_ID, MIABSQLiteHelper.COLUMN_MESSAGE };
+		String[] projection = { MIABSQLiteHelper.COLUMN_ID, MIABSQLiteHelper.COLUMN_HEAD };
 		CursorLoader cursorLoader = new CursorLoader(this,
 				MIABContentProvider.CONTENT_URI, projection, null, null, null);
 		return cursorLoader;
