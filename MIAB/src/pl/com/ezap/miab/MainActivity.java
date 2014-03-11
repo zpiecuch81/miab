@@ -1,6 +1,6 @@
 package pl.com.ezap.miab;
 
-import pl.com.ezap.miab.services.MIABService;
+import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.shared.Message;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -13,13 +13,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity{
+
+	private GeneralMenuHelper menuHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +30,13 @@ public class MainActivity extends Activity{
 
 		setContentView(R.layout.activity_main);
 
+		menuHelper = new GeneralMenuHelper( this );
+
 		findViewById(R.id.button_leaveMsg).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						startMessageCreation(false);
+						startMessageCreation(false,false);
 					}
 				});
 
@@ -41,15 +44,39 @@ public class MainActivity extends Activity{
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						startMessageCreation(true);
+						startMessageCreation(true,false);
+					}
+				});
+
+		findViewById(R.id.button_digMsg).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						startMessageCreation(false,true);
+					}
+				});
+
+		findViewById(R.id.button_searchDigMsg).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						
+					}
+				});
+
+		findViewById(R.id.button_foundMsg).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent viewMIABs = new Intent(getMainActivity(), MessageListActivity.class);
+						startActivity(viewMIABs);
 					}
 				});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.general, menu);
 		return true;
 	}
 
@@ -69,38 +96,24 @@ public class MainActivity extends Activity{
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle presses on the action bar items
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivity(intent);
-			return true;
-		case R.id.action_scanning:
-			switchMIABService();
-			invalidateOptionsMenu();
-			return true;
-		case R.id.action_foundMIABs:
-			Intent viewMIABs = new Intent(this, MessageListActivity.class);
-			startActivity(viewMIABs);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+		return menuHelper.onOptionsItemSelected( item )
+				? true
+				: super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu (Menu menu) {
-		SharedPreferences settings = getPreferences(0);
-		if(settings.getBoolean("MIABServiceOn", true)) {
-			menu.getItem(0).setIcon(R.drawable.action_scanning);
-		} else {
-			menu.getItem(0).setIcon(R.drawable.action_notscanning);
-		}
+		menuHelper.onPrepareOptionsMenu(menu);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	private void startMessageCreation(boolean isFlowing) {
+	private MainActivity getMainActivity() {
+		return this;
+	}
+
+	private void startMessageCreation(boolean isFlowing, boolean isDig) {
 		Message.getInstance().m_isFlowing = isFlowing;
+		Message.getInstance().m_isBurried = isDig;
 
 		Intent intent = new Intent(this, CreateMessageActivity.class);
 		startActivity(intent);
@@ -128,20 +141,6 @@ public class MainActivity extends Activity{
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
 		if (netInfo == null || !netInfo.isConnectedOrConnecting()) {
 			Toast.makeText( getApplicationContext(), R.string.msgEnableNetToast, Toast.LENGTH_LONG ).show();
-		}
-	}
-
-	private void switchMIABService()
-	{
-		SharedPreferences settings = getPreferences(0);
-		SharedPreferences.Editor settingsEditor = settings.edit();
-		boolean enableNow = !settings.getBoolean("MIABServiceOn", true);
-		settingsEditor.putBoolean("MIABServiceOn", enableNow);
-		settingsEditor.commit();
-		if( enableNow ) {
-			startService(new Intent( getApplicationContext(), MIABService.class ));
-		} else {
-			stopService(new Intent( getApplicationContext(), MIABService.class ));
 		}
 	}
 }

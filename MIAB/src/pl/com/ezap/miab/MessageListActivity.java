@@ -1,5 +1,6 @@
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.app.ListActivity;
@@ -8,8 +9,6 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -24,6 +23,7 @@ import android.widget.SimpleCursorAdapter;
 public class MessageListActivity extends ListActivity implements
 		LoaderCallbacks<Cursor> {
 
+	private GeneralMenuHelper menuHelper;
 	private static final int DELETE_ID = Menu.FIRST + 1;
 	// private Cursor cursor;
 	private SimpleCursorAdapter adapter;
@@ -34,6 +34,8 @@ public class MessageListActivity extends ListActivity implements
 		setContentView(R.layout.activity_miab_list);
 		this.getListView().setDividerHeight(2);
 
+		menuHelper = new GeneralMenuHelper( this );
+
 		MIABSQLiteHelper helper = new MIABSQLiteHelper( getApplicationContext() );
 		helper.recreateTable();
 
@@ -43,23 +45,21 @@ public class MessageListActivity extends ListActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.general, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_scanning:
-			return true;
-		case R.id.action_foundMIABs:
-			MIABSQLiteHelper helper = new MIABSQLiteHelper( getApplicationContext() );
-			helper.storeMessage( "added Test message :)", 1L, true, false, new Location(LocationManager.GPS_PROVIDER) ); 
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+		return menuHelper.onOptionsItemSelected( item )
+				? true
+				: super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		menuHelper.onPrepareOptionsMenu(menu);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class MessageListActivity extends ListActivity implements
 
 		// Fields from the database (projection)
 		// Must include the _id column for the adapter to work
-		String[] from = new String[] { MIABSQLiteHelper.COLUMN_HEAD };
+		String[] from = new String[] { MIABSQLiteHelper.COLUMN_HEAD, MIABSQLiteHelper.COLUMN_ID };
 		// Fields on the UI to which we map
 		int[] to = new int[] { R.id.label };
 
@@ -108,7 +108,7 @@ public class MessageListActivity extends ListActivity implements
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-//		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
 	}
 
 	// creates a new loader after the initLoader () call

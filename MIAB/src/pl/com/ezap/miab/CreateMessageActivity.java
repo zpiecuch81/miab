@@ -1,6 +1,7 @@
 package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.services.SenderService;
+import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.shared.Message;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.InputFilter;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +22,14 @@ import android.widget.Toast;
 
 public class CreateMessageActivity extends Activity {
 
+	private GeneralMenuHelper menuHelper;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_message);
+
+		menuHelper = new GeneralMenuHelper( this );
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -42,9 +48,21 @@ public class CreateMessageActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.create_message, menu);
+		getMenuInflater().inflate(R.menu.general, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return menuHelper.onOptionsItemSelected( item )
+				? true
+				: super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		menuHelper.onPrepareOptionsMenu(menu);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -59,6 +77,11 @@ public class CreateMessageActivity extends Activity {
 			layout.setBackgroundResource(R.drawable.bkg_throw);
 			Button buttonLeave = (Button)(findViewById(R.id.buttonMessageReady));
 			buttonLeave.setText(R.string.button_throwMsg);
+		} else if( miab.m_isBurried ) {
+			LinearLayout layout= (LinearLayout)findViewById(R.id.createMessageLayout);
+			layout.setBackgroundResource(R.drawable.bkg_dig);
+			Button buttonLeave = (Button)(findViewById(R.id.buttonMessageReady));
+			buttonLeave.setText(R.string.button_digMsg);
 		}
 	}
 

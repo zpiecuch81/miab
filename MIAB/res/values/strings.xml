@@ -6,10 +6,16 @@
     <string name="action_stopscanning">Disable scanning</string>
     <string name="button_leaveMsg">Leave a message</string>
     <string name="button_throwMsg">Throw a message</string>
+    <string name="button_digMsg">Dig here</string>
+    <string name="button_searchDigMsg">Search dig messages</string>
+    <string name="button_foundMsg">Found messages</string>
     <string name="playServicesNotAvailable">Google Play Services is required to run this application :(</string>
-    <string name="title_activity_create_message">Create Message</string>
+    <string name="title_activity_create_message">Create message</string>
+    <string name="title_activity_message_view">Message details</string>
+    <string name="title_activity_message_list">Found messages</string>
+    <string name="title_activity_sending_message">Sending message</string>
+    <string name="title_activity_google_services_missing">Google Play Services missing</string>
     <string name="buttonMessageReady">Leave message</string>
-    <string name="title_activity_sending_message">Sending Message</string>
     <string name="msgThrowingMessage">Throwing bottle</string>
     <string name="msgLeavingMessage">Leaving bottle</string>
     <string name="msgBurryingMessage">Burrying bottle</string>
@@ -18,14 +24,13 @@
     <string name="msgSendingError">Error, bottle lost :(</string>
     <string name="msgEnableGPSToast">Enable GPS</string>
     <string name="msgEnableNetToast">Enable network access</string>
-    <string name="title_activity_google_services_missing">Google Play Services Missing</string>
     <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
     <string name="msgNoMessages">No MIABs found</string>
-    <string name="action_foundMIABs">FoundMessages</string>
     <string name="msgMessageLeft">Left on: </string>
     <string name="msgMessageFound">Found on: </string>
     <string name="msgMessageFoundLocation">Found location: </string>
-    <string name="msgMIABwasFlowing">Message was dig.</string>
-    <string name="msgMIABwasDig">Message was flowing.</string>
+    <string name="msgMIABwasFlowing">Message was flowing.</string>
+    <string name="msgMIABwasDig">Message was dig.</string>
+    <string name="menu_delete">Delete message</string>
 
 </resources>

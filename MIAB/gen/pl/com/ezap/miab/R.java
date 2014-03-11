@@ -180,60 +180,62 @@ containing a value of this type.
         public static final int action_notscanning=0x7f020000;
         public static final int action_scanning=0x7f020001;
         public static final int bkg=0x7f020002;
-        public static final int bkg_leave=0x7f020003;
-        public static final int bkg_throw=0x7f020004;
-        public static final int common_signin_btn_icon_dark=0x7f020005;
-        public static final int common_signin_btn_icon_disabled_dark=0x7f020006;
-        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020007;
-        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020008;
-        public static final int common_signin_btn_icon_disabled_light=0x7f020009;
-        public static final int common_signin_btn_icon_focus_dark=0x7f02000a;
-        public static final int common_signin_btn_icon_focus_light=0x7f02000b;
-        public static final int common_signin_btn_icon_light=0x7f02000c;
-        public static final int common_signin_btn_icon_normal_dark=0x7f02000d;
-        public static final int common_signin_btn_icon_normal_light=0x7f02000e;
-        public static final int common_signin_btn_icon_pressed_dark=0x7f02000f;
-        public static final int common_signin_btn_icon_pressed_light=0x7f020010;
-        public static final int common_signin_btn_text_dark=0x7f020011;
-        public static final int common_signin_btn_text_disabled_dark=0x7f020012;
-        public static final int common_signin_btn_text_disabled_focus_dark=0x7f020013;
-        public static final int common_signin_btn_text_disabled_focus_light=0x7f020014;
-        public static final int common_signin_btn_text_disabled_light=0x7f020015;
-        public static final int common_signin_btn_text_focus_dark=0x7f020016;
-        public static final int common_signin_btn_text_focus_light=0x7f020017;
-        public static final int common_signin_btn_text_light=0x7f020018;
-        public static final int common_signin_btn_text_normal_dark=0x7f020019;
-        public static final int common_signin_btn_text_normal_light=0x7f02001a;
-        public static final int common_signin_btn_text_pressed_dark=0x7f02001b;
-        public static final int common_signin_btn_text_pressed_light=0x7f02001c;
-        public static final int ic_launcher=0x7f02001d;
-        public static final int ic_launcher_orig=0x7f02001e;
-        public static final int ic_plusone_medium_off_client=0x7f02001f;
-        public static final int ic_plusone_small_off_client=0x7f020020;
-        public static final int ic_plusone_standard_off_client=0x7f020021;
-        public static final int ic_plusone_tall_off_client=0x7f020022;
-        public static final int rounded=0x7f020023;
+        public static final int bkg_dig=0x7f020003;
+        public static final int bkg_leave=0x7f020004;
+        public static final int bkg_throw=0x7f020005;
+        public static final int common_signin_btn_icon_dark=0x7f020006;
+        public static final int common_signin_btn_icon_disabled_dark=0x7f020007;
+        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020008;
+        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020009;
+        public static final int common_signin_btn_icon_disabled_light=0x7f02000a;
+        public static final int common_signin_btn_icon_focus_dark=0x7f02000b;
+        public static final int common_signin_btn_icon_focus_light=0x7f02000c;
+        public static final int common_signin_btn_icon_light=0x7f02000d;
+        public static final int common_signin_btn_icon_normal_dark=0x7f02000e;
+        public static final int common_signin_btn_icon_normal_light=0x7f02000f;
+        public static final int common_signin_btn_icon_pressed_dark=0x7f020010;
+        public static final int common_signin_btn_icon_pressed_light=0x7f020011;
+        public static final int common_signin_btn_text_dark=0x7f020012;
+        public static final int common_signin_btn_text_disabled_dark=0x7f020013;
+        public static final int common_signin_btn_text_disabled_focus_dark=0x7f020014;
+        public static final int common_signin_btn_text_disabled_focus_light=0x7f020015;
+        public static final int common_signin_btn_text_disabled_light=0x7f020016;
+        public static final int common_signin_btn_text_focus_dark=0x7f020017;
+        public static final int common_signin_btn_text_focus_light=0x7f020018;
+        public static final int common_signin_btn_text_light=0x7f020019;
+        public static final int common_signin_btn_text_normal_dark=0x7f02001a;
+        public static final int common_signin_btn_text_normal_light=0x7f02001b;
+        public static final int common_signin_btn_text_pressed_dark=0x7f02001c;
+        public static final int common_signin_btn_text_pressed_light=0x7f02001d;
+        public static final int ic_launcher=0x7f02001e;
+        public static final int ic_launcher_orig=0x7f02001f;
+        public static final int ic_plusone_medium_off_client=0x7f020020;
+        public static final int ic_plusone_small_off_client=0x7f020021;
+        public static final int ic_plusone_standard_off_client=0x7f020022;
+        public static final int ic_plusone_tall_off_client=0x7f020023;
+        public static final int rounded=0x7f020024;
     }
     public static final class id {
-        public static final int TextView01=0x7f06000f;
-        public static final int action_foundMIABs=0x7f060012;
-        public static final int action_scanning=0x7f060011;
-        public static final int action_settings=0x7f060010;
+        public static final int TextView01=0x7f060012;
+        public static final int action_scanning=0x7f060013;
         public static final int buttonMessageReady=0x7f060007;
+        public static final int button_digMsg=0x7f06000a;
+        public static final int button_foundMsg=0x7f06000c;
         public static final int button_leaveMsg=0x7f060008;
+        public static final int button_searchDigMsg=0x7f06000b;
         public static final int button_throwMsg=0x7f060009;
         public static final int createMessageLayout=0x7f060005;
         public static final int editMessageText=0x7f060006;
         public static final int hybrid=0x7f060004;
-        public static final int icon=0x7f06000d;
-        public static final int label=0x7f06000e;
-        public static final int message_details=0x7f06000c;
-        public static final int message_view=0x7f06000b;
+        public static final int icon=0x7f060010;
+        public static final int label=0x7f060011;
+        public static final int message_details=0x7f06000f;
+        public static final int message_view=0x7f06000e;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int satellite=0x7f060002;
         public static final int terrain=0x7f060003;
-        public static final int viewMessageLayout=0x7f06000a;
+        public static final int viewMessageLayout=0x7f06000d;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
@@ -247,12 +249,9 @@ containing a value of this type.
         public static final int miab_row=0x7f030005;
     }
     public static final class menu {
-        public static final int create_message=0x7f0b0000;
-        public static final int main=0x7f0b0001;
-        public static final int sending_message=0x7f0b0002;
+        public static final int general=0x7f0b0000;
     }
     public static final class string {
-        public static final int action_foundMIABs=0x7f07002e;
         public static final int action_settings=0x7f07001b;
         public static final int action_stopscanning=0x7f07001c;
         public static final int app_name=0x7f07001a;
@@ -279,8 +278,11 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f070014;
-        public static final int buttonMessageReady=0x7f070021;
+        public static final int buttonMessageReady=0x7f070028;
+        public static final int button_digMsg=0x7f07001f;
+        public static final int button_foundMsg=0x7f070021;
         public static final int button_leaveMsg=0x7f07001d;
+        public static final int button_searchDigMsg=0x7f070020;
         public static final int button_throwMsg=0x7f07001e;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
@@ -353,31 +355,34 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int msgBurryingMessage=0x7f070025;
-        public static final int msgEnableGPSToast=0x7f070029;
-        public static final int msgEnableNetToast=0x7f07002a;
-        public static final int msgGoogleServicesMissing=0x7f07002c;
-        public static final int msgLeavingMessage=0x7f070024;
-        public static final int msgMIABwasDig=0x7f070033;
-        public static final int msgMIABwasFlowing=0x7f070032;
-        public static final int msgMessageFound=0x7f070030;
-        public static final int msgMessageFoundLocation=0x7f070031;
-        public static final int msgMessageLeft=0x7f07002f;
-        public static final int msgNoMessages=0x7f07002d;
-        public static final int msgRetrivingCurrentLocation=0x7f070026;
-        public static final int msgSendingDone=0x7f070027;
-        public static final int msgSendingError=0x7f070028;
-        public static final int msgThrowingMessage=0x7f070023;
-        public static final int playServicesNotAvailable=0x7f07001f;
-        public static final int pref_description_message_searching=0x7f070037;
+        public static final int menu_delete=0x7f070038;
+        public static final int msgBurryingMessage=0x7f07002b;
+        public static final int msgEnableGPSToast=0x7f07002f;
+        public static final int msgEnableNetToast=0x7f070030;
+        public static final int msgGoogleServicesMissing=0x7f070031;
+        public static final int msgLeavingMessage=0x7f07002a;
+        public static final int msgMIABwasDig=0x7f070037;
+        public static final int msgMIABwasFlowing=0x7f070036;
+        public static final int msgMessageFound=0x7f070034;
+        public static final int msgMessageFoundLocation=0x7f070035;
+        public static final int msgMessageLeft=0x7f070033;
+        public static final int msgNoMessages=0x7f070032;
+        public static final int msgRetrivingCurrentLocation=0x7f07002c;
+        public static final int msgSendingDone=0x7f07002d;
+        public static final int msgSendingError=0x7f07002e;
+        public static final int msgThrowingMessage=0x7f070029;
+        public static final int playServicesNotAvailable=0x7f070022;
+        public static final int pref_description_message_searching=0x7f07003c;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f070035;
-        public static final int pref_title_message_searching=0x7f070036;
-        public static final int title_activity_create_message=0x7f070020;
-        public static final int title_activity_google_services_missing=0x7f07002b;
-        public static final int title_activity_sending_message=0x7f070022;
-        public static final int title_activity_settings=0x7f070034;
+        public static final int pref_header_general=0x7f07003a;
+        public static final int pref_title_message_searching=0x7f07003b;
+        public static final int title_activity_create_message=0x7f070023;
+        public static final int title_activity_google_services_missing=0x7f070027;
+        public static final int title_activity_message_list=0x7f070025;
+        public static final int title_activity_message_view=0x7f070024;
+        public static final int title_activity_sending_message=0x7f070026;
+        public static final int title_activity_settings=0x7f070039;
     }
     public static final class style {
         /** 
@@ -406,6 +411,8 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0001;
+        public static final int messageDataFont=0x7f0a0003;
+        public static final int messageFont=0x7f0a0002;
     }
     public static final class xml {
         public static final int pref_general=0x7f040000;

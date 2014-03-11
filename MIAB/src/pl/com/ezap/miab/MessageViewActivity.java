@@ -1,11 +1,15 @@
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import android.widget.TextView;
  */
 public class MessageViewActivity extends Activity {
 
+	private GeneralMenuHelper menuHelper;
 	private TextView messageView;
 	private TextView detailsView;
 	private Uri todoUri;
@@ -22,11 +27,12 @@ public class MessageViewActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		try {
-			setContentView(R.layout.activity_message_view);
-		} catch( Exception e ) {
-			e.printStackTrace();
-		}
+		setContentView(R.layout.activity_message_view);
+
+		menuHelper = new GeneralMenuHelper( this );
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		messageView = (TextView) findViewById(R.id.message_view);
 		detailsView = (TextView) findViewById(R.id.message_details);
@@ -45,6 +51,25 @@ public class MessageViewActivity extends Activity {
 			processMIAB(todoUri);
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.general, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return menuHelper.onOptionsItemSelected( item )
+				? true
+				: super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		menuHelper.onPrepareOptionsMenu(menu);
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	private void processMIAB( Uri uri )
@@ -77,8 +102,8 @@ public class MessageViewActivity extends Activity {
 			LinearLayout layout= (LinearLayout)findViewById(R.id.viewMessageLayout);
 			layout.setBackgroundResource(R.drawable.bkg_throw);
 		} else if( flags == MIABSQLiteHelper.MIAB_FLAG_WAS_DIG ) {
-//			LinearLayout layout= (LinearLayout)findViewById(R.id.viewMessageLayout);
-//			layout.setBackgroundResource(R.drawable.bkg_throw);
+			LinearLayout layout= (LinearLayout)findViewById(R.id.viewMessageLayout);
+			layout.setBackgroundResource(R.drawable.bkg_dig);
 		}
 	}
 
