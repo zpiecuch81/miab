@@ -69,6 +69,7 @@ public class CreateMessageActivity extends Activity {
 	protected void onResume()
 	{
 		super.onResume();
+		menuHelper.updateMenuState();
 		Message miab = Message.getInstance();
 		EditText text = (EditText)findViewById(R.id.editMessageText);
 		text.setText(miab.m_message);

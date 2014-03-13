@@ -44,6 +44,13 @@ public class MessageListActivity extends ListActivity implements
 	}
 
 	@Override
+	public void onResume()
+	{
+		super.onResume();
+		menuHelper.updateMenuState();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.general, menu);
 		return true;

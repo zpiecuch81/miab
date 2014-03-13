@@ -95,6 +95,13 @@ public class MainActivity extends Activity{
 	}
 
 	@Override
+	public void onResume()
+	{
+		super.onResume();
+		menuHelper.updateMenuState();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return menuHelper.onOptionsItemSelected( item )
 				? true

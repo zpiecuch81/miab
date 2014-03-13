@@ -54,6 +54,13 @@ public class MessageViewActivity extends Activity {
 	}
 
 	@Override
+	public void onResume()
+	{
+		super.onResume();
+		menuHelper.updateMenuState();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.general, menu);
 		return true;
@@ -146,17 +153,7 @@ public class MessageViewActivity extends Activity {
 
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		saveState();
 		outState.putParcelable(MIABContentProvider.CONTENT_ITEM_TYPE, todoUri);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		saveState();
-	}
-
-	private void saveState() {
 	}
 
 } 

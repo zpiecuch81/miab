@@ -54,8 +54,7 @@ public class MIABService extends Service
 		}
 		Toast.makeText( getApplicationContext(), "MIAB Service started", Toast.LENGTH_LONG ).show();
 		startGPSListening();
-//		MIABSearcher searcher = new MIABSearcher();
-//		searcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ) );
+		//MIABSearcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ), this.getApplicationContext() );
 
 		// If we get killed, after returning from here, restart
 		return START_STICKY;
@@ -165,7 +164,7 @@ public class MIABService extends Service
 				+ location.getLatitude() + ","
 				+ location.getLongitude() );
 		//Toast.makeText( getApplicationContext(), "searching message", Toast.LENGTH_SHORT ).show();
-		MIABSearcher.searchAtLocation( location );
+		MIABSearcher.searchAtLocation( location, this.getApplicationContext() );
 	}
 
 }

@@ -57,7 +57,7 @@ public class MIABEndpoint {
 			miab.setFlowing( (boolean)entity.getProperty("isFlowing") );
 			miab.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
 			miab.setGeoIndex( (long)entity.getProperty("geoIndex") );
-			miab.setFlowStamp( (long)entity.getProperty("flowStamp") );
+			//miab.setFlowStamp( (long)entity.getProperty("flowStamp") );
 			miab.setTimeStamp( (long)entity.getProperty("timeStamp") );
 			miab.setID( (long)entity.getKey().getId() );
 			execute.add(miab);
