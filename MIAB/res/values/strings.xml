@@ -6,8 +6,8 @@
     <string name="action_stopscanning">Disable scanning</string>
     <string name="button_leaveMsg">Leave a message</string>
     <string name="button_throwMsg">Throw a message</string>
-    <string name="button_digMsg">Dig here</string>
-    <string name="button_searchDigMsg">Search dig messages</string>
+    <string name="button_digMsg">Hide a message</string>
+    <string name="button_searchDigMsg">Search hidden messages</string>
     <string name="button_foundMsg">Found messages</string>
     <string name="playServicesNotAvailable">Google Play Services is required to run this application :(</string>
     <string name="title_activity_create_message">Create message</string>
@@ -18,7 +18,7 @@
     <string name="buttonMessageReady">Leave message</string>
     <string name="msgThrowingMessage">Throwing bottle</string>
     <string name="msgLeavingMessage">Leaving bottle</string>
-    <string name="msgBurryingMessage">Burrying bottle</string>
+    <string name="msgBurryingMessage">Hidding bottle</string>
     <string name="msgRetrivingCurrentLocation">Retriving current location</string>
     <string name="msgSendingDone">Bottle left</string>
     <string name="msgSendingError">Error, bottle lost :(</string>
