@@ -118,9 +118,9 @@ public class MainActivity extends Activity{
 		return this;
 	}
 
-	private void startMessageCreation(boolean isFlowing, boolean isDig) {
+	private void startMessageCreation(boolean isFlowing, boolean isHidden) {
 		Message.getInstance().m_isFlowing = isFlowing;
-		Message.getInstance().m_isBurried = isDig;
+		Message.getInstance().m_isHidden = isHidden;
 
 		Intent intent = new Intent(this, CreateMessageActivity.class);
 		startActivity(intent);

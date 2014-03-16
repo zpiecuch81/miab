@@ -8,7 +8,7 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
 
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
-import pl.com.ezap.miab.miabendpoint.model.MIAB;
+import pl.com.ezap.miab.miabendpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
@@ -18,10 +18,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MIABSearcher extends AsyncTask<Void, Integer, List<MIAB> > {
+public class MIABSearcher extends AsyncTask<Void, Integer, List<MessageV1> > {
 
 	private class MessageCache {
-		public List<MIAB> miabs;
+		public List<MessageV1> miabs;
 		public long geoIndex;
 	}
 
@@ -35,37 +35,37 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MIAB> > {
 	}
 
 	@Override
-	protected List<MIAB> doInBackground(Void... unused)
+	protected List<MessageV1> doInBackground(Void... unused)
 	{
-		List<MIAB> miabs2Check = getMIABsWithCurrentGeoIndex();
-		List<MIAB> miabs2Download = selectCurrentLocationMIABS( miabs2Check );
-		List<MIAB> downloadedMIABs = downloadMIABs( miabs2Download );
+		List<MessageV1> miabs2Check = getMIABsWithCurrentGeoIndex();
+		List<MessageV1> miabs2Download = selectCurrentLocationMIABS( miabs2Check );
+		List<MessageV1> downloadedMIABs = downloadMIABs( miabs2Download );
 		storeDownloadedMIABs( downloadedMIABs );
 		updateCache( downloadedMIABs );
 		return downloadedMIABs;
 	}
 
 	@Override
-	protected void onPostExecute(List<MIAB> result)
+	protected void onPostExecute(List<MessageV1> result)
 	{
 		if( !result.isEmpty() ) {
 			Toast.makeText( context, "Found " + result.size() + " MIABs", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	private List<MIAB> getMIABsWithCurrentGeoIndex()
+	private List<MessageV1> getMIABsWithCurrentGeoIndex()
 	{
 		if( isCacheEnough() ) {
 			return cache.miabs;
 		}
-		List<MIAB> miabs = getFromDataStore();
-		if( !doDig ) {
-			if( cache == null ) {
-				cache = new MessageCache();
-			}
-			cache.miabs = miabs;
-			cache.geoIndex = geoIndex;
-		}
+		List<MessageV1> miabs = getFromDataStore();
+//		if( !doDig ) {
+//			if( cache == null ) {
+//				cache = new MessageCache();
+//			}
+//			cache.miabs = miabs;
+//			cache.geoIndex = geoIndex;
+//		}
 		return miabs;
 	}
 
@@ -77,26 +77,29 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MIAB> > {
 		return ( cache != null && cache.geoIndex == geoIndex );
 	}
 
-	private List<MIAB> getFromDataStore()
+	private List<MessageV1> getFromDataStore()
 	{
 		Miabendpoint.Builder builder = new Miabendpoint.Builder(
 				AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
 		builder.setApplicationName("message-in-bottle");
 		Miabendpoint endpoint = builder.build();
-		List<MIAB> miabs = new ArrayList<MIAB>();
+		List<MessageV1> miabs = null;
 		try{
-			miabs = endpoint.listMIAB( geoIndex, doDig ).execute().getItems();
-			Log.d( "MIABSearcher", "Received list of " + miabs.size() + " MIABs with index " + geoIndex);
+			miabs = endpoint.listMessages( geoIndex, doDig ).execute().getItems();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return miabs == null ? new ArrayList<MIAB>() : miabs;
+		if( miabs == null ) {
+			miabs = new ArrayList<MessageV1>();
+		}
+		Log.d( "MIABSearcher", "Received list of " + miabs.size() + " MIABs with index " + geoIndex);
+		return miabs;
 	}
 
-	private List<MIAB> selectCurrentLocationMIABS( List<MIAB> miabs2Check )
+	private List<MessageV1> selectCurrentLocationMIABS( List<MessageV1> miabs2Check )
 	{
-		List<MIAB> foundMiabs = new ArrayList<MIAB>();
-		for(MIAB miab : miabs2Check) {
+		List<MessageV1> foundMiabs = new ArrayList<MessageV1>();
+		for(MessageV1 miab : miabs2Check) {
 			if( LocationHelper.isSamePoint( location2search, miab.getLocation() ) ){
 				foundMiabs.add( miab );
 			}
@@ -104,21 +107,21 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MIAB> > {
 		return foundMiabs;
 	}
 
-	private List<MIAB> downloadMIABs( List<MIAB> miabs2Download )
+	private List<MessageV1> downloadMIABs( List<MessageV1> miabs2Download )
 	{
 		Miabendpoint.Builder builder = new Miabendpoint.Builder(
 				AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
 		builder.setApplicationName("message-in-bottle");
 		Miabendpoint endpoint = builder.build();
-		List<MIAB> downloadedMIABs = new ArrayList<MIAB>();
-		for( MIAB miab : miabs2Download ) { 
+		List<MessageV1> downloadedMIABs = new ArrayList<MessageV1>();
+		for( MessageV1 miab : miabs2Download ) { 
 			try{
-				MIAB gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
+				MessageV1 gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
 				if( gotMIAB != null ) {
 					endpoint.removeMIAB( miab.getId() ).execute();
 				}
 				downloadedMIABs.add( gotMIAB );
-				Log.d( "MIABSearcher", "Downloaded MIAB, id =  " + gotMIAB.getId());
+				Log.d( "MIABSearcher", "Downloaded MessageV1, id =  " + gotMIAB.getId());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -126,27 +129,27 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MIAB> > {
 		return downloadedMIABs;
 	}
 
-	private void storeDownloadedMIABs( List<MIAB> downloadedMIABs )
+	private void storeDownloadedMIABs( List<MessageV1> downloadedMIABs )
 	{
 		MIABSQLiteHelper sqlHelper = new MIABSQLiteHelper( context );
-		for( MIAB miab : downloadedMIABs ) {
+		for( MessageV1 miab : downloadedMIABs ) {
 			boolean stored = sqlHelper.storeMessage(
 				miab.getMessage(),
 				miab.getTimeStamp(),
-				miab.getBurried(),
+				miab.getHidden(),
 				miab.getFlowing(),
 				location2search );
 			Log.d( "MIABSearcher", "Message id " + miab.getId() + ", store status = " + stored );
 		}
 	}
 
-	private void updateCache( List<MIAB> downloadedMIABs )
+	private void updateCache( List<MessageV1> downloadedMIABs )
 	{
 		if( cache == null || doDig ) {
 			return;
 		}
-		for( MIAB miab : downloadedMIABs ) {
-			for( MIAB cacheMiab : cache.miabs ) {
+		for( MessageV1 miab : downloadedMIABs ) {
+			for( MessageV1 cacheMiab : cache.miabs ) {
 				if( cacheMiab.getId() == miab.getId() ) {
 					cache.miabs.remove( cacheMiab );
 					break;

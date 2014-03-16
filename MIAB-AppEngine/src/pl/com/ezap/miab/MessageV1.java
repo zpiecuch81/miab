@@ -10,7 +10,7 @@ import org.datanucleus.api.jpa.annotations.Extension;
 import com.google.appengine.api.datastore.GeoPt;
 
 @Entity
-public class MIAB {
+public class MessageV1 {
 
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private String message;
@@ -21,95 +21,114 @@ public class MIAB {
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private boolean isFlowing;
 	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
-	private boolean isBurried;
-	private Long flowStamp;
-	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
 	private Long timeStamp;
-	@Extension(vendorName="datanucleus", key="gae.unindexed", value="true")
+
+	//indexed - required for composite index
+	private Long flowStamp;
+	private boolean isHidden;
 	private Long geoIndex;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long ID;
 
-	public MIAB() {
+	public MessageV1()
+	{
 		setMessage("");
 		setLocation(null);
 		setFlowing(false);
-		setBurried(false);
+		setHidden(false);
 		setTimeStamp(0L);
 		setGeoIndex(0L);
 	}
 
-	public String getMessage() {
+	public String getMessage()
+	{
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(String message)
+	{
 		this.message = message;
 	}
 
-	public GeoPt getLocation() {
+	public GeoPt getLocation()
+	{
 		return location;
 	}
 
-	public void setLocation(GeoPt location) {
+	public void setLocation(GeoPt location)
+	{
 		this.location = location;
 	}
 
-	public GeoPt getDeltaLocation() {
+	public GeoPt getDeltaLocation()
+	{
 		return deltaLocation;
 	}
 
-	public void setDeltaLocation(GeoPt deltaLocation) {
+	public void setDeltaLocation(GeoPt deltaLocation)
+	{
 		this.deltaLocation = deltaLocation;
 	}
 
-	public boolean isFlowing() {
+	public boolean isFlowing()
+	{
 		return isFlowing;
 	}
 
-	public void setFlowing(boolean isFlowing) {
+	public void setFlowing(boolean isFlowing)
+	{
 		this.isFlowing = isFlowing;
 	}
 
-	public Long getTimeStamp() {
+	public Long getTimeStamp()
+	{
 		return timeStamp;
 	}
 
-	public void setFlowStamp(Long flowStamp) {
-		this.flowStamp = flowStamp;
-	}
-
-	public Long getFlowStamp() {
-		return flowStamp;
-	}
-
-	public void setTimeStamp(Long timeStamp) {
+	public void setTimeStamp(Long timeStamp)
+	{
 		this.timeStamp = timeStamp;
 	}
 
-	public Long getGeoIndex() {
+	public Long getFlowStamp()
+	{
+		return flowStamp;
+	}
+
+	public void setFlowStamp(Long flowStamp)
+	{
+		this.flowStamp = flowStamp;
+	}
+
+	public Long getGeoIndex()
+	{
 		return geoIndex;
 	}
 
-	public void setGeoIndex(Long geoIndex) {
+	public void setGeoIndex(Long geoIndex)
+	{
 		this.geoIndex = geoIndex;
 	}
 
-	public Long getID() {
+	public Long getID()
+	{
 		return ID;
 	}
 
-	public void setID(Long ID) {
+	public void setID(Long ID)
+	{
 		this.ID = ID;
 	}
 
-	public boolean isBurried() {
-		return isBurried;
+	public boolean isHidden()
+	{
+		return isHidden;
 	}
 
-	public void setBurried(boolean isBurried) {
-		this.isBurried = isBurried;
+	public void setHidden(boolean isBurried)
+	{
+		this.isHidden = isBurried;
 	}
 }

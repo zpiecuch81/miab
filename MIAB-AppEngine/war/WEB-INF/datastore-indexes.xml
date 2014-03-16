@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <datastore-indexes autoGenerate="true">
-    <datastore-index kind="MIAB" ancestor="false">
-        <property name="isBurried" direction="asc" />
+    <datastore-index kind="MessageV1" ancestor="false">
+        <property name="isHidden" direction="asc" />
         <property name="geoIndex" direction="asc" />
     </datastore-index>
 </datastore-indexes>

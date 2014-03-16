@@ -34,10 +34,10 @@
             mapOptions);
 <%
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    //Key guestbookKey = KeyFactory.createKey("MIAB");
+    //Key guestbookKey = KeyFactory.createKey("MessageV1");
     // Run an ancestor query to ensure we see the most up-to-date
-    // view of the MIABs.
-    Query query = new Query("MIAB");
+    // view of the MessageV1s.
+    Query query = new Query("MessageV1");
     List<Entity> miabs = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(50));
     if (miabs.isEmpty()) {
     } else {

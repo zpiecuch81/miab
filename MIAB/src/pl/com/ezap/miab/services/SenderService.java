@@ -2,6 +2,7 @@ package pl.com.ezap.miab.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
@@ -12,7 +13,7 @@ import pl.com.ezap.miab.CloudEndpointUtils;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
-import pl.com.ezap.miab.miabendpoint.model.MIAB;
+import pl.com.ezap.miab.miabendpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import android.app.Service;
 import android.content.Context;
@@ -33,16 +34,18 @@ public class SenderService extends Service {
 	final static public String IS_BURRIED_KEY = "pl.com.ezap.miab.services.IsBurried";
 	final static public String IS_FLOWING_KEY = "pl.com.ezap.miab.services.IsFlowing";
 
-	private ArrayList<MIAB> messages2send;
+	private ArrayList<MessageV1> messages2send;
 	private LocationManager locationManager;
 	private LocationListener locationListener;
 	private int maxGPSFoundTrials;
 	private boolean isSending;
 
-	private class SendMessageTask extends AsyncTask<MIAB, Integer, Long> {
+	private class SendMessageTask extends AsyncTask<MessageV1, Integer, Long>
+	{
 
 		@Override
-		protected Long doInBackground(MIAB... miabMsg) {
+		protected Long doInBackground(MessageV1... miabMsg)
+		{
 			Miabendpoint.Builder endpointBuilder = new Miabendpoint.Builder(
 					AndroidHttp.newCompatibleTransport(),
 					new JacksonFactory(),
@@ -62,7 +65,8 @@ public class SenderService extends Service {
 		}
 
 		@Override
-		protected void onPostExecute(Long result) {
+		protected void onPostExecute(Long result)
+		{
 			Log.d( "SendMessageTask", "onPostExecute, result " + result);
 			if( result == 0 ) {
 				messages2send.remove( 0 );
@@ -75,35 +79,39 @@ public class SenderService extends Service {
 	}
 
 	@Override
-	public void onCreate() {
+	public void onCreate()
+	{
 		super.onCreate();
 		locationManager = null;
 		locationListener = null;
 		isSending = false;
-		messages2send = new ArrayList<MIAB>();
+		messages2send = new ArrayList<MessageV1>();
 	}
 
 	@Override
-	public IBinder onBind(Intent arg0) {
+	public IBinder onBind(Intent arg0)
+	{
 		return null;
 	}
 
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+	public int onStartCommand(Intent intent, int flags, int startId)
+	{
 		if( intent == null ) {
 			return START_STICKY;
 		}
 
-		//fill basic MIAB data 
-		MIAB miabMessage = new MIAB();
+		//fill basic MessageV1 data 
+		MessageV1 miabMessage = new MessageV1();
 		miabMessage.setMessage( intent.getStringExtra( MESSAGE_KEY ) );
-		miabMessage.setBurried( intent.getBooleanExtra( IS_BURRIED_KEY, false ) );
+		miabMessage.setHidden( intent.getBooleanExtra( IS_BURRIED_KEY, false ) );
 		miabMessage.setFlowing( intent.getBooleanExtra( IS_FLOWING_KEY, false ) );
 		miabMessage.setTimeStamp( new java.util.Date().getTime() );
+		setFloatingData( miabMessage );
 		//ID can't be 0/null, app engine will assign a number to it anyway
 		miabMessage.setId( miabMessage.getTimeStamp() );
 
-		int displayMessageID = miabMessage.getBurried() ? R.string.msgBurryingMessage :
+		int displayMessageID = miabMessage.getHidden() ? R.string.msgBurryingMessage :
 								miabMessage.getFlowing() ? R.string.msgThrowingMessage :
 								R.string.msgLeavingMessage;
 		Toast.makeText( getApplicationContext(), displayMessageID, Toast.LENGTH_LONG).show();
@@ -117,7 +125,24 @@ public class SenderService extends Service {
 		return START_STICKY;
 	}
 
-	private void startLocationListener() {
+	private void setFloatingData(MessageV1 miab)
+	{
+		if( miab.getFlowing() ) {
+			Random r = new Random();
+			float longitudeSpeed = (float)(r.nextInt(90) - 45)/10000.0f;
+			float latitudeSpeed = (float)(r.nextInt(90) - 45)/10000.0f;
+			GeoPt deltaGeoPt = new GeoPt();
+			deltaGeoPt.setLatitude( latitudeSpeed );
+			deltaGeoPt.setLongitude( longitudeSpeed );
+			miab.setDeltaLocation( deltaGeoPt );
+			miab.setFlowStamp( miab.getTimeStamp() );
+		} else {
+			miab.setDeltaLocation( null );
+		}
+	}
+
+	private void startLocationListener()
+	{
 		if( locationManager != null ) {
 			return;		//already started
 		}
@@ -182,14 +207,16 @@ public class SenderService extends Service {
 		locationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 100, 0, locationListener );
 	}
 
-	private boolean isAccuracyEnough( Location location) {
+	private boolean isAccuracyEnough( Location location)
+	{
 		if( location != null ) {
 			return location.getAccuracy() <= 5.0;
 		}
 		return false;
 	}
 
-	private void sendNextMessage( Location location ) {
+	private void sendNextMessage( Location location )
+	{
 		if( isSending ) {
 			return;
 		}
@@ -201,7 +228,8 @@ public class SenderService extends Service {
 		addGeoDataAndSend( messages2send.get( 0 ), location );
 	}
 
-	private void finishService() {
+	private void finishService()
+	{
 		Log.i( "SenderService", "stopping service");
 		if( locationManager != null && locationListener != null ) {
 			locationManager.removeUpdates( locationListener );
@@ -210,17 +238,22 @@ public class SenderService extends Service {
 		stopSelf();
 	}
 
-	private void addGeoDataAndSend( MIAB miabMsg, Location location ) {
+	private void addGeoDataAndSend( MessageV1 miab, Location location )
+	{
 		GeoPt geoPt = new GeoPt();
-		geoPt.setLatitude( (float)location.getLatitude() );
-		geoPt.setLongitude( (float)location.getLongitude() );
-		miabMsg.setLocation( geoPt );
+		if( miab.getFlowing() ) {
+			geoPt.setLatitude( (float)location.getLatitude() + miab.getDeltaLocation().getLatitude() );
+			geoPt.setLongitude( (float)location.getLongitude() + miab.getDeltaLocation().getLongitude() );
+		} else {
+			geoPt.setLatitude( (float)location.getLatitude() );
+			geoPt.setLongitude( (float)location.getLongitude() );
+		}
+		miab.setLocation( geoPt );
 		GeoIndex geoIndex = new GeoIndex();
-		miabMsg.setGeoIndex( geoIndex.getIndex( 
+		miab.setGeoIndex( geoIndex.getIndex( 
 				geoPt.getLatitude(),
 				geoPt.getLongitude() ) );
-		miabMsg.setDeltaLocation( null );
 
-		new SendMessageTask().execute( miabMsg );
+		new SendMessageTask().execute( miab );
 	}
 }

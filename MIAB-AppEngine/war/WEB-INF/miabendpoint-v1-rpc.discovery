@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/RdSIFaVlCoqzHdIoYbmPTg0D4uc\"",
+ "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/GEQbl7pigZLgOvrJ-S9QJXMunWo\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -72,14 +72,14 @@
   }
  },
  "schemas": {
-  "CollectionResponse_MIAB": {
-   "id": "CollectionResponse_MIAB",
+  "CollectionResponse_MessageV1": {
+   "id": "CollectionResponse_MessageV1",
    "type": "object",
    "properties": {
     "items": {
      "type": "array",
      "items": {
-      "$ref": "MIAB"
+      "$ref": "MessageV1"
      }
     },
     "nextPageToken": {
@@ -101,13 +101,10 @@
     }
    }
   },
-  "MIAB": {
-   "id": "MIAB",
+  "MessageV1": {
+   "id": "MessageV1",
    "type": "object",
    "properties": {
-    "burried": {
-     "type": "boolean"
-    },
     "deltaLocation": {
      "$ref": "GeoPt"
     },
@@ -121,6 +118,9 @@
     "geoIndex": {
      "type": "string",
      "format": "int64"
+    },
+    "hidden": {
+     "type": "boolean"
     },
     "id": {
      "type": "string",
@@ -154,7 +154,7 @@
     "id"
    ],
    "returns": {
-    "$ref": "MIAB"
+    "$ref": "MessageV1"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -164,21 +164,21 @@
    "id": "miabendpoint.insertMIAB",
    "parameters": {
     "resource": {
-     "$ref": "MIAB"
+     "$ref": "MessageV1"
     }
    },
    "parameterOrder": [
     "resource"
    ],
    "returns": {
-    "$ref": "MIAB"
+    "$ref": "MessageV1"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
    ]
   },
-  "miabendpoint.listMIAB": {
-   "id": "miabendpoint.listMIAB",
+  "miabendpoint.listMessages": {
+   "id": "miabendpoint.listMessages",
    "allowGet": true,
    "parameters": {
     "cursor": {
@@ -189,7 +189,7 @@
      "required": true,
      "format": "int64"
     },
-    "isBurried": {
+    "isHidden": {
      "type": "boolean",
      "required": true
     },
@@ -200,10 +200,10 @@
    },
    "parameterOrder": [
     "geoIndex",
-    "isBurried"
+    "isHidden"
    ],
    "returns": {
-    "$ref": "CollectionResponse_MIAB"
+    "$ref": "CollectionResponse_MessageV1"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -229,14 +229,14 @@
    "id": "miabendpoint.updateMIAB",
    "parameters": {
     "resource": {
-     "$ref": "MIAB"
+     "$ref": "MessageV1"
     }
    },
    "parameterOrder": [
     "resource"
    ],
    "returns": {
-    "$ref": "MIAB"
+    "$ref": "MessageV1"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"

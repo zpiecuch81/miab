@@ -24,7 +24,8 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 
 @Api(name = "miabendpoint", namespace = @ApiNamespace(ownerDomain = "com.pl", ownerName = "com.pl", packagePath = "ezap.miab"))
-public class MIABEndpoint {
+public class MIABEndpoint
+{
 
 	/**
 	 * This method lists all the entities inserted in datastore.
@@ -33,37 +34,43 @@ public class MIABEndpoint {
 	 * @return A CollectionResponse class containing the list of all entities
 	 * persisted and a cursor to the next page.
 	 */
-	@ApiMethod(name = "listMIAB")
-	public CollectionResponse<MIAB> listMIAB(
+	@ApiMethod(name = "listMessages")
+	public CollectionResponse<MessageV1> listMessages(
 			@Named("geoIndex") long geoIndex,
-			@Named("isBurried") boolean isBurried,
+			@Named("isHidden") boolean isHidden,
 			@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("limit") Integer limit) {
+			@Nullable @Named("limit") Integer limit)
+	{
 
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query allEntities = new Query("MIAB");
-		allEntities.setFilter( CompositeFilterOperator.and(
-				FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
-				FilterOperator.EQUAL.of( "isBurried", Boolean.valueOf(isBurried) ) ) );
-		PreparedQuery pq = datastore.prepare(allEntities);
+		ArrayList<MessageV1> execute = new ArrayList<MessageV1>();
+//		try{
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			Query allEntities = new Query("MessageV1");
+//			allEntities.setFilter( CompositeFilterOperator.and(
+//					FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
+//					FilterOperator.EQUAL.of( "isHidden", Boolean.valueOf(isHidden) ) ) );
+			PreparedQuery pq = datastore.prepare(allEntities);
+//
+			for ( Entity entity : pq.asIterable() ) {
+				MessageV1 message = new MessageV1();
+				message.setMessage( (String)entity.getProperty("message") );
+				message.setLocation( (GeoPt)entity.getProperty("location") );
+				message.setHidden( (boolean)entity.getProperty("isBurried") );
+				message.setFlowing( (boolean)entity.getProperty("isFlowing") );
+				message.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
+				message.setGeoIndex( (long)entity.getProperty("geoIndex") );
+				message.setFlowStamp( (long)entity.getProperty("flowStamp") );
+				message.setTimeStamp( (long)entity.getProperty("timeStamp") );
+				message.setID( (long)entity.getKey().getId() );
+				execute.add(message);
+			}
+//		}catch(Exception e) {
+//			Message_v1 message_v1 = new Message_v1();
+//			message_v1.setMessage( e.getMessage() );
+//			execute.add(message_v1);
+//		}
 
-		ArrayList<MIAB> execute = new ArrayList<MIAB>();
-
-		for ( Entity entity : pq.asIterable() ) {
-			MIAB miab = new MIAB();
-			miab.setMessage( (String)entity.getProperty("message") );
-			miab.setLocation( (GeoPt)entity.getProperty("location") );
-			miab.setBurried( (boolean)entity.getProperty("isBurried") );
-			miab.setFlowing( (boolean)entity.getProperty("isFlowing") );
-			miab.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
-			miab.setGeoIndex( (long)entity.getProperty("geoIndex") );
-			//miab.setFlowStamp( (long)entity.getProperty("flowStamp") );
-			miab.setTimeStamp( (long)entity.getProperty("timeStamp") );
-			miab.setID( (long)entity.getKey().getId() );
-			execute.add(miab);
-		}
-
-		return CollectionResponse.<MIAB> builder().setItems(execute)
+		return CollectionResponse.<MessageV1> builder().setItems(execute)
 				.setNextPageToken(cursorString).build();
 	}
 
@@ -74,15 +81,16 @@ public class MIABEndpoint {
 	 * @return The entity with primary key id.
 	 */
 	@ApiMethod(name = "getMIAB")
-	public MIAB getMIAB(@Named("id") Long id) {
+	public MessageV1 getMIAB(@Named("id") Long id)
+	{
 		EntityManager mgr = getEntityManager();
-		MIAB miab = null;
+		MessageV1 messageV1 = null;
 		try {
-			miab = mgr.find(MIAB.class, id);
+			messageV1 = mgr.find(MessageV1.class, id);
 		} finally {
 			mgr.close();
 		}
-		return miab;
+		return messageV1;
 	}
 
 	/**
@@ -90,21 +98,22 @@ public class MIABEndpoint {
 	 * exists in the datastore, an exception is thrown.
 	 * It uses HTTP POST method.
 	 *
-	 * @param miab the entity to be inserted.
+	 * @param messageV1 the entity to be inserted.
 	 * @return The inserted entity.
 	 */
 	@ApiMethod(name = "insertMIAB")
-	public MIAB insertMIAB(MIAB miab) {
+	public MessageV1 insertMIAB(MessageV1 messageV1)
+	{
 		EntityManager mgr = getEntityManager();
 		try {
-			if (containsMIAB(miab)) {
+			if (containsMIAB(messageV1)) {
 				throw new EntityExistsException("Object already exists");
 			}
-			mgr.persist(miab);
+			mgr.persist(messageV1);
 		} finally {
 			mgr.close();
 		}
-		return miab;
+		return messageV1;
 	}
 
 	/**
@@ -112,21 +121,22 @@ public class MIABEndpoint {
 	 * exist in the datastore, an exception is thrown.
 	 * It uses HTTP PUT method.
 	 *
-	 * @param miab the entity to be updated.
+	 * @param messageV1 the entity to be updated.
 	 * @return The updated entity.
 	 */
 	@ApiMethod(name = "updateMIAB")
-	public MIAB updateMIAB(MIAB miab) {
+	public MessageV1 updateMIAB(MessageV1 messageV1)
+	{
 		EntityManager mgr = getEntityManager();
 		try {
-			if (!containsMIAB(miab)) {
+			if (!containsMIAB(messageV1)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.persist(miab);
+			mgr.persist(messageV1);
 		} finally {
 			mgr.close();
 		}
-		return miab;
+		return messageV1;
 	}
 
 	/**
@@ -136,24 +146,26 @@ public class MIABEndpoint {
 	 * @param id the primary key of the entity to be deleted.
 	 */
 	@ApiMethod(name = "removeMIAB")
-	public void removeMIAB(@Named("id") Long id) {
+	public void removeMIAB(@Named("id") Long id)
+	{
 		EntityManager mgr = getEntityManager();
 		try {
-			MIAB miab = mgr.find(MIAB.class, id);
-			mgr.remove(miab);
+			MessageV1 messageV1 = mgr.find(MessageV1.class, id);
+			mgr.remove(messageV1);
 		} finally {
 			mgr.close();
 		}
 	}
 
-	private boolean containsMIAB(MIAB miab) {
-		if( miab.getID() == null ) {
+	private boolean containsMIAB(MessageV1 messageV1)
+	{
+		if( messageV1.getID() == null ) {
 			return false;
 		}
 		EntityManager mgr = getEntityManager();
 		boolean contains = true;
 		try {
-			MIAB item = mgr.find(MIAB.class, miab.getID());
+			MessageV1 item = mgr.find(MessageV1.class, messageV1.getID());
 			if (item == null) {
 				contains = false;
 			}
@@ -163,7 +175,8 @@ public class MIABEndpoint {
 		return contains;
 	}
 
-	private static EntityManager getEntityManager() {
+	private static EntityManager getEntityManager()
+	{
 		return EMF.get().createEntityManager();
 	}
 

@@ -28,7 +28,7 @@
   "packagePath" : "ezap.miab",
   "methods" : {
     "miabendpoint.updateMIAB" : {
-      "path" : "miab",
+      "path" : "messagev1",
       "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -44,7 +44,7 @@
       }
     },
     "miabendpoint.getMIAB" : {
-      "path" : "miab/{id}",
+      "path" : "messagev1/{id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -56,39 +56,6 @@
           "id" : {
             "type" : "int64",
             "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "miabendpoint.listMIAB" : {
-      "path" : "miab/{geoIndex}/{isBurried}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.listMIAB",
-      "request" : {
-        "parameters" : {
-          "geoIndex" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "isBurried" : {
-            "type" : "boolean",
-            "required" : true
-          },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "limit" : {
-            "type" : "int32",
-            "required" : false
           }
         },
         "body" : "empty"
@@ -119,7 +86,7 @@
       }
     },
     "miabendpoint.insertMIAB" : {
-      "path" : "miab",
+      "path" : "messagev1",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -133,12 +100,45 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "miabendpoint.listMessages" : {
+      "path" : "messagev1/{geoIndex}/{isHidden}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MIABEndpoint.listMessages",
+      "request" : {
+        "parameters" : {
+          "geoIndex" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "isHidden" : {
+            "type" : "boolean",
+            "required" : true
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "MIAB" : {
-        "id" : "MIAB",
+      "MessageV1" : {
+        "id" : "MessageV1",
         "type" : "object",
         "properties" : {
           "message" : {
@@ -150,11 +150,11 @@
           "deltaLocation" : {
             "$ref" : "GeoPt"
           },
-          "flowStamp" : {
+          "timeStamp" : {
             "type" : "string",
             "format" : "int64"
           },
-          "timeStamp" : {
+          "flowStamp" : {
             "type" : "string",
             "format" : "int64"
           },
@@ -162,14 +162,14 @@
             "type" : "string",
             "format" : "int64"
           },
+          "hidden" : {
+            "type" : "boolean"
+          },
           "id" : {
             "type" : "string",
             "format" : "int64"
           },
           "flowing" : {
-            "type" : "boolean"
-          },
-          "burried" : {
             "type" : "boolean"
           }
         }
@@ -188,14 +188,14 @@
           }
         }
       },
-      "CollectionResponse_MIAB" : {
-        "id" : "CollectionResponse_MIAB",
+      "CollectionResponse_MessageV1" : {
+        "id" : "CollectionResponse_MessageV1",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "MIAB"
+              "$ref" : "MessageV1"
             }
           },
           "nextPageToken" : {
@@ -207,30 +207,30 @@
     "methods" : {
       "pl.com.ezap.miab.MIABEndpoint.updateMIAB" : {
         "request" : {
-          "$ref" : "MIAB"
+          "$ref" : "MessageV1"
         },
         "response" : {
-          "$ref" : "MIAB"
+          "$ref" : "MessageV1"
         }
       },
       "pl.com.ezap.miab.MIABEndpoint.getMIAB" : {
         "response" : {
-          "$ref" : "MIAB"
-        }
-      },
-      "pl.com.ezap.miab.MIABEndpoint.listMIAB" : {
-        "response" : {
-          "$ref" : "CollectionResponse_MIAB"
+          "$ref" : "MessageV1"
         }
       },
       "pl.com.ezap.miab.MIABEndpoint.removeMIAB" : {
       },
       "pl.com.ezap.miab.MIABEndpoint.insertMIAB" : {
         "request" : {
-          "$ref" : "MIAB"
+          "$ref" : "MessageV1"
         },
         "response" : {
-          "$ref" : "MIAB"
+          "$ref" : "MessageV1"
+        }
+      },
+      "pl.com.ezap.miab.MIABEndpoint.listMessages" : {
+        "response" : {
+          "$ref" : "CollectionResponse_MessageV1"
         }
       }
     }

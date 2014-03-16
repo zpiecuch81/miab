@@ -24,7 +24,7 @@ public class adminServlet extends HttpServlet {
 		resp.getWriter().println("<h1 align=\"center\">Admin Servlet Test</h1>");
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Query allEntities = new Query("MIAB");
+		Query allEntities = new Query("MessageV1");
 		allEntities.setFilter( new FilterPredicate( "geoIndex", FilterOperator.EQUAL, Long.valueOf(140) ) );
 		PreparedQuery pq = datastore.prepare(allEntities);
 		String str = new String();

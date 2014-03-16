@@ -15,7 +15,7 @@ public class Message {
 		return m_instance;
 	}
 	public Message() {
-		m_isBurried = false;
+		m_isHidden = false;
 		m_isFlowing = false;
 		m_location = null;
 		m_message = "";
@@ -23,6 +23,6 @@ public class Message {
 	public String m_message;
 	public Location m_location;
 	public boolean m_isFlowing;
-	public boolean m_isBurried;
+	public boolean m_isHidden;
 	private static Message m_instance;
 }

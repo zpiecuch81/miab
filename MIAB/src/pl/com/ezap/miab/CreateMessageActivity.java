@@ -78,7 +78,7 @@ public class CreateMessageActivity extends Activity {
 			layout.setBackgroundResource(R.drawable.bkg_throw);
 			Button buttonLeave = (Button)(findViewById(R.id.buttonMessageReady));
 			buttonLeave.setText(R.string.button_throwMsg);
-		} else if( miab.m_isBurried ) {
+		} else if( miab.m_isHidden ) {
 			LinearLayout layout= (LinearLayout)findViewById(R.id.createMessageLayout);
 			layout.setBackgroundResource(R.drawable.bkg_dig);
 			Button buttonLeave = (Button)(findViewById(R.id.buttonMessageReady));
@@ -92,6 +92,8 @@ public class CreateMessageActivity extends Activity {
 		super.onPause();
 		EditText text = (EditText)findViewById(R.id.editMessageText);
 		Message.getInstance().m_message = text.getText().toString();
+		LinearLayout layout= (LinearLayout)findViewById(R.id.createMessageLayout);
+		layout.setBackgroundResource(0);
 	}
 
 	private void messageReady() {
@@ -113,7 +115,7 @@ public class CreateMessageActivity extends Activity {
 
 		Intent sendMessageIntent = new Intent( getApplicationContext(), SenderService.class );
 		sendMessageIntent.putExtra( SenderService.IS_FLOWING_KEY, message.m_isFlowing );
-		sendMessageIntent.putExtra( SenderService.IS_BURRIED_KEY, message.m_isBurried );
+		sendMessageIntent.putExtra( SenderService.IS_BURRIED_KEY, message.m_isHidden );
 		sendMessageIntent.putExtra( SenderService.MESSAGE_KEY, message.m_message );
 		startService( sendMessageIntent );
 		Message.resetInstance();
