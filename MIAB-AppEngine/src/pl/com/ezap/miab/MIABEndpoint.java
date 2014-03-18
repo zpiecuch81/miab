@@ -43,32 +43,34 @@ public class MIABEndpoint
 	{
 
 		ArrayList<MessageV1> execute = new ArrayList<MessageV1>();
-//		try{
+		try{
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Query allEntities = new Query("MessageV1");
-//			allEntities.setFilter( CompositeFilterOperator.and(
-//					FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
-//					FilterOperator.EQUAL.of( "isHidden", Boolean.valueOf(isHidden) ) ) );
+			allEntities.setFilter( CompositeFilterOperator.and(
+					FilterOperator.EQUAL.of( "geoIndex", Long.valueOf(geoIndex) ),
+					FilterOperator.EQUAL.of( "isHidden", Boolean.valueOf(isHidden) ) ) );
 			PreparedQuery pq = datastore.prepare(allEntities);
-//
-			for ( Entity entity : pq.asIterable() ) {
-				MessageV1 message = new MessageV1();
-				message.setMessage( (String)entity.getProperty("message") );
-				message.setLocation( (GeoPt)entity.getProperty("location") );
-				message.setHidden( (boolean)entity.getProperty("isBurried") );
-				message.setFlowing( (boolean)entity.getProperty("isFlowing") );
-				message.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
-				message.setGeoIndex( (long)entity.getProperty("geoIndex") );
-				message.setFlowStamp( (long)entity.getProperty("flowStamp") );
-				message.setTimeStamp( (long)entity.getProperty("timeStamp") );
-				message.setID( (long)entity.getKey().getId() );
-				execute.add(message);
+
+			if( pq != null ) {
+				for ( Entity entity : pq.asIterable() ) {
+					MessageV1 message = new MessageV1();
+					message.setMessage( (String)entity.getProperty("message") );
+					message.setLocation( (GeoPt)entity.getProperty("location") );
+					message.setHidden( (boolean)entity.getProperty("isHidden") );
+					message.setFlowing( (boolean)entity.getProperty("isFlowing") );
+					message.setGeoIndex( (long)entity.getProperty("geoIndex") );
+					message.setTimeStamp( (long)entity.getProperty("timeStamp") );
+					if( message.isFlowing() ) {
+						message.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
+						message.setFlowStamp( (long)entity.getProperty("flowStamp") );
+					}
+					message.setID( (long)entity.getKey().getId() );
+					execute.add(message);
+				}
 			}
-//		}catch(Exception e) {
-//			Message_v1 message_v1 = new Message_v1();
-//			message_v1.setMessage( e.getMessage() );
-//			execute.add(message_v1);
-//		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		return CollectionResponse.<MessageV1> builder().setItems(execute)
 				.setNextPageToken(cursorString).build();
