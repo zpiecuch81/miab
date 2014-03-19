@@ -109,21 +109,23 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MessageV1> > {
 
 	private List<MessageV1> downloadMIABs( List<MessageV1> miabs2Download )
 	{
-		Miabendpoint.Builder builder = new Miabendpoint.Builder(
-				AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
-		builder.setApplicationName("message-in-bottle");
-		Miabendpoint endpoint = builder.build();
 		List<MessageV1> downloadedMIABs = new ArrayList<MessageV1>();
-		for( MessageV1 miab : miabs2Download ) { 
-			try{
-				MessageV1 gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
-				if( gotMIAB != null ) {
-					endpoint.removeMIAB( miab.getId() ).execute();
+		if( !miabs2Download.isEmpty() ) {
+			Miabendpoint.Builder builder = new Miabendpoint.Builder(
+					AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+			builder.setApplicationName("message-in-bottle");
+			Miabendpoint endpoint = builder.build();
+			for( MessageV1 miab : miabs2Download ) { 
+				try{
+					MessageV1 gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
+					if( gotMIAB != null ) {
+						endpoint.removeMIAB( miab.getId() ).execute();
+					}
+					downloadedMIABs.add( gotMIAB );
+					Log.d( "MIABSearcher", "Downloaded MessageV1, id =  " + gotMIAB.getId());
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				downloadedMIABs.add( gotMIAB );
-				Log.d( "MIABSearcher", "Downloaded MessageV1, id =  " + gotMIAB.getId());
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 		return downloadedMIABs;

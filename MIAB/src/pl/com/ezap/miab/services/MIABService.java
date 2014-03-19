@@ -1,5 +1,6 @@
 package pl.com.ezap.miab.services;
 
+import pl.com.ezap.miab.shared.LocationHelper;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 public class MIABService extends Service
 		implements NetworkBroadcastReceiver.NetworkStateListener {
 
-	static final int GPS_CHECK_TIME_INTERVAL = 10000;
+	static final int GPS_CHECK_TIME_INTERVAL = 2000;
 	private LocationManager locationManager;
 	private LocationListener locationListener;
 	private NetworkBroadcastReceiver networkReceiver;
@@ -53,8 +54,8 @@ public class MIABService extends Service
 			return START_STICKY;
 		}
 		Toast.makeText( getApplicationContext(), "MIAB Service started", Toast.LENGTH_LONG ).show();
-		//startGPSListening();
-		MIABSearcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ), this.getApplicationContext() );
+		startGPSListening();
+		//MIABSearcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ), this.getApplicationContext() );
 
 		// If we get killed, after returning from here, restart
 		return START_STICKY;
@@ -79,7 +80,7 @@ public class MIABService extends Service
 
 	private void startGPSListening() {
 		initializeListeners();
-		maxGPSFoundTrials = 5;
+		maxGPSFoundTrials = 3;
 		locationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, GPS_CHECK_TIME_INTERVAL, 0, locationListener );
 	}
 
@@ -101,9 +102,9 @@ public class MIABService extends Service
 				@Override
 				public void onLocationChanged( Location location ) {
 					Log.i( "MIABService", "onLocationChanged");
-					if( isAccuracyEnough( location ) || --maxGPSFoundTrials < 0 ) {
+					if( LocationHelper.isAccuracyEnough( location ) || --maxGPSFoundTrials < 0 ) {
 						searchMessage( location );
-						maxGPSFoundTrials = 5;
+						maxGPSFoundTrials = 3;
 					}
 				}
 
@@ -150,20 +151,11 @@ public class MIABService extends Service
 		}
 	}
 
-	private boolean isAccuracyEnough( Location location) {
-		if( location != null ) {
-			Log.d( "MIABService", "isAccuracyEnough, accuracy = " + location.getAccuracy() );
-			return location.getAccuracy() <= 5.0;
-		}
-		Log.e( "MIABService", "isAccuracyEnough - null parameter");
-		return false;
-	}
-
 	private void searchMessage(Location location) {
 		Log.i( "MIABService", "searchMessage on location "
 				+ location.getLatitude() + ","
 				+ location.getLongitude() );
-		//Toast.makeText( getApplicationContext(), "searching message", Toast.LENGTH_SHORT ).show();
+		Toast.makeText( getApplicationContext(), "SEARCHING", Toast.LENGTH_SHORT ).show();
 		MIABSearcher.searchAtLocation( location, this.getApplicationContext() );
 	}
 

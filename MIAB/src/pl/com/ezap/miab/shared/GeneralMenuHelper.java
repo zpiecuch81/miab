@@ -1,5 +1,6 @@
 package pl.com.ezap.miab.shared;
 
+import pl.com.ezap.miab.AboutActivity;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.services.MIABService;
 import android.app.Activity;
@@ -30,6 +31,10 @@ public class GeneralMenuHelper {
 		case R.id.action_scanning:
 			switchMIABService();
 			activity.invalidateOptionsMenu();
+			return true;
+		case R.id.action_about:
+			Intent intent = new Intent(activity, AboutActivity.class);
+			activity.startActivity(intent);
 			return true;
 		}
 		return false;

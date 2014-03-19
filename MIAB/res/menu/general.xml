@@ -4,13 +4,13 @@
         android:id="@+id/action_scanning"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/action_stopscanning"
+        android:title="@string/action_scanning"
         android:icon="@drawable/action_scanning" />
 
-    <!-- <item
-        android:id="@+id/action_settings"
+    <item
+        android:id="@+id/action_about"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_settings"/> -->
+        android:showAsAction="never"
+        android:title="@string/action_about"/>
 
 </menu>

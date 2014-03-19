@@ -15,6 +15,7 @@ import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
+import pl.com.ezap.miab.shared.LocationHelper;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -162,7 +163,7 @@ public class SenderService extends Service {
 
 			@Override
 			public void onLocationChanged(Location location) {
-				if( isAccuracyEnough( location ) || --maxGPSFoundTrials < 0 ) {
+				if( LocationHelper.isAccuracyEnough( location ) || --maxGPSFoundTrials < 0 ) {
 					sendNextMessage( location );
 					maxGPSFoundTrials = 5;
 				}
@@ -205,14 +206,6 @@ public class SenderService extends Service {
 
 		locationManager = (LocationManager)this.getApplicationContext().getSystemService( Context.LOCATION_SERVICE );
 		locationManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 100, 0, locationListener );
-	}
-
-	private boolean isAccuracyEnough( Location location)
-	{
-		if( location != null ) {
-			return location.getAccuracy() <= 5.0;
-		}
-		return false;
 	}
 
 	private void sendNextMessage( Location location )
