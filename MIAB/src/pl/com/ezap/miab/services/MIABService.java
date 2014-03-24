@@ -54,8 +54,8 @@ public class MIABService extends Service
 			return START_STICKY;
 		}
 		Toast.makeText( getApplicationContext(), "MIAB Service started", Toast.LENGTH_LONG ).show();
-		startGPSListening();
-		//MIABSearcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ), this.getApplicationContext() );
+		//startGPSListening();
+		MIABSearcher.searchAtLocation( new Location( LocationManager.GPS_PROVIDER ), this.getApplicationContext() );
 
 		// If we get killed, after returning from here, restart
 		return START_STICKY;

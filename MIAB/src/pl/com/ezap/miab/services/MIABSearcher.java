@@ -7,14 +7,22 @@ import java.util.List;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
 
+import pl.com.ezap.miab.MessageListActivity;
+import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.miabendpoint.Miabendpoint;
 import pl.com.ezap.miab.miabendpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -49,7 +57,25 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<MessageV1> > {
 	protected void onPostExecute(List<MessageV1> result)
 	{
 		if( !result.isEmpty() ) {
-			Toast.makeText( context, "Found " + result.size() + " MIABs", Toast.LENGTH_LONG).show();
+			//Toast.makeText( context, "Found " + result.size() + " MIABs", Toast.LENGTH_LONG).show();
+			Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+			NotificationCompat.Builder notificationBuilder =
+					new NotificationCompat.Builder(context)
+					.setSmallIcon(android.R.drawable.ic_dialog_email, result.size() )
+					.setContentTitle("Found bottle.")
+					.setContentText("Hello World!")
+					.setLargeIcon( largeIcon );
+			Intent resultIntent = new Intent(context, MessageListActivity.class);
+			PendingIntent resultPendingIntent =
+					PendingIntent.getActivity( context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT );
+			
+			notificationBuilder.setContentIntent( resultPendingIntent );
+			// Sets an ID for the notification
+			int mNotificationId = 001;
+			// Gets an instance of the NotificationManager service
+			NotificationManager mNotifyMgr = 
+					(NotificationManager) context.getSystemService( Context.NOTIFICATION_SERVICE );
+			mNotifyMgr.notify(mNotificationId, notificationBuilder.build());
 		}
 	}
 
