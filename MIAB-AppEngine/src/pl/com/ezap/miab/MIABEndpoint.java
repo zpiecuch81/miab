@@ -54,16 +54,16 @@ public class MIABEndpoint
 			if( pq != null ) {
 				for ( Entity entity : pq.asIterable() ) {
 					MessageV1 message = new MessageV1();
-					message.setMessage( (String)entity.getProperty("message") );
+					//message.setMessage( (String)entity.getProperty("message") );
 					message.setLocation( (GeoPt)entity.getProperty("location") );
-					message.setHidden( (boolean)entity.getProperty("isHidden") );
-					message.setFlowing( (boolean)entity.getProperty("isFlowing") );
-					message.setGeoIndex( (long)entity.getProperty("geoIndex") );
-					message.setTimeStamp( (long)entity.getProperty("timeStamp") );
-					if( message.isFlowing() ) {
-						message.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
-						message.setFlowStamp( (long)entity.getProperty("flowStamp") );
-					}
+					//message.setHidden( (boolean)entity.getProperty("isHidden") );
+					//message.setFlowing( (boolean)entity.getProperty("isFlowing") );
+					//message.setGeoIndex( (long)entity.getProperty("geoIndex") );
+					//message.setTimeStamp( (long)entity.getProperty("timeStamp") );
+					//if( message.isFlowing() ) {
+					//	message.setDeltaLocation( (GeoPt)entity.getProperty("deltaLocation") );
+					//	message.setFlowStamp( (long)entity.getProperty("flowStamp") );
+					//}
 					message.setID( (long)entity.getKey().getId() );
 					execute.add(message);
 				}
