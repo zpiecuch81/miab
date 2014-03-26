@@ -30,6 +30,8 @@
     <string name="msgSendingError">Error, bottle lost :(</string>
     <string name="msgEnableGPSToast">Enable GPS</string>
     <string name="msgEnableNetToast">Enable network access</string>
+    <string name="msgNotificationFoundBottleTitle">Found new bottle!</string>
+    <string name="msgNotificationManyBottleContent">Number of unread messages: </string>
 
     <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
 

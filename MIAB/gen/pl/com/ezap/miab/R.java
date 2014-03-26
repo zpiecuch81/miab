@@ -362,35 +362,37 @@ containing a value of this type.
         public static final int msgBurryingMessage=0x7f07002d;
         /**  AboutActivity messages 
          */
-        public static final int msgCompanyName=0x7f07003a;
+        public static final int msgCompanyName=0x7f07003c;
         public static final int msgEnableGPSToast=0x7f070031;
         public static final int msgEnableNetToast=0x7f070032;
-        public static final int msgGoogleServicesMissing=0x7f070033;
+        public static final int msgGoogleServicesMissing=0x7f070035;
         public static final int msgLeavingMessage=0x7f07002c;
-        public static final int msgMIABwasDig=0x7f070039;
-        public static final int msgMIABwasFlowing=0x7f070038;
-        public static final int msgMessageFound=0x7f070036;
-        public static final int msgMessageFoundLocation=0x7f070037;
-        public static final int msgMessageLeft=0x7f070035;
+        public static final int msgMIABwasDig=0x7f07003b;
+        public static final int msgMIABwasFlowing=0x7f07003a;
+        public static final int msgMessageFound=0x7f070038;
+        public static final int msgMessageFoundLocation=0x7f070039;
+        public static final int msgMessageLeft=0x7f070037;
         /**  MessageViewActivity messages 
          */
-        public static final int msgNoMessages=0x7f070034;
+        public static final int msgNoMessages=0x7f070036;
+        public static final int msgNotificationFoundBottleTitle=0x7f070033;
+        public static final int msgNotificationManyBottleContent=0x7f070034;
         public static final int msgRetrivingCurrentLocation=0x7f07002e;
         public static final int msgSendingDone=0x7f07002f;
         public static final int msgSendingError=0x7f070030;
         public static final int msgThrowingMessage=0x7f07002b;
-        public static final int pref_description_message_searching=0x7f07003e;
+        public static final int pref_description_message_searching=0x7f070040;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f07003c;
-        public static final int pref_title_message_searching=0x7f07003d;
+        public static final int pref_header_general=0x7f07003e;
+        public static final int pref_title_message_searching=0x7f07003f;
         public static final int title_activity_about=0x7f070020;
         public static final int title_activity_create_message=0x7f07001b;
         public static final int title_activity_google_services_missing=0x7f07001f;
         public static final int title_activity_message_list=0x7f07001d;
         public static final int title_activity_message_view=0x7f07001c;
         public static final int title_activity_sending_message=0x7f07001e;
-        public static final int title_activity_settings=0x7f07003b;
+        public static final int title_activity_settings=0x7f07003d;
     }
     public static final class style {
         /** 

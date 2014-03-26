@@ -61,6 +61,14 @@ public class MessageViewActivity extends Activity {
 	}
 
 	@Override
+	protected void onPause()
+	{
+		super.onPause();
+//		LinearLayout layout= (LinearLayout)findViewById(R.id.viewMessageLayout);
+//		layout.setBackgroundResource(0);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.general, menu);
 		return true;
@@ -84,6 +92,8 @@ public class MessageViewActivity extends Activity {
 		Cursor cursor = getCursorToMIAB( uri );
 		if( cursor != null ) {
 			cursor.moveToFirst();
+			new MIABSQLiteHelper(this).setMessageRead(
+					cursor.getInt( cursor.getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_ID ) ) );
 			setBackground( cursor );
 			fillData( cursor );
 			cursor.close();
@@ -117,7 +127,7 @@ public class MessageViewActivity extends Activity {
 	private void fillData(Cursor cursor) {
 
 		messageView.setText( cursor.getString(
-				cursor.getColumnIndexOrThrow(MIABSQLiteHelper.COLUMN_MESSAGE)) );
+				cursor.getColumnIndexOrThrow(MIABSQLiteHelper.COLUMN_MESSAGE) ) );
 
 		int flags = cursor.getInt(cursor.getColumnIndexOrThrow(MIABSQLiteHelper.COLUMN_MESSAGE_FLAG));
 		StringBuilder messageBuilder = new StringBuilder();

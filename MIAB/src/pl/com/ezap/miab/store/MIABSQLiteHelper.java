@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+import android.location.LocationManager;
 import android.util.Log;
 
 public class MIABSQLiteHelper extends SQLiteOpenHelper {
@@ -12,6 +13,7 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_MIABS = "miabs";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_HEAD = "head";
+	public static final String COLUMN_NOT_READ = "notRead";
 	public static final String COLUMN_MESSAGE = "message";
 	public static final String COLUMN_MESSAGE_FLAG = "flags";
 	public static final String COLUMN_DROP_TIME_STAMP = "dropTimeStamp";
@@ -29,6 +31,7 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 			+ TABLE_MIABS + "("
 			+ COLUMN_ID + " integer primary key autoincrement, "
 			+ COLUMN_HEAD + " text not null, "
+			+ COLUMN_NOT_READ + " int not null, "
 			+ COLUMN_MESSAGE + " text not null, "
 			+ COLUMN_MESSAGE_FLAG + " int not null, "
 			+ COLUMN_DROP_TIME_STAMP + " int not null, "
@@ -36,7 +39,7 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 			+ COLUMN_LONGITUDE + " long not null, "
 			+ COLUMN_LATITUDE + " long not null "
 			+ ");";
-	//private static final String DATABASE_DROP = "drop table " + TABLE_MIABS;
+	private static final String DATABASE_DROP = "drop table " + TABLE_MIABS;
 
 	public MIABSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,7 +59,7 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public boolean storeMessage(
+	public long storeMessage(
 			String message,
 			long dropTimeStamp,
 			boolean wasDig,
@@ -75,15 +78,28 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 		values.put( MIABSQLiteHelper.COLUMN_MESSAGE_FLAG, flags);
 		values.put( MIABSQLiteHelper.COLUMN_LONGITUDE, foundLocation.getLongitude() );
 		values.put( MIABSQLiteHelper.COLUMN_LATITUDE, foundLocation.getLatitude() );
+		values.put( MIABSQLiteHelper.COLUMN_NOT_READ, 1 );
 
-		boolean stored = false;
+		long stored = -1;
 		try {
-			stored = getWritableDatabase().insert( MIABSQLiteHelper.TABLE_MIABS, null, values) != -1;
+			stored = getWritableDatabase().insert( MIABSQLiteHelper.TABLE_MIABS, null, values);
 		}
 		catch( Exception e ) {
 			Log.e( MIABSQLiteHelper.class.getName(), "Exception while storing message: " + e.getMessage() );
 		}
 		return stored;
+	}
+
+	public void setMessageRead( long messageID ) {
+		ContentValues values = new ContentValues();
+		values.put( MIABSQLiteHelper.COLUMN_NOT_READ, 0 );
+		String whereClause = COLUMN_ID + "=" +Long.toString( messageID );
+		try {
+			getWritableDatabase().update( MIABSQLiteHelper.TABLE_MIABS, values, whereClause, null);
+		}
+		catch( Exception e ) {
+			Log.e( MIABSQLiteHelper.class.getName(), "Exception while storing message: " + e.getMessage() );
+		}
 	}
 
 	private String createHead(long date, String message)
