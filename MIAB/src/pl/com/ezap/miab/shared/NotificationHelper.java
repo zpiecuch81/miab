@@ -5,6 +5,7 @@ import pl.com.ezap.miab.MessageViewActivity;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -81,7 +82,7 @@ public class NotificationHelper {
 			context,
 			0,
 			resultIntent,
-			PendingIntent.FLAG_UPDATE_CURRENT );
+			PendingIntent.FLAG_CANCEL_CURRENT );
 	}
 
 	private void createNotification( int notificationID) {
@@ -93,7 +94,10 @@ public class NotificationHelper {
 				.setContentText( contentText )
 				.setLargeIcon( largeIcon )
 				.setAutoCancel( true )
-				.setContentIntent( pendingIntent );
+				.setContentIntent( pendingIntent )
+				.setDefaults( Notification.DEFAULT_ALL )
+				.setWhen( new java.util.Date().getTime() )
+				.setNumber( unreadMessagesCount );
 		NotificationManager mNotifyMgr = 
 				( NotificationManager ) context.getSystemService( Context.NOTIFICATION_SERVICE );
 		mNotifyMgr.notify( notificationID, notificationBuilder.build() );
