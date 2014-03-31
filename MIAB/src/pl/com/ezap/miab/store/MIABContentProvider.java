@@ -180,6 +180,7 @@ public class MIABContentProvider extends ContentProvider {
 				MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP,
 				MIABSQLiteHelper.COLUMN_LONGITUDE,
 				MIABSQLiteHelper.COLUMN_LATITUDE,
+				MIABSQLiteHelper.COLUMN_NOT_READ,
 				MIABSQLiteHelper.COLUMN_ID };
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));

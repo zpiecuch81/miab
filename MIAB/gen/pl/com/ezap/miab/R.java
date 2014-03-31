@@ -213,7 +213,8 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f020021;
         public static final int ic_plusone_standard_off_client=0x7f020022;
         public static final int ic_plusone_tall_off_client=0x7f020023;
-        public static final int rounded=0x7f020024;
+        public static final int icon_main=0x7f020024;
+        public static final int rounded=0x7f020025;
     }
     public static final class id {
         public static final int TextView01=0x7f060012;
@@ -227,6 +228,7 @@ containing a value of this type.
         public static final int button_throwMsg=0x7f060009;
         public static final int createMessageLayout=0x7f060005;
         public static final int editMessageText=0x7f060006;
+        public static final int emptyText=0x01010000;
         public static final int hybrid=0x7f060004;
         public static final int icon=0x7f060010;
         public static final int label=0x7f060011;

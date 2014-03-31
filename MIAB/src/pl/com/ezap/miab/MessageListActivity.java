@@ -9,6 +9,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -19,13 +20,13 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
-public class MessageListActivity extends ListActivity implements
-		LoaderCallbacks<Cursor> {
+public class MessageListActivity extends ListActivity implements LoaderCallbacks<Cursor>
+{
 
 	private GeneralMenuHelper menuHelper;
 	private static final int DELETE_ID = Menu.FIRST + 1;
-	// private Cursor cursor;
 	private SimpleCursorAdapter adapter;
 
 	@Override
@@ -48,6 +49,14 @@ public class MessageListActivity extends ListActivity implements
 	{
 		super.onResume();
 		menuHelper.updateMenuState();
+		getLoaderManager().restartLoader(0, null, this);
+	}
+
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		//getLoaderManager().destroyLoader( 0 );
 	}
 
 	@Override
@@ -95,20 +104,35 @@ public class MessageListActivity extends ListActivity implements
 		startActivity(i);
 	}
 
-
-
 	private void fillData() {
-
-		// Fields from the database (projection)
-		// Must include the _id column for the adapter to work
-		String[] from = new String[] { MIABSQLiteHelper.COLUMN_HEAD, MIABSQLiteHelper.COLUMN_ID };
+		String[] from = new String[] {
+				MIABSQLiteHelper.COLUMN_HEAD,
+				MIABSQLiteHelper.COLUMN_ID,
+				MIABSQLiteHelper.COLUMN_NOT_READ
+				};
 		// Fields on the UI to which we map
 		int[] to = new int[] { R.id.label };
-
-		getLoaderManager().initLoader(0, null, this);
 		adapter = new SimpleCursorAdapter(this, R.layout.miab_row, null, from, to, 0);
+		adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+				if (view.getId() == R.id.label)
+				{
+					int isNotRead = cursor.getInt(
+							cursor.getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_NOT_READ ) );
+					TextView tv = (TextView)view;
+					if( isNotRead != 0 ) {
+						tv.setTypeface( null, Typeface.BOLD );
+					} else {
+						tv.setTypeface( null, Typeface.NORMAL );
+					}
+					tv.setText( cursor.getString( columnIndex ) );
+				}
+				return true;
+			}
+		});
 
 		setListAdapter(adapter);
+		getLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
@@ -121,7 +145,10 @@ public class MessageListActivity extends ListActivity implements
 	// creates a new loader after the initLoader () call
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		String[] projection = { MIABSQLiteHelper.COLUMN_ID, MIABSQLiteHelper.COLUMN_HEAD };
+		String[] projection = {
+				MIABSQLiteHelper.COLUMN_ID,
+				MIABSQLiteHelper.COLUMN_HEAD,
+				MIABSQLiteHelper.COLUMN_NOT_READ };
 		CursorLoader cursorLoader = new CursorLoader(this,
 				MIABContentProvider.CONTENT_URI, projection, null, null, null);
 		return cursorLoader;

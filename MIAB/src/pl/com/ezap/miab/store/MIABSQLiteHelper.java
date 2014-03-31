@@ -39,7 +39,7 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 			+ COLUMN_LONGITUDE + " long not null, "
 			+ COLUMN_LATITUDE + " long not null "
 			+ ");";
-	private static final String DATABASE_DROP = "drop table " + TABLE_MIABS;
+	//private static final String DATABASE_DROP = "drop table " + TABLE_MIABS;
 
 	public MIABSQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -82,7 +82,9 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 
 		long stored = -1;
 		try {
-			stored = getWritableDatabase().insert( MIABSQLiteHelper.TABLE_MIABS, null, values);
+			SQLiteDatabase db = getWritableDatabase();
+			db.insert( MIABSQLiteHelper.TABLE_MIABS, null, values);
+			db.close();
 		}
 		catch( Exception e ) {
 			Log.e( MIABSQLiteHelper.class.getName(), "Exception while storing message: " + e.getMessage() );
@@ -95,7 +97,9 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper {
 		values.put( MIABSQLiteHelper.COLUMN_NOT_READ, 0 );
 		String whereClause = COLUMN_ID + "=" +Long.toString( messageID );
 		try {
-			getWritableDatabase().update( MIABSQLiteHelper.TABLE_MIABS, values, whereClause, null);
+			SQLiteDatabase db = getWritableDatabase();
+			db.update( MIABSQLiteHelper.TABLE_MIABS, values, whereClause, null);
+			db.close();
 		}
 		catch( Exception e ) {
 			Log.e( MIABSQLiteHelper.class.getName(), "Exception while storing message: " + e.getMessage() );
