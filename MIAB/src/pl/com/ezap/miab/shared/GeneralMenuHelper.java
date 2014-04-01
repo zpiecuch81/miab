@@ -3,7 +3,7 @@ package pl.com.ezap.miab.shared;
 
 import pl.com.ezap.miab.AboutActivity;
 import pl.com.ezap.miab.R;
-import pl.com.ezap.miab.services.MIABService;
+import pl.com.ezap.miab.services.SearchService;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -72,9 +72,9 @@ public class GeneralMenuHelper
     settingsEditor.putBoolean( "MIABServiceOn", enableNow );
     settingsEditor.commit();
     if( enableNow ) {
-      activity.startService( new Intent( activity.getApplicationContext(), MIABService.class ) );
+      activity.startService( new Intent( activity.getApplicationContext(), SearchService.class ) );
     } else {
-      activity.stopService( new Intent( activity.getApplicationContext(), MIABService.class ) );
+      activity.stopService( new Intent( activity.getApplicationContext(), SearchService.class ) );
     }
   }
 }

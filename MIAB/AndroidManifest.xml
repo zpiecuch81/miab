@@ -70,7 +70,7 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name="pl.com.ezap.miab.services.MIABService"
+            android:name="pl.com.ezap.miab.services.SearchService"
             android:enabled="true"
             android:exported="false" >
         </service>

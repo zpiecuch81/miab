@@ -16,7 +16,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MIABService extends Service implements NetworkBroadcastReceiver.NetworkStateListener
+public class SearchService extends Service implements NetworkBroadcastReceiver.NetworkStateListener
 {
   static final int GPS_CHECK_TIME_INTERVAL = 2000;
   private LocationManager locationManager;
