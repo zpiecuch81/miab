@@ -25,8 +25,8 @@
     <string name="msgThrowingMessage">Throwing bottle</string>
     <string name="msgLeavingMessage">Leaving bottle</string>
     <string name="msgBurryingMessage">Hidding bottle</string>
-    <string name="msgRetrivingCurrentLocation">Retriving current location</string>
-    <string name="msgSendingDone">Bottle left</string>
+    <string name="msgAcquireCurrentLocation">Getting current location</string>
+    <string name="msgSendingDone">Done :)</string>
     <string name="msgSendingError">Error, bottle lost :(</string>
     <string name="msgEnableGPSToast">Enable GPS</string>
     <string name="msgEnableNetToast">Enable network access</string>

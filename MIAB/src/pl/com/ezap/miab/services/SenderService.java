@@ -15,6 +15,7 @@ import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import pl.com.ezap.miab.miabendpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
+import pl.com.ezap.miab.shared.NotificationHelper;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 public class SenderService extends Service
 {
@@ -35,6 +35,7 @@ public class SenderService extends Service
   private ArrayList<MessageV1> messages2send;
   private LocationManager locationManager;
   private LocationListener locationListener;
+  private NotificationHelper notificationHelper;
   private int maxGPSFoundTrials;
   private boolean isSending;
 
@@ -69,15 +70,6 @@ public class SenderService extends Service
       Log.d( "SendMessageTask", "onPostExecute, result " + result );
       if( result == 0 ) {
         messages2send.remove( 0 );
-        Toast.makeText(
-            getApplicationContext(),
-            R.string.msgSendingDone,
-            Toast.LENGTH_LONG ).show();
-      } else {
-        Toast.makeText(
-            getApplicationContext(),
-            R.string.msgSendingError,
-            Toast.LENGTH_LONG ).show();
       }
       isSending = false;
     }
@@ -105,7 +97,15 @@ public class SenderService extends Service
     if( intent == null ) {
       return START_STICKY;
     }
-    // fill basic MessageV1 data
+    MessageV1 miabMessage = intent2message( intent );
+    Log.i( "SenderService", "Adding message to queue" );
+    messages2send.add( miabMessage );
+
+    startSendingBottles();
+    return START_STICKY;
+  }
+
+  private MessageV1 intent2message( Intent intent ){
     MessageV1 miabMessage = new MessageV1();
     miabMessage.setMessage( intent.getStringExtra( MESSAGE_KEY ) );
     miabMessage.setHidden( intent.getBooleanExtra( IS_BURRIED_KEY, false ) );
@@ -114,20 +114,7 @@ public class SenderService extends Service
     setFloatingData( miabMessage );
     // ID can't be 0/null, app engine will assign a number to it anyway
     miabMessage.setId( miabMessage.getTimeStamp() );
-    int displayMessageID =
-        miabMessage.getHidden()
-            ? R.string.msgBurryingMessage : miabMessage .getFlowing()
-            ? R.string.msgThrowingMessage : R.string.msgLeavingMessage;
-    Toast.makeText(
-        getApplicationContext(),
-        displayMessageID,
-        Toast.LENGTH_LONG ).show();
-    // add message to send it when position will be known
-    Log.i( "SenderService", "Adding message to queue" );
-    messages2send.add( miabMessage );
-    // start searching location if not searching already
-    startLocationListener();
-    return START_STICKY;
+    return miabMessage;
   }
 
   private void setFloatingData( MessageV1 miab )
@@ -146,11 +133,12 @@ public class SenderService extends Service
     }
   }
 
-  private void startLocationListener()
+  private void startSendingBottles()
   {
     if( locationManager != null ) {
       return; // already started
     }
+
     maxGPSFoundTrials = 5;
     locationListener = new LocationListener() {
       @Override
@@ -190,6 +178,10 @@ public class SenderService extends Service
 //        }
       }
     };
+
+    notificationHelper = new NotificationHelper( this );
+    notificationHelper.gpsSearchingStarted( getSendText( messages2send.get( 0 ) ) );
+
     locationManager =
         (LocationManager)this.getApplicationContext().getSystemService( Context.LOCATION_SERVICE );
     locationManager.requestLocationUpdates(
@@ -209,12 +201,16 @@ public class SenderService extends Service
       return;
     }
     isSending = true;
-    addGeoDataAndSend( messages2send.get( 0 ), location );
+    addGeoData( messages2send.get( 0 ), location );
+    new SendMessageTask().execute( messages2send.get( 0 ) );
   }
 
   private void finishService()
   {
     Log.i( "SenderService", "stopping service" );
+    if( notificationHelper != null ) {
+      notificationHelper.sendingFinished( getString( R.string.msgSendingDone ) );
+    }
     if( locationManager != null && locationListener != null ) {
       locationManager.removeUpdates( locationListener );
     }
@@ -222,8 +218,9 @@ public class SenderService extends Service
     stopSelf();
   }
 
-  private void addGeoDataAndSend( MessageV1 miab, Location location )
+  private void addGeoData( MessageV1 miab, Location location )
   {
+    notificationHelper.messageSending( getSendText( miab ) );
     GeoPt geoPt = new GeoPt();
     if( miab.getFlowing() ) {
       geoPt.setLatitude( (float)location.getLatitude() + miab.getDeltaLocation().getLatitude() );
@@ -235,7 +232,15 @@ public class SenderService extends Service
     miab.setLocation( geoPt );
     GeoIndex geoIndex = new GeoIndex();
     miab.setGeoIndex( geoIndex.getIndex( geoPt.getLatitude(), geoPt.getLongitude() ) );
-    new SendMessageTask().execute( miab );
+  }
+
+  private String getSendText( MessageV1 message )
+  {
+    int displayMessageID =
+        message.getHidden()
+            ? R.string.msgBurryingMessage : message .getFlowing()
+            ? R.string.msgThrowingMessage : R.string.msgLeavingMessage;
+    return getString( displayMessageID );
   }
 
 }

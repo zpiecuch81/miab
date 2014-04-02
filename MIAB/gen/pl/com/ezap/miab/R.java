@@ -361,6 +361,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int menu_delete=0x7f070024;
+        public static final int msgAcquireCurrentLocation=0x7f07002e;
         public static final int msgBurryingMessage=0x7f07002d;
         /**  AboutActivity messages 
          */
@@ -379,7 +380,6 @@ containing a value of this type.
         public static final int msgNoMessages=0x7f070036;
         public static final int msgNotificationFoundBottleTitle=0x7f070033;
         public static final int msgNotificationManyBottleContent=0x7f070034;
-        public static final int msgRetrivingCurrentLocation=0x7f07002e;
         public static final int msgSendingDone=0x7f07002f;
         public static final int msgSendingError=0x7f070030;
         public static final int msgThrowingMessage=0x7f07002b;

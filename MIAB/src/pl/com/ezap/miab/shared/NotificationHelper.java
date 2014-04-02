@@ -20,7 +20,7 @@ import android.support.v4.app.NotificationCompat;
 public class NotificationHelper
 {
   private int FOUND_NOTIFICATION_ID = 101;
-  // private int SENDING_NOTIFICATION_ID = 131;
+  private int SENDING_NOTIFICATION_ID = 131;
   private Context context;
   private int unreadMessagesCount;
   private String contentText;
@@ -39,9 +39,9 @@ public class NotificationHelper
       return;
     }
     cursor.moveToFirst();
-    createContentText( cursor );
+    createFoundContentText( cursor );
     createPendingIntent( cursor );
-    createNotification( FOUND_NOTIFICATION_ID );
+    createFoundNotification();
   }
 
   private Cursor getUnreadMessages()
@@ -59,7 +59,7 @@ public class NotificationHelper
         null );
   }
 
-  private void createContentText( Cursor cursor )
+  private void createFoundContentText( Cursor cursor )
   {
     if( unreadMessagesCount == 1 ) {
       contentText =
@@ -93,12 +93,12 @@ public class NotificationHelper
             PendingIntent.FLAG_CANCEL_CURRENT );
   }
 
-  private void createNotification( int notificationID )
+  private void createFoundNotification()
   {
     Bitmap largeIcon =
         BitmapFactory.decodeResource(
             context.getResources(),
-            R.drawable.ic_launcher );
+            R.drawable.icon_main );
     NotificationCompat.Builder notificationBuilder =
         new NotificationCompat.Builder( context )
             .setSmallIcon( android.R.drawable.ic_dialog_email, unreadMessagesCount )
@@ -110,10 +110,70 @@ public class NotificationHelper
             .setDefaults( Notification.DEFAULT_ALL )
             .setWhen( new java.util.Date().getTime() )
             .setNumber( unreadMessagesCount );
-    NotificationManager mNotifyMgr =
-        (NotificationManager)context
-            .getSystemService( Context.NOTIFICATION_SERVICE );
-    mNotifyMgr.notify( notificationID, notificationBuilder.build() );
+    setNotification( FOUND_NOTIFICATION_ID, notificationBuilder.build() );
   }
 
+  public void gpsSearchingStarted( String message )
+  {
+    contentText = context.getString( R.string.msgAcquireCurrentLocation );
+    Bitmap largeIcon =
+        BitmapFactory.decodeResource(
+            context.getResources(),
+            R.drawable.icon_main );
+    NotificationCompat.Builder notificationBuilder =
+        new NotificationCompat.Builder( context )
+            .setSmallIcon( android.R.drawable.ic_dialog_email )
+            .setContentTitle( message )
+            .setContentText( contentText )
+            .setLargeIcon( largeIcon )
+            .setAutoCancel( false )
+            .setOngoing( true )
+            .setWhen( new java.util.Date().getTime() )
+            .setProgress( 0, 0, true );
+    setNotification( SENDING_NOTIFICATION_ID, notificationBuilder.build() );
+  }
+
+  public void messageSending( String message )
+  {
+    Bitmap largeIcon =
+        BitmapFactory.decodeResource(
+            context.getResources(),
+            R.drawable.icon_main );
+    NotificationCompat.Builder notificationBuilder =
+        new NotificationCompat.Builder( context )
+            .setSmallIcon( android.R.drawable.ic_dialog_email )
+            .setLargeIcon( largeIcon )
+            .setAutoCancel( false )
+            .setOngoing( true )
+            .setWhen( new java.util.Date().getTime() )
+            .setContentTitle( message )
+            .setContentText( message )
+            .setProgress( 0, 0, true );
+    setNotification( SENDING_NOTIFICATION_ID, notificationBuilder.build() );
+  }
+
+  public void sendingFinished( String message )
+  {
+    Bitmap largeIcon =
+        BitmapFactory.decodeResource(
+            context.getResources(),
+            R.drawable.icon_main );
+    NotificationCompat.Builder notificationBuilder =
+        new NotificationCompat.Builder( context )
+            .setSmallIcon( android.R.drawable.ic_dialog_email )
+            .setContentTitle( message )
+            .setContentText( "" )
+            .setLargeIcon( largeIcon )
+            .setAutoCancel( true )
+            .setOngoing( false )
+            .setWhen( new java.util.Date().getTime() )
+            .setProgress( 0, 0, false );
+    setNotification( SENDING_NOTIFICATION_ID, notificationBuilder.build() );
+  }
+
+  private void setNotification( int notificationID, Notification notification ) {
+    NotificationManager notifyMgr =
+        (NotificationManager)context.getSystemService( Context.NOTIFICATION_SERVICE );
+    notifyMgr.notify( notificationID, notification );
+  }
 }
