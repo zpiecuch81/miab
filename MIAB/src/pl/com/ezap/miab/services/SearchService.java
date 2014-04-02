@@ -63,7 +63,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
         Toast.LENGTH_LONG ).show();
     //TODO: revert it back!!!
     // startGPSListening();
-    MIABSearcher.searchAtLocation(
+    BottleSearcher.searchAtLocation(
         new Location( LocationManager.GPS_PROVIDER ),
         this.getApplicationContext() );
     // If we get killed, after returning from here, restart
@@ -183,7 +183,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     Toast
         .makeText( getApplicationContext(), "SEARCHING", Toast.LENGTH_SHORT )
         .show();
-    MIABSearcher.searchAtLocation( location, this.getApplicationContext() );
+    BottleSearcher.searchAtLocation( location, this.getApplicationContext() );
   }
 
 }

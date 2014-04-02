@@ -23,7 +23,7 @@ class DBMessage
   long dbID;
 }
 
-public class MIABSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
+public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
 {
   private class MessageCache
   {
@@ -31,7 +31,7 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     public long geoIndex;
   }
 
-  public MIABSearcher( Location location2search, Context context, boolean doDig )
+  public BottleSearcher( Location location2search, Context context, boolean doDig )
   {
     this.location2search = location2search;
     this.context = context;
@@ -192,6 +192,7 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
       // endpoint.removeMIAB( dbMessage.message.getId() );
       // } catch (IOException e) {
       // e.printStackTrace();
+      // continue;
       // }
       // clean also from cache
       if( cache != null && !doDig ) {
@@ -207,12 +208,12 @@ public class MIABSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
 
   static public void searchAtLocation( Location location, Context context )
   {
-    new MIABSearcher( location, context, false ).execute();
+    new BottleSearcher( location, context, false ).execute();
   }
 
   static public void digAtLocation( Location location, Context context )
   {
-    new MIABSearcher( location, context, true ).execute();
+    new BottleSearcher( location, context, true ).execute();
   }
 
   private Context context;
