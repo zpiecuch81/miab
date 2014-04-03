@@ -6,4 +6,7 @@
     <style name="messageDataFont">
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="aboutFont">
+        <item name="android:textSize">25sp</item>
+    </style>
 </resources>

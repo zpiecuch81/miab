@@ -44,6 +44,8 @@
     <string name="msgMIABwasDig">Message was hidden.</string>
 
     <!-- AboutActivity messages -->
-    <string name="msgCompanyName">EZAP</string>
+    <string name="msgCreatedBy">Created by:</string>
+    <string name="msgGraphics">Graphic by:</string>
+    <string name="msgVersion">Version:</string>
 
 </resources>
