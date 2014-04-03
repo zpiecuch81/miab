@@ -2,25 +2,25 @@
 <resources>
 
     <string name="app_name">Message In A Bottle</string>
-    <string name="title_activity_create_message">Create message</string>
-    <string name="title_activity_message_view">Message details</string>
-    <string name="title_activity_message_list">Found messages</string>
-    <string name="title_activity_sending_message">Sending message</string>
+    <string name="title_activity_create_message">Create bottle message</string>
+    <string name="title_activity_message_view">Bottle details</string>
+    <string name="title_activity_message_list">Found bottles</string>
+    <string name="title_activity_sending_message">Sending bottle</string>
     <string name="title_activity_google_services_missing">Google Play Services missing</string>
-    <string name="title_activity_about">Message In A Bottle</string>
+    <string name="title_activity_about">About</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_scanning">Disable scanning</string>
     <string name="action_about">About</string>
 
-    <string name="menu_delete">Delete message</string>
+    <string name="menu_delete">Delete bottle</string>
 
-    <string name="button_leaveMsg">Leave a message</string>
-    <string name="button_throwMsg">Throw a message</string>
-    <string name="button_digMsg">Hide a message</string>
-    <string name="button_searchDigMsg">Search hidden messages</string>
-    <string name="button_foundMsg">Found messages</string>
-    <string name="buttonMessageReady">Leave message</string>
+    <string name="button_leaveMsg">Leave a bottle</string>
+    <string name="button_throwMsg">Throw a bottle</string>
+    <string name="button_digMsg">Hide a bottle</string>
+    <string name="button_searchDigMsg">Search hidden bottles</string>
+    <string name="button_foundMsg">Found bottles</string>
+    <string name="buttonMessageReady">Leave bottle</string>
 
     <string name="msgThrowingMessage">Throwing bottle</string>
     <string name="msgLeavingMessage">Leaving bottle</string>
@@ -31,17 +31,17 @@
     <string name="msgEnableGPSToast">Enable GPS</string>
     <string name="msgEnableNetToast">Enable network access</string>
     <string name="msgNotificationFoundBottleTitle">Found new bottle!</string>
-    <string name="msgNotificationManyBottleContent">Number of unchecked bottles: </string>
+    <string name="msgNotificationManyBottleContent">Number of unread bottles: </string>
 
     <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
 
     <!-- MessageViewActivity messages -->
-    <string name="msgNoMessages">No MIABs found</string>
+    <string name="msgNoMessages">No bottles found</string>
     <string name="msgMessageLeft">Left on: </string>
     <string name="msgMessageFound">Found on: </string>
     <string name="msgMessageFoundLocation">Found location: </string>
-    <string name="msgMIABwasFlowing">Message was flowing.</string>
-    <string name="msgMIABwasDig">Message was hidden.</string>
+    <string name="msgMIABwasFlowing">Bottle was flowing.</string>
+    <string name="msgMIABwasDig">Bottle was hidden.</string>
 
     <!-- AboutActivity messages -->
     <string name="msgCreatedBy">Created by:</string>

@@ -216,29 +216,30 @@ containing a value of this type.
         public static final int rounded=0x7f020024;
     }
     public static final class id {
-        public static final int TextView01=0x7f060013;
-        public static final int aboutInfo=0x7f060005;
-        public static final int action_about=0x7f060015;
-        public static final int action_scanning=0x7f060014;
-        public static final int buttonMessageReady=0x7f060008;
-        public static final int button_digMsg=0x7f06000b;
-        public static final int button_foundMsg=0x7f06000d;
-        public static final int button_leaveMsg=0x7f060009;
-        public static final int button_searchDigMsg=0x7f06000c;
-        public static final int button_throwMsg=0x7f06000a;
-        public static final int createMessageLayout=0x7f060006;
-        public static final int editMessageText=0x7f060007;
+        public static final int TextView01=0x7f060014;
+        public static final int aboutInfo=0x7f060006;
+        public static final int action_about=0x7f060016;
+        public static final int action_scanning=0x7f060015;
+        public static final int buttonMessageReady=0x7f060009;
+        public static final int button_digMsg=0x7f06000c;
+        public static final int button_foundMsg=0x7f06000e;
+        public static final int button_leaveMsg=0x7f06000a;
+        public static final int button_searchDigMsg=0x7f06000d;
+        public static final int button_throwMsg=0x7f06000b;
+        public static final int createMessageLayout=0x7f060007;
+        public static final int editMessageText=0x7f060008;
         public static final int emptyText=0x01010000;
         public static final int hybrid=0x7f060004;
-        public static final int icon=0x7f060011;
-        public static final int label=0x7f060012;
-        public static final int message_details=0x7f060010;
-        public static final int message_view=0x7f06000f;
+        public static final int icon=0x7f060012;
+        public static final int label=0x7f060013;
+        public static final int logoImage=0x7f060005;
+        public static final int message_details=0x7f060011;
+        public static final int message_view=0x7f060010;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int satellite=0x7f060002;
         public static final int terrain=0x7f060003;
-        public static final int viewMessageLayout=0x7f06000e;
+        public static final int viewMessageLayout=0x7f06000f;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
