@@ -1,26 +1,39 @@
 
 package pl.com.ezap.miab;
 
-import pl.com.ezap.miab.shared.Message;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AboutActivity extends Activity
 {
+  private Bitmap logoImage;
+
   @Override
   protected void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.activity_about );
 
+    logoImage = BitmapFactory.decodeResource( getResources(), R.drawable.logo_h );
+    ImageView logo = (ImageView)findViewById( R.id.logoImage );
+    logo.setImageBitmap( logoImage );
+
     fillAboutInfo();
+  }
+
+  @Override
+  protected void onDestroy()
+  {
+    super.onDestroy();
+    if( logoImage != null ) {
+      logoImage.recycle();
+    }
   }
 
   @Override
@@ -29,22 +42,6 @@ public class AboutActivity extends Activity
     // Inflate the menu; this adds items to the action bar if it is present.
     // getMenuInflater().inflate(R.menu.about, menu);
     return true;
-  }
-
-  @Override
-  protected void onResume()
-  {
-    super.onResume();
-    ImageView logo = (ImageView)findViewById( R.id.logoImage );
-    logo.setImageResource( R.drawable.logo_h );
-  }
-
-  @Override
-  protected void onPause()
-  {
-    ImageView logo = (ImageView)findViewById( R.id.logoImage );
-    logo.setImageResource( 0 );
-    super.onPause();
   }
 
   private void fillAboutInfo()
