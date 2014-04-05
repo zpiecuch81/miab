@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"FWXGb4Q2eZqWRcG8B2Ixrr-vrqQ/GEQbl7pigZLgOvrJ-S9QJXMunWo\"",
+ "etag": "\"gWnWV7fYC80JM0beuSxOtzgfiS0/GEQbl7pigZLgOvrJ-S9QJXMunWo\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
