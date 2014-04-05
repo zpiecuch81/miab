@@ -36,15 +36,6 @@
                 android:value="pl.com.ezap.miab.MainActivity" />
         </activity>
         <activity
-            android:name="pl.com.ezap.miab.SendingMessageActivity"
-            android:label="@string/title_activity_sending_message"
-            android:parentActivityName="pl.com.ezap.miab.CreateMessageActivity" >
-            <!-- The meta-data element is needed for versions lower than 4.1 -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.com.ezap.miab.CreateMessage" />
-        </activity>
-        <activity
             android:name="pl.com.ezap.miab.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>

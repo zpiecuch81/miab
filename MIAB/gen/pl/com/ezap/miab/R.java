@@ -257,10 +257,10 @@ containing a value of this type.
         public static final int general=0x7f0b0000;
     }
     public static final class string {
-        public static final int EULAString=0x7f070040;
-        public static final int action_about=0x7f070023;
-        public static final int action_scanning=0x7f070022;
-        public static final int action_settings=0x7f070021;
+        public static final int EULAString=0x7f07003f;
+        public static final int action_about=0x7f070022;
+        public static final int action_scanning=0x7f070021;
+        public static final int action_settings=0x7f070020;
         public static final int app_name=0x7f07001a;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -285,12 +285,12 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f070014;
-        public static final int buttonMessageReady=0x7f07002a;
-        public static final int button_digMsg=0x7f070027;
-        public static final int button_foundMsg=0x7f070029;
-        public static final int button_leaveMsg=0x7f070025;
-        public static final int button_searchDigMsg=0x7f070028;
-        public static final int button_throwMsg=0x7f070026;
+        public static final int buttonMessageReady=0x7f070029;
+        public static final int button_digMsg=0x7f070026;
+        public static final int button_foundMsg=0x7f070028;
+        public static final int button_leaveMsg=0x7f070024;
+        public static final int button_searchDigMsg=0x7f070027;
+        public static final int button_throwMsg=0x7f070025;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -362,44 +362,45 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int menu_delete=0x7f070024;
-        public static final int msgAcquireCurrentLocation=0x7f07002e;
-        public static final int msgBurryingMessage=0x7f07002d;
+        public static final int menu_delete=0x7f070023;
+        public static final int msgAcquireCurrentLocation=0x7f07002d;
+        public static final int msgBurryingMessage=0x7f07002c;
         /**  AboutActivity messages 
+ AboutActivity messages 
          */
-        public static final int msgCreatedBy=0x7f07003d;
-        public static final int msgEnableGPSToast=0x7f070031;
-        public static final int msgEnableNetToast=0x7f070032;
-        public static final int msgGoogleServicesMissing=0x7f070036;
-        public static final int msgGraphics=0x7f07003e;
-        public static final int msgLeavingMessage=0x7f07002c;
-        public static final int msgMIABwasDig=0x7f07003c;
-        public static final int msgMIABwasFlowing=0x7f07003b;
-        public static final int msgMessageFound=0x7f070039;
-        public static final int msgMessageFoundLocation=0x7f07003a;
-        public static final int msgMessageLeft=0x7f070038;
-        public static final int msgMessageTooShort=0x7f070033;
+        public static final int msgCreatedBy=0x7f07003c;
+        public static final int msgEnableGPSToast=0x7f070030;
+        public static final int msgEnableNetToast=0x7f070031;
+        public static final int msgGoogleServicesMissing=0x7f070035;
+        public static final int msgGraphics=0x7f07003d;
+        public static final int msgLeavingMessage=0x7f07002b;
+        public static final int msgMIABwasDig=0x7f07003b;
+        public static final int msgMIABwasFlowing=0x7f07003a;
+        public static final int msgMessageFound=0x7f070038;
+        public static final int msgMessageFoundLocation=0x7f070039;
+        public static final int msgMessageLeft=0x7f070037;
+        public static final int msgMessageTooShort=0x7f070032;
         /**  MessageViewActivity messages 
+ MessageViewActivity messages 
          */
-        public static final int msgNoMessages=0x7f070037;
-        public static final int msgNotificationFoundBottleTitle=0x7f070034;
-        public static final int msgNotificationManyBottleContent=0x7f070035;
-        public static final int msgSendingDone=0x7f07002f;
-        public static final int msgSendingError=0x7f070030;
-        public static final int msgThrowingMessage=0x7f07002b;
-        public static final int msgVersion=0x7f07003f;
-        public static final int pref_description_message_searching=0x7f070044;
+        public static final int msgNoMessages=0x7f070036;
+        public static final int msgNotificationFoundBottleTitle=0x7f070033;
+        public static final int msgNotificationManyBottleContent=0x7f070034;
+        public static final int msgSendingDone=0x7f07002e;
+        public static final int msgSendingError=0x7f07002f;
+        public static final int msgThrowingMessage=0x7f07002a;
+        public static final int msgVersion=0x7f07003e;
+        public static final int pref_description_message_searching=0x7f070043;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f070042;
-        public static final int pref_title_message_searching=0x7f070043;
-        public static final int title_activity_about=0x7f070020;
+        public static final int pref_header_general=0x7f070041;
+        public static final int pref_title_message_searching=0x7f070042;
+        public static final int title_activity_about=0x7f07001f;
         public static final int title_activity_create_message=0x7f07001b;
-        public static final int title_activity_google_services_missing=0x7f07001f;
+        public static final int title_activity_google_services_missing=0x7f07001e;
         public static final int title_activity_message_list=0x7f07001d;
         public static final int title_activity_message_view=0x7f07001c;
-        public static final int title_activity_sending_message=0x7f07001e;
-        public static final int title_activity_settings=0x7f070041;
+        public static final int title_activity_settings=0x7f070040;
     }
     public static final class style {
         /** 

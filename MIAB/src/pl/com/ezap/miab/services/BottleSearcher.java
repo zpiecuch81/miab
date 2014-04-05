@@ -188,12 +188,13 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     Miabendpoint endpoint = getEndPoint();
     for( DBMessage dbMessage: downloadedMIABs ) {
       // remove stored MIABS from Datastore
-      // try {
-      // endpoint.removeMIAB( dbMessage.message.getId() );
-      // } catch (IOException e) {
-      // e.printStackTrace();
-      // continue;
-      // }
+      try {
+        endpoint.removeMIAB( dbMessage.message.getId() );
+      }
+      catch( IOException e ) {
+        e.printStackTrace();
+        continue;
+      }
       // clean also from cache
       if( cache != null && !doDig ) {
         for( MessageV1 cacheMiab: cache.miabs ) {

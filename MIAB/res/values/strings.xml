@@ -5,7 +5,6 @@
     <string name="title_activity_create_message">Create bottle message</string>
     <string name="title_activity_message_view">Bottle details</string>
     <string name="title_activity_message_list">Found bottles</string>
-    <string name="title_activity_sending_message">Sending bottle</string>
     <string name="title_activity_google_services_missing">Google Play Services missing</string>
     <string name="title_activity_about">About</string>
 
@@ -49,10 +48,9 @@
     <string name="msgGraphics">Graphic by:</string>
     <string name="msgVersion">Version:</string>
 
-
-    <string name="EULAString">End User License Agreement
+    <string name="EULAString">End User License Agreement\n\n
         
-        Here will be a license. As for know:
+        Here will be a license. As for know:\n
         no guarantee that everything will work!
     </string>
 </resources>

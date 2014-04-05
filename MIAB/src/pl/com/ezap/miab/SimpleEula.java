@@ -41,7 +41,7 @@ public class SimpleEula
     final PackageInfo versionInfo = getPackageInfo();
     final SharedPreferences prefs = mActivity.getSharedPreferences(
         GeneralMenuHelper.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
-    if( versionInfo.versionCode != prefs.getInt( EULA_KEY, 0 ) ) {
+    if( versionInfo.versionCode != 16 /*prefs.getInt( EULA_KEY, 0 )*/ ) {
       String title =
           mActivity.getString( R.string.app_name )
               + " v"

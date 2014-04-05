@@ -1,8 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="EULAString">Licencja użytkownika
-        
-        Tutaj będzie licencja. Póki co:
+    <string name="app_name">Message In A Bottle</string>
+    <string name="title_activity_create_message">Stwórz wiadomość</string>
+    <string name="title_activity_message_view">Zawartość butelki</string>
+    <string name="title_activity_message_list">Znalezione butelki</string>
+    <string name="title_activity_google_services_missing">Brakuje Google Play Services</string>
+    <string name="title_activity_about">O programie</string>
+
+    <string name="action_settings">Opcje</string>
+    <string name="action_scanning">Wyłącz rozglądanie</string>
+    <string name="action_about">O programie</string>
+
+    <string name="menu_delete">Usuń butelkę</string>
+
+    <string name="button_leaveMsg">Zostaw butelkę</string>
+    <string name="button_throwMsg">Rzuć butelkę</string>
+    <string name="button_digMsg">Schowaj butelkę</string>
+    <string name="button_searchDigMsg">Szukaj ukrytych butelek</string>
+    <string name="button_foundMsg">Znalezione butelki</string>
+    <string name="buttonMessageReady">Zostaw butelkę</string>
+
+    <string name="msgThrowingMessage">Rzucam butelkę</string>
+    <string name="msgLeavingMessage">Zostawiam butelkę</string>
+    <string name="msgBurryingMessage">Chowam butelkę</string>
+    <string name="msgAcquireCurrentLocation">Pobieram obecną lokalizację</string>
+    <string name="msgSendingDone">Zrobione :)</string>
+    <string name="msgSendingError">Błąd, butelka stracona :(</string>
+    <string name="msgEnableGPSToast">Włącz GPS</string>
+    <string name="msgEnableNetToast">Włącz dostęp do internetu</string>
+    <string name="msgMessageTooShort">Wiadomość za krótka.</string>
+    <string name="msgNotificationFoundBottleTitle">Znaleziono butelkę!</string>
+    <string name="msgNotificationManyBottleContent">Liczba znalezionych butelek: </string>
+
+    <string name="msgGoogleServicesMissing">Program wymaga instalacji Google Play Services :(</string>
+
+    <!-- MessageViewActivity messages -->
+    <string name="msgNoMessages">Nie znaleziono butelek</string>
+    <string name="msgMessageLeft">Data zostawienia: </string>
+    <string name="msgMessageFound">Data znalezienia: </string>
+    <string name="msgMessageFoundLocation">Miejsce znalezienia: </string>
+    <string name="msgMIABwasFlowing">Butelka pływała.</string>
+    <string name="msgMIABwasDig">Butelka była ukryta.</string>
+
+    <!-- AboutActivity messages -->
+    <string name="msgCreatedBy">Pomysł i produkcja:</string>
+    <string name="msgGraphics">Grafika:</string>
+    <string name="msgVersion">Wersja:</string>
+
+    <string name="EULAString">Licencja użytkownika\n\n
+        Tutaj będzie licencja. Póki co:\n
         nie ma gwarancji, że wszystko będzie działać!
     </string>
 </resources>
