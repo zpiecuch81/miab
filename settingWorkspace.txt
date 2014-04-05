@@ -6,6 +6,7 @@
 	- git remote add origin https://github.com/zpiecuch81/miab2.git
 	- git config --global credential.helper "cache --timeout=3600"
 	- git fetch origin
+	- git checkout alpha
 	
 3. Add google play sirvices library in ADT:
 	- File/Import...
