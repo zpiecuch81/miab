@@ -14,11 +14,10 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 public class SearchService extends Service implements NetworkBroadcastReceiver.NetworkStateListener
 {
-  static final int GPS_CHECK_TIME_INTERVAL = 2000;
+  static final int GPS_CHECK_TIME_INTERVAL = 10000;
   private LocationManager locationManager;
   private LocationListener locationListener;
   private NetworkBroadcastReceiver networkReceiver;
@@ -36,10 +35,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
   @Override
   public void onDestroy()
   {
-    Toast.makeText(
-        getApplicationContext(),
-        "MIAB Service stopped",
-        Toast.LENGTH_LONG ).show();
     super.onDestroy();
     stopGPSListening();
     locationManager = null;
@@ -57,15 +52,10 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     if( locationManager != null ) {
       return START_STICKY;
     }
-    Toast.makeText(
-        getApplicationContext(),
-        "MIAB Service started",
-        Toast.LENGTH_LONG ).show();
-    //TODO: revert it back!!!
-    // startGPSListening();
-    BottleSearcher.searchAtLocation(
-        new Location( LocationManager.GPS_PROVIDER ),
-        this.getApplicationContext() );
+    startGPSListening();
+//    BottleSearcher.searchAtLocation(
+//        new Location( LocationManager.GPS_PROVIDER ),
+//        this.getApplicationContext() );
     // If we get killed, after returning from here, restart
     return START_STICKY;
   }
@@ -180,9 +170,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
   {
     Log.i( "MIABService", "searchMessage on location "
         + location.getLatitude() + "," + location.getLongitude() );
-    Toast
-        .makeText( getApplicationContext(), "SEARCHING", Toast.LENGTH_SHORT )
-        .show();
     BottleSearcher.searchAtLocation( location, this.getApplicationContext() );
   }
 

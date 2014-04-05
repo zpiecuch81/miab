@@ -49,4 +49,10 @@
     <string name="msgGraphics">Graphic by:</string>
     <string name="msgVersion">Version:</string>
 
+
+    <string name="EULAString">End User License Agreement
+        
+        Here will be a license. As for know:
+        no guarantee that everything will work!
+    </string>
 </resources>

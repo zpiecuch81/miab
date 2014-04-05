@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="EULAString">Licencja użytkownika
+        
+        Tutaj będzie licencja. Póki co:
+        nie ma gwarancji, że wszystko będzie działać!
+    </string>
+</resources>

@@ -46,12 +46,10 @@ public class SimpleEula
           mActivity.getString( R.string.app_name )
               + " v"
               + versionInfo.versionName;
-      String message =
-              "\n\n" + "Wszystko sie mo¿e schrzaniæ";
       AlertDialog.Builder builder =
         new AlertDialog.Builder( mActivity )
           .setTitle( title )
-          .setMessage( message )
+          .setMessage( R.string.EULAString )
           .setPositiveButton(
               android.R.string.ok,
               new Dialog.OnClickListener() {

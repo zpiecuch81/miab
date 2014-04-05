@@ -257,6 +257,7 @@ containing a value of this type.
         public static final int general=0x7f0b0000;
     }
     public static final class string {
+        public static final int EULAString=0x7f070040;
         public static final int action_about=0x7f070023;
         public static final int action_scanning=0x7f070022;
         public static final int action_settings=0x7f070021;
@@ -387,18 +388,18 @@ containing a value of this type.
         public static final int msgSendingError=0x7f070030;
         public static final int msgThrowingMessage=0x7f07002b;
         public static final int msgVersion=0x7f07003f;
-        public static final int pref_description_message_searching=0x7f070043;
+        public static final int pref_description_message_searching=0x7f070044;
         /**  Example General settings 
          */
-        public static final int pref_header_general=0x7f070041;
-        public static final int pref_title_message_searching=0x7f070042;
+        public static final int pref_header_general=0x7f070042;
+        public static final int pref_title_message_searching=0x7f070043;
         public static final int title_activity_about=0x7f070020;
         public static final int title_activity_create_message=0x7f07001b;
         public static final int title_activity_google_services_missing=0x7f07001f;
         public static final int title_activity_message_list=0x7f07001d;
         public static final int title_activity_message_view=0x7f07001c;
         public static final int title_activity_sending_message=0x7f07001e;
-        public static final int title_activity_settings=0x7f070040;
+        public static final int title_activity_settings=0x7f070041;
     }
     public static final class style {
         /** 
