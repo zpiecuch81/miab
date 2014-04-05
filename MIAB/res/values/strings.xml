@@ -15,9 +15,9 @@
     <string name="menu_delete">Delete bottle</string>
 
     <string name="button_leaveMsg">Leave a bottle</string>
-    <string name="button_throwMsg">Throw a bottle</string>
-    <string name="button_digMsg">Hide a bottle</string>
-    <string name="button_searchDigMsg">Search hidden bottles</string>
+    <string name="button_throwMsg">Throw a bottle (not in Alpha)</string>
+    <string name="button_digMsg">Hide a bottle (not in Alpha)</string>
+    <string name="button_searchDigMsg">Search hidden bottles (not in Alpha)</string>
     <string name="button_foundMsg">Found bottles</string>
     <string name="buttonMessageReady">Leave bottle</string>
 
@@ -49,8 +49,8 @@
     <string name="msgVersion">Version:</string>
 
     <string name="EULAString">End User License Agreement\n\n
-        
-        Here will be a license. As for know:\n
-        no guarantee that everything will work!
+Here will be a license. As for know:\n
+no guarantee that everything will work!\n\n
+Bottles left in alpha version may get broken before official release :(
     </string>
 </resources>

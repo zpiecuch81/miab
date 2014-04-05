@@ -44,7 +44,7 @@ public class MainActivity extends Activity
           @Override
           public void onClick( View v )
           {
-            startMessageCreation( true, false );
+            //startMessageCreation( true, false );
           }
         } );
     findViewById( R.id.button_digMsg ).setOnClickListener(
@@ -52,7 +52,7 @@ public class MainActivity extends Activity
           @Override
           public void onClick( View v )
           {
-            startMessageCreation( false, true );
+            //startMessageCreation( false, true );
           }
         } );
     findViewById( R.id.button_searchDigMsg ).setOnClickListener(

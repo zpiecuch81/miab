@@ -14,9 +14,9 @@
     <string name="menu_delete">Usuń butelkę</string>
 
     <string name="button_leaveMsg">Zostaw butelkę</string>
-    <string name="button_throwMsg">Rzuć butelkę</string>
-    <string name="button_digMsg">Schowaj butelkę</string>
-    <string name="button_searchDigMsg">Szukaj ukrytych butelek</string>
+    <string name="button_throwMsg">Rzuć butelkę (niedostępne w alfa)</string>
+    <string name="button_digMsg">Schowaj butelkę (niedostępne w alfa)</string>
+    <string name="button_searchDigMsg">Szukaj ukrytych butelek (niedostępne w alfa)</string>
     <string name="button_foundMsg">Znalezione butelki</string>
     <string name="buttonMessageReady">Zostaw butelkę</string>
 
@@ -48,7 +48,8 @@
     <string name="msgVersion">Wersja:</string>
 
     <string name="EULAString">Licencja użytkownika\n\n
-        Tutaj będzie licencja. Póki co:\n
-        nie ma gwarancji, że wszystko będzie działać!
+Tutaj będzie licencja. Póki co:\n
+nie ma gwarancji, że wszystko będzie działać!\n\n
+Butelki zostawione w wersji alfa mogą się stłuc przed wydaniem programu :(
     </string>
 </resources>
