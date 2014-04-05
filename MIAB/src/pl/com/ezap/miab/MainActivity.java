@@ -27,6 +27,9 @@ public class MainActivity extends Activity
     super.onCreate( savedInstanceState );
     checkGooglePlayServicesAvailability();
     setContentView( R.layout.activity_main );
+
+    new SimpleEula(this).show();
+
     menuHelper = new GeneralMenuHelper( this );
     findViewById( R.id.button_leaveMsg ).setOnClickListener(
         new View.OnClickListener() {
