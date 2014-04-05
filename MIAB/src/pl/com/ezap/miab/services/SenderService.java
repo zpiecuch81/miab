@@ -30,7 +30,7 @@ import android.util.Log;
 public class SenderService extends Service
 {
   final static public String MESSAGE_KEY = "pl.com.ezap.miab.services.Message2Send";
-  final static public String IS_BURRIED_KEY = "pl.com.ezap.miab.services.IsBurried";
+  final static public String IS_HIDDEN_KEY = "pl.com.ezap.miab.services.IsHidden";
   final static public String IS_FLOWING_KEY = "pl.com.ezap.miab.services.IsFlowing";
   private ArrayList<MessageV1> messages2send;
   private LocationManager locationManager;
@@ -108,7 +108,7 @@ public class SenderService extends Service
   private MessageV1 intent2message( Intent intent ){
     MessageV1 miabMessage = new MessageV1();
     miabMessage.setMessage( intent.getStringExtra( MESSAGE_KEY ) );
-    miabMessage.setHidden( intent.getBooleanExtra( IS_BURRIED_KEY, false ) );
+    miabMessage.setHidden( intent.getBooleanExtra( IS_HIDDEN_KEY, false ) );
     miabMessage.setFlowing( intent.getBooleanExtra( IS_FLOWING_KEY, false ) );
     miabMessage.setTimeStamp( new java.util.Date().getTime() );
     setFloatingData( miabMessage );

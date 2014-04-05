@@ -1,8 +1,8 @@
 
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
-import pl.com.ezap.miab.shared.Message;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import android.location.LocationManager;
@@ -118,9 +118,9 @@ public class MainActivity extends Activity
 
   private void startMessageCreation( boolean isFlowing, boolean isHidden )
   {
-    Message.getInstance().m_isFlowing = isFlowing;
-    Message.getInstance().m_isHidden = isHidden;
     Intent intent = new Intent( this, CreateMessageActivity.class );
+    intent.putExtra( SenderService.IS_FLOWING_KEY, isFlowing );
+    intent.putExtra( SenderService.IS_HIDDEN_KEY, isHidden );
     startActivity( intent );
   }
 

@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 public class GeneralMenuHelper
 {
-  static final String SHARED_PREFERENCES_NAME = "sharedPreferences";
+  public static final String SHARED_PREFERENCES_NAME = "sharedPreferences";
   private Activity activity;
   private Menu menu;
 
@@ -56,7 +56,7 @@ public class GeneralMenuHelper
     }
     SharedPreferences settings =
         activity.getSharedPreferences( SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
-    if( settings.getBoolean( "MIABServiceOn", true ) ) {
+    if( settings.getBoolean( "MIABServiceOn", false ) ) {
       menu.getItem( 0 ).setIcon( R.drawable.action_scanning );
     } else {
       menu.getItem( 0 ).setIcon( R.drawable.action_notscanning );
@@ -68,7 +68,7 @@ public class GeneralMenuHelper
     SharedPreferences settings =
         activity.getSharedPreferences( SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
     SharedPreferences.Editor settingsEditor = settings.edit();
-    boolean enableNow = !settings.getBoolean( "MIABServiceOn", true );
+    boolean enableNow = !settings.getBoolean( "MIABServiceOn", false );
     settingsEditor.putBoolean( "MIABServiceOn", enableNow );
     settingsEditor.commit();
     if( enableNow ) {

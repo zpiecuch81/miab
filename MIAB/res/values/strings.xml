@@ -30,6 +30,7 @@
     <string name="msgSendingError">Error, bottle lost :(</string>
     <string name="msgEnableGPSToast">Enable GPS</string>
     <string name="msgEnableNetToast">Enable network access</string>
+    <string name="msgMessageTooShort">Message too short.</string>
     <string name="msgNotificationFoundBottleTitle">Found new bottle!</string>
     <string name="msgNotificationManyBottleContent">Number of unread bottles: </string>
 
