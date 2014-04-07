@@ -4,7 +4,6 @@ package pl.com.ezap.miab.shared;
 import pl.com.ezap.miab.miabendpoint.model.GeoPt;
 import android.location.Location;
 import android.location.LocationManager;
-import android.util.Log;
 
 public class LocationHelper
 {
@@ -32,12 +31,8 @@ public class LocationHelper
   public static boolean isAccuracyEnough( Location location )
   {
     if( location != null ) {
-      Log.d(
-          "MIABService",
-          "isAccuracyEnough, accuracy = " + location.getAccuracy() );
       return location.getAccuracy() <= GPS_ACCURACY;
     }
-    Log.e( "MIABService", "isAccuracyEnough - null parameter" );
     return false;
   }
 }

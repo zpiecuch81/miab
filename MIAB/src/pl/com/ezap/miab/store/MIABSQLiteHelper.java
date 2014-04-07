@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
-import android.util.Log;
 
 public class MIABSQLiteHelper extends SQLiteOpenHelper
 {
@@ -53,8 +52,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
   @Override
   public void onUpgrade( SQLiteDatabase db, int oldVersion, int newVersion )
   {
-    Log.w( MIABSQLiteHelper.class.getName(), "Upgrading database from version "
-        + oldVersion + " to " + newVersion + ", which will destroy all old data" );
     db.execSQL( DATABASE_DROP );
     onCreate( db );
   }
@@ -66,7 +63,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
       boolean wasFlowing,
       Location foundLocation )
   {
-    Log.i( MIABSQLiteHelper.class.getName(), "Storing message" );
     long foundDate = new java.util.Date().getTime();
     int flags =
         wasDig ? MIAB_FLAG_WAS_DIG : wasFlowing
@@ -88,9 +84,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
       db.close();
     }
     catch( Exception e ) {
-      Log.e(
-          MIABSQLiteHelper.class.getName(),
-          "Exception while storing message: " + e.getMessage() );
     }
     return stored;
   }
@@ -106,9 +99,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
       db.close();
     }
     catch( Exception e ) {
-      Log.e(
-          MIABSQLiteHelper.class.getName(),
-          "Exception while storing message: " + e.getMessage() );
     }
   }
 
@@ -132,7 +122,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
     // }
     // catch(Exception e)
     // {
-    // Log.i(MIABSQLiteHelper.class.getName(), "table didn't exists" );
     // return;
     // }
     //

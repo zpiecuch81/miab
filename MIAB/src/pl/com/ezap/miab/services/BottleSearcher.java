@@ -15,7 +15,6 @@ import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Log;
 
 class DBMessage
 {
@@ -101,10 +100,6 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     if( miabs == null ) {
       miabs = new ArrayList<MessageV1>();
     }
-    Log.d( "MIABSearcher", "Received list of "
-        + miabs.size()
-        + " MIABs with index "
-        + geoIndex );
     return miabs;
   }
 
@@ -130,9 +125,6 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
           MessageV1 gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
           if( gotMIAB != null ) {
             downloadedMIABs.add( gotMIAB );
-            Log.d(
-                "MIABSearcher",
-                "Downloaded MessageV1, id =  " + gotMIAB.getId() );
           }
         }
         catch( IOException e ) {
@@ -172,10 +164,6 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
         dbMessage.dbID = storeID;
         dbMessages.add( dbMessage );
       }
-      Log.d( "MIABSearcher", "Message id "
-          + miab.getId()
-          + ", store ID = "
-          + storeID );
     }
     return dbMessages;
   }

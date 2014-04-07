@@ -25,7 +25,6 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 
 public class SenderService extends Service
 {
@@ -67,7 +66,6 @@ public class SenderService extends Service
     @Override
     protected void onPostExecute( Long result )
     {
-      Log.d( "SendMessageTask", "onPostExecute, result " + result );
       if( result == 0 ) {
         messages2send.remove( 0 );
       }
@@ -98,7 +96,6 @@ public class SenderService extends Service
       return START_STICKY;
     }
     MessageV1 miabMessage = intent2message( intent );
-    Log.i( "SenderService", "Adding message to queue" );
     messages2send.add( miabMessage );
 
     startSendingBottles();
@@ -207,7 +204,6 @@ public class SenderService extends Service
 
   private void finishService()
   {
-    Log.i( "SenderService", "stopping service" );
     if( notificationHelper != null ) {
       notificationHelper.sendingFinished( getString( R.string.msgSendingDone ) );
     }

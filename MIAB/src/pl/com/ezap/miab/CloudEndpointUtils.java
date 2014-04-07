@@ -7,7 +7,6 @@ import com.google.api.client.googleapis.services.AbstractGoogleClient;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 import java.io.IOException;
 
@@ -83,7 +82,6 @@ public class CloudEndpointUtils
    *          message to log and show or {@code null} for none */
   public static void logAndShow( Activity activity, String tag, String message )
   {
-    Log.e( tag, message );
     showError( activity, message );
   }
 
@@ -97,7 +95,6 @@ public class CloudEndpointUtils
    *          throwable to log and show */
   public static void logAndShow( Activity activity, String tag, Throwable t )
   {
-    Log.e( tag, "Error", t );
     String message = t.getMessage();
     // Exceptions that occur in your Cloud Endpoint implementation classes
     // are wrapped as GoogleJsonResponseExceptions
