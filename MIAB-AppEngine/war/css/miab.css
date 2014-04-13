@@ -31,6 +31,9 @@ article > footer{
 	text-align: right;
 	padding-right: 25px;
 }
+article > p{
+	text-indent: 25px;
+}
 #wholePage{
 	width: 1000px;
 	margin: 20px auto;
@@ -62,7 +65,7 @@ article > footer{
 }
 #mainSection li{
 	margin-left: 20px;
-	padding-bottom: 10px;
+	padding-top: 10px;
 }
 #rightSide{
 	float: right;
