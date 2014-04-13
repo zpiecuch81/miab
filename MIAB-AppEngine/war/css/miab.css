@@ -1,0 +1,79 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+h1{
+	font: bold 60px Tahoma;
+}
+h2{
+	font: bold 15px Tahoma;
+}
+header, section, footer, aside, nav, article, hgroup{
+	display: block;
+}
+body{
+	background-image:url("../img/sand.jpg");
+}
+a:link, a:visited, a:hover, a:active {
+	color: black;
+	text-decoration: none;
+}
+article{
+	background-color: rgba(255,255,255,0.2);
+	border-radius: 50px;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+article > header{
+	margin: 10px 50px;
+}
+article > footer{
+	text-align: right;
+	padding-right: 25px;
+}
+#wholePage{
+	width: 1000px;
+	margin: 20px auto;
+}
+#mainMenu{
+	text-align: center;
+	position: fixed;
+	top: 0px;
+	height: 30px;
+	width: 1000px;
+	background-image:url("../img/sand.jpg");
+}
+#mainMenu li{
+	display: inline-block;
+	list-style: none;
+	padding: 5px 25px;
+	font: bold 14px Tahoma;
+}
+#mainHeader{
+	background-image:url("../img/header.jpg");
+	margin-top: 30px;
+	border-radius: 10px;
+	height: 150px;
+}
+#mainSection{
+	float: left;
+	width: 950px;
+	margin: 30px 25px;
+}
+#mainSection li{
+	margin-left: 20px;
+	padding-bottom: 10px;
+}
+#rightSide{
+	float: right;
+	width: 150px;
+	margin: 30px 0px;
+	padding: 20px;
+	background: lime;
+}
+#mainFooter{
+	clear: both;
+	text-align: center;
+	padding: 20px;
+	border-top: 2px solid green;
+}
