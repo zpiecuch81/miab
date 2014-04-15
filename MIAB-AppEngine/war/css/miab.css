@@ -8,6 +8,11 @@ h1{
 h2{
 	font: bold 15px Tahoma;
 }
+h4{
+	font: bold;
+	padding: 0px;
+	margin-top: 10px;
+}
 header, section, footer, aside, nav, article, hgroup{
 	display: block;
 }
