@@ -9,9 +9,9 @@
   </init-param>
  </servlet>
  <servlet>
-  <servlet-name>AdminServlet</servlet-name>
-   <servlet-class>pl.com.ezap.miab.adminServlet</servlet-class>
-  </servlet>
+  <servlet-name>BottleFlow</servlet-name>
+  <servlet-class>pl.com.ezap.miab.BottleFlow</servlet-class>
+ </servlet>
 
  <servlet-mapping>
   <servlet-name>SystemServiceServlet</servlet-name>
@@ -22,23 +22,14 @@
   <url-pattern>/_datastore</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
-  <servlet-name>AdminServlet</servlet-name>
-  <url-pattern>/adminServlet/*</url-pattern>
+  <servlet-name>BottleFlow</servlet-name>
+  <url-pattern>/admin/BottleFlow/*</url-pattern>
  </servlet-mapping>
 
  <security-constraint>
   <web-resource-collection>
    <web-resource-name>admin</web-resource-name>
    <url-pattern>/admin/*</url-pattern>
-  </web-resource-collection>
-  <auth-constraint>
-   <role-name>admin</role-name>
-  </auth-constraint>
- </security-constraint>
- <security-constraint>
-  <web-resource-collection>
-   <web-resource-name>AdminServlet</web-resource-name>
-   <url-pattern>/adminServlet/*</url-pattern>
   </web-resource-collection>
   <auth-constraint>
    <role-name>admin</role-name>

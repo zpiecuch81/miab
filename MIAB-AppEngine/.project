@@ -3,6 +3,7 @@
 	<name>MIAB-AppEngine</name>
 	<comment></comment>
 	<projects>
+		<project>MIAB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
