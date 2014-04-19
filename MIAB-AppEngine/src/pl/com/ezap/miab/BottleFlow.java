@@ -1,6 +1,5 @@
 package pl.com.ezap.miab;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ public class BottleFlow extends HttpServlet
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws IOException {
+  {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query allEntities = new Query("MessageV1");
@@ -64,8 +63,5 @@ public class BottleFlow extends HttpServlet
     }
 
     datastore.put( toCommit );
-
-    resp.setContentType("text/plain");
-    resp.getWriter().println( "" );
   }
 }

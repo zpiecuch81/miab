@@ -67,12 +67,10 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
       return cache.miabs;
     }
     List<MessageV1> miabs = getFromDataStore();
+    cache = new MessageCache();
     if( !doDig ) {
-      // if( cache == null ) {
-      // cache = new MessageCache();
-      // }
-      // cache.miabs = miabs;
-      // cache.geoIndex = geoIndex;
+      cache.miabs = miabs;
+      cache.geoIndex = geoIndex;
     }
     return miabs;
   }
@@ -85,12 +83,20 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     return ( cache != null && cache.geoIndex == geoIndex );
   }
 
-  private List<MessageV1> getFromDataStore()
+  private Miabendpoint getEndPoint()
   {
     Miabendpoint.Builder builder =
-        new Miabendpoint.Builder( AndroidHttp.newCompatibleTransport(), new GsonFactory(), null );
+        new Miabendpoint.Builder(
+            AndroidHttp.newCompatibleTransport(),
+            new GsonFactory(),
+            null );
     builder.setApplicationName( "message-in-bottle" );
-    Miabendpoint endpoint = builder.build();
+    return builder.build();
+  }
+
+  private List<MessageV1> getFromDataStore()
+  {
+    Miabendpoint endpoint = getEndPoint();
     List<MessageV1> miabs = null;
     try {
       miabs = endpoint.listMessages( geoIndex, doDig ).execute().getItems();
@@ -141,17 +147,6 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
       }
     }
     return downloadedMIABs;
-  }
-
-  private Miabendpoint getEndPoint()
-  {
-    Miabendpoint.Builder builder =
-        new Miabendpoint.Builder(
-            AndroidHttp.newCompatibleTransport(),
-            new GsonFactory(),
-            null );
-    builder.setApplicationName( "message-in-bottle" );
-    return builder.build();
   }
 
   private List<DBMessage> storeDownloadedMIABs( List<MessageV1> downloadedMIABs )
