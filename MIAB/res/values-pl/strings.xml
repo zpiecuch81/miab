@@ -23,7 +23,7 @@
     <string name="msgThrowingMessage">Rzucam butelkę</string>
     <string name="msgLeavingMessage">Zostawiam butelkę</string>
     <string name="msgBurryingMessage">Chowam butelkę</string>
-    <string name="msgAcquireCurrentLocation">Pobieram obecną lokalizację</string>
+    <string name="msgAcquireCurrentLocation">Ustalam obecną lokalizację</string>
     <string name="msgSendingDone">Zrobione :)</string>
     <string name="msgSendingError">Błąd, butelka stracona :(</string>
     <string name="msgEnableGPSToast">Włącz GPS</string>
@@ -31,6 +31,10 @@
     <string name="msgMessageTooShort">Wiadomość za krótka.</string>
     <string name="msgNotificationFoundBottleTitle">Znaleziono butelkę!</string>
     <string name="msgNotificationManyBottleContent">Liczba znalezionych butelek: </string>
+    <string name="msgNotificationSearchingHidden">Szukam ukrytych butelek.</string>
+    <string name="msgNotificationGPSError">Błąd ustalania obecnej lokalizacji :(</string>
+    <string name="msgNotificationGrabError">Błąd w trakcie szukania butelek :(</string>
+    <string name="msgNotificationNoBottleFound">Nie znaleziono butelek :(</string>
 
     <string name="msgGoogleServicesMissing">Program wymaga instalacji Google Play Services :(</string>
 

@@ -33,7 +33,8 @@ public class GPSHelper
 
   public void start()
   {
-    startGPSListening();
+    //startGPSListening();
+    client.onLocationFound( new Location(LocationManager.GPS_PROVIDER) );
   }
 
   public void stop()

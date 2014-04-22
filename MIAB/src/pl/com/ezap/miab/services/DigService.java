@@ -3,20 +3,23 @@ package pl.com.ezap.miab.services;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.location.Location;
-import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.util.Log;
+import pl.com.ezap.miab.R;
+import pl.com.ezap.miab.shared.BottleGrabber;
 import pl.com.ezap.miab.shared.GPSHelper;
+import pl.com.ezap.miab.shared.NotificationHelper_v2;
 
 public class DigService extends Service
     implements
-    NetworkBroadcastReceiver.NetworkStateListener,
-    GPSHelper.GPSListener
+    GPSHelper.GPSListener,
+    BottleGrabber.BottleListener
 {
   private NetworkBroadcastReceiver networkReceiver;
   private GPSHelper gpsHelper;
+  private BottleGrabber bottleGrabber;
+  private NotificationHelper_v2 notifications; 
 
   @Override
   public void onCreate()
@@ -46,19 +49,20 @@ public class DigService extends Service
       return START_NOT_STICKY;
     }
 
+    Log.d( "DigService", "onStartCommand called" );
+
+    notifications = new NotificationHelper_v2(
+        getApplicationContext(),
+        NotificationHelper_v2.DIG_SERVICE_NOTIFICATION_ID,
+        getString( R.string.msgNotificationSearchingHidden ) );
+    notifications.createUpdateNotification( getString( R.string.msgAcquireCurrentLocation ) );
+
     gpsHelper = new GPSHelper( 
         this.getApplication().getApplicationContext(),
         this,
         10000,
         3 );
     gpsHelper.start();
-
-    if( networkReceiver == null ) {
-      networkReceiver = new NetworkBroadcastReceiver( this );
-      IntentFilter filter =
-          new IntentFilter( ConnectivityManager.CONNECTIVITY_ACTION );
-      registerReceiver( networkReceiver, filter );
-    }
 
     return START_NOT_STICKY;
   }
@@ -70,32 +74,43 @@ public class DigService extends Service
   }
 
   @Override
-  public void onNetwoorkAvailable()
-  { }
-
-  @Override
-  public void onNetwoorkUnavailable()
-  { }
-
-  @Override
   public void onLocationFound( Location foundLocation )
   {
-    // TODO Auto-generated method stub
+    Log.d( "DigService", "onLocationFound called, location = " + foundLocation.toString() );
+    notifications.createUpdateNotification( getString( R.string.msgNotificationSearchingHidden ) );
+    if( bottleGrabber == null ) {
+      bottleGrabber = new BottleGrabber( this.getApplication().getApplicationContext(), this );
+    }
+    gpsHelper.stop();
+    bottleGrabber.dig( foundLocation );
   }
 
   @Override
   public void onGPSFailure()
   {
-    // TODO Auto-generated method stub
+    Log.d( "DigService", "onGPSFailure called" );
+    notifications.finalNotification( getString( R.string.msgNotificationGPSError ) );
+    stopSelf();
   }
 
-  private void searchMessage( Location location )
+  @Override
+  public void onGrabFinished( int foundBottlesNumber )
   {
-    Log.i( "MIABService", "searchMessage on location "
-        + location.getLatitude()
-        + ","
-        + location.getLongitude() );
-    BottleSearcher.digAtLocation( location, this.getApplicationContext() );
+    Log.d( "DigService", "onGrabFinished called, foundBottlesNumber = " + foundBottlesNumber );
+    if( foundBottlesNumber > 0 ) {
+      notifications.updateFoundBottles();
+    } else {
+      notifications.finalNotification( getString( R.string.msgNotificationNoBottleFound ) );
+    }
+    stopSelf();
+  }
+
+  @Override
+  public void onGrabFailure()
+  {
+    Log.d( "DigService", "onGrabFailure called" );
+    notifications.finalNotification( getString( R.string.msgNotificationGrabError ) );
+    stopSelf();
   }
 
 }

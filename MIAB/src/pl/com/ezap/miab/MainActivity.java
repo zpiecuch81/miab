@@ -1,6 +1,7 @@
 
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.services.DigService;
 import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import com.google.android.gms.common.ConnectionResult;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity
     new SimpleEula(this).show();
 
     menuHelper = new GeneralMenuHelper( this );
+
     findViewById( R.id.button_leaveMsg ).setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -59,7 +61,9 @@ public class MainActivity extends Activity
         new View.OnClickListener() {
           @Override
           public void onClick( View v )
-          {}
+          {
+            searchHiddenBottles();
+          }
         } );
     findViewById( R.id.button_foundMsg ).setOnClickListener(
         new View.OnClickListener() {
@@ -136,7 +140,7 @@ public class MainActivity extends Activity
     }
   }
 
-  private void checkGPSEnabled()
+  private boolean checkGPSEnabled()
   {
     final LocationManager manager =
         (LocationManager)getSystemService( Context.LOCATION_SERVICE );
@@ -145,10 +149,12 @@ public class MainActivity extends Activity
           getApplicationContext(),
           R.string.msgEnableGPSToast,
           Toast.LENGTH_LONG ).show();
+      return false;
     }
+    return true;
   }
 
-  private void checkIsOnline()
+  private boolean checkIsOnline()
   {
     ConnectivityManager cm =
         (ConnectivityManager)getSystemService( Context.CONNECTIVITY_SERVICE );
@@ -158,6 +164,15 @@ public class MainActivity extends Activity
           getApplicationContext(),
           R.string.msgEnableNetToast,
           Toast.LENGTH_LONG ).show();
+      return false;
+    }
+    return true;
+  }
+
+  private void searchHiddenBottles()
+  {
+    if( checkGPSEnabled() && checkIsOnline() ){
+      startService( new Intent( getApplicationContext(), DigService.class ) );
     }
   }
 }
