@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
-import pl.com.ezap.miab.miabendpoint.Miabendpoint;
-import pl.com.ezap.miab.miabendpoint.model.MessageV1;
+import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
+import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.content.Context;
 import android.location.Location;
@@ -109,10 +109,10 @@ public class BottleGrabber
         return false;
       }
 
-      private Miabendpoint getEndPoint()
+      private Messagev1endpoint getEndPoint()
       {
-        Miabendpoint.Builder builder =
-            new Miabendpoint.Builder(
+        Messagev1endpoint.Builder builder =
+            new Messagev1endpoint.Builder(
                 AndroidHttp.newCompatibleTransport(),
                 new GsonFactory(),
                 null );
@@ -122,10 +122,10 @@ public class BottleGrabber
 
       private List<MessageV1> getFromDataStore()
       {
-        Miabendpoint endpoint = getEndPoint();
+        Messagev1endpoint endpoint = getEndPoint();
         List<MessageV1> bottles = null;
         try {
-          bottles = endpoint.listMessages( geoIndex, searchHidden ).execute().getItems();
+          bottles = endpoint.listMessageV1( geoIndex, searchHidden ).execute().getItems();
         }
         catch( IOException e ) {
           e.printStackTrace();
@@ -140,8 +140,7 @@ public class BottleGrabber
         return bottles;
       }
 
-      private List<MessageV1> selectCurrentLocationMIABS(
-          List<MessageV1> miabs2Check )
+      private List<MessageV1> selectCurrentLocationMIABS( List<MessageV1> miabs2Check )
       {
         List<MessageV1> foundBottles = new ArrayList<MessageV1>();
         for( MessageV1 bottle: miabs2Check ) {
@@ -156,10 +155,10 @@ public class BottleGrabber
       {
         List<MessageV1> downloadedBottles = new ArrayList<MessageV1>();
         if( !bottles2Download.isEmpty() ) {
-          Miabendpoint endpoint = getEndPoint();
+          Messagev1endpoint endpoint = getEndPoint();
           for( MessageV1 miab: bottles2Download ) {
             try {
-              MessageV1 gotBottle = endpoint.getMIAB( miab.getId() ).execute();
+              MessageV1 gotBottle = endpoint.getMessageV1( miab.getId() ).execute();
               if( gotBottle != null ) {
                 downloadedBottles.add( gotBottle );
                 Log.d(
@@ -203,11 +202,11 @@ public class BottleGrabber
         if( downloadedBottles.isEmpty() ) {
           return;
         }
-        Miabendpoint endpoint = getEndPoint();
+        Messagev1endpoint endpoint = getEndPoint();
         for( MessageV1 bottle: downloadedBottles ) {
           // remove stored MIABS from Datastore
           try {
-            endpoint.removeMIAB( bottle.getId() );
+            endpoint.removeMessageV1( bottle.getId() ).execute();
           }
           catch( IOException e ) {
             Log.e( "BottleGrabber", e.getMessage() );

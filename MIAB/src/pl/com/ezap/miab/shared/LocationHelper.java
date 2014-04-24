@@ -1,7 +1,7 @@
 
 package pl.com.ezap.miab.shared;
 
-import pl.com.ezap.miab.miabendpoint.model.GeoPt;
+import pl.com.ezap.miab.messagev1endpoint.model.GeoPt;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;

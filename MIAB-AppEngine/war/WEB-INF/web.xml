@@ -5,7 +5,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>pl.com.ezap.miab.MIABEndpoint</param-value>
+   <param-value>pl.com.ezap.miab.MIABEndpoint,pl.com.ezap.miab.MessageV1Endpoint</param-value>
   </init-param>
  </servlet>
  <servlet>

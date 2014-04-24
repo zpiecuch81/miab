@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
-import pl.com.ezap.miab.miabendpoint.Miabendpoint;
-import pl.com.ezap.miab.miabendpoint.model.MessageV1;
+import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
+import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
 import pl.com.ezap.miab.shared.NotificationHelper;
@@ -83,10 +83,10 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     return ( cache != null && cache.geoIndex == geoIndex );
   }
 
-  private Miabendpoint getEndPoint()
+  private Messagev1endpoint getEndPoint()
   {
-    Miabendpoint.Builder builder =
-        new Miabendpoint.Builder(
+    Messagev1endpoint.Builder builder =
+        new Messagev1endpoint.Builder(
             AndroidHttp.newCompatibleTransport(),
             new GsonFactory(),
             null );
@@ -96,10 +96,10 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
 
   private List<MessageV1> getFromDataStore()
   {
-    Miabendpoint endpoint = getEndPoint();
+    Messagev1endpoint endpoint = getEndPoint();
     List<MessageV1> miabs = null;
     try {
-      miabs = endpoint.listMessages( geoIndex, doDig ).execute().getItems();
+      miabs = endpoint.listMessageV1( geoIndex, doDig ).execute().getItems();
     }
     catch( IOException e ) {
       e.printStackTrace();
@@ -130,10 +130,10 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
   {
     List<MessageV1> downloadedMIABs = new ArrayList<MessageV1>();
     if( !miabs2Download.isEmpty() ) {
-      Miabendpoint endpoint = getEndPoint();
+      Messagev1endpoint endpoint = getEndPoint();
       for( MessageV1 miab: miabs2Download ) {
         try {
-          MessageV1 gotMIAB = endpoint.getMIAB( miab.getId() ).execute();
+          MessageV1 gotMIAB = endpoint.getMessageV1( miab.getId() ).execute();
           if( gotMIAB != null ) {
             downloadedMIABs.add( gotMIAB );
             Log.d(
@@ -180,11 +180,11 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     if( downloadedMIABs.isEmpty() ) {
       return;
     }
-    Miabendpoint endpoint = getEndPoint();
+    Messagev1endpoint endpoint = getEndPoint();
     for( DBMessage dbMessage: downloadedMIABs ) {
       // remove stored MIABS from Datastore
       try {
-        endpoint.removeMIAB( dbMessage.message.getId() );
+        endpoint.removeMessageV1( dbMessage.message.getId() ).execute();
       }
       catch( IOException e ) {
         e.printStackTrace();

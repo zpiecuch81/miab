@@ -5,6 +5,7 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="endpoint-libs/libmessagev1endpoint-v1/messagev1endpoint/messagev1endpoint-v1-generated-source"/>
 	<classpathentry kind="src" path="endpoint-libs/libmiabendpoint-v1/miabendpoint/miabendpoint-v1-generated-source"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
