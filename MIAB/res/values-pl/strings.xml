@@ -35,6 +35,7 @@
     <string name="msgNotificationGPSError">Błąd ustalania obecnej lokalizacji :(</string>
     <string name="msgNotificationGrabError">Błąd w trakcie szukania butelek :(</string>
     <string name="msgNotificationNoBottleFound">Nie znaleziono butelek :(</string>
+    <string name="msgNotificationSearchingBottles">Szukanie butelek</string>
 
     <string name="msgGoogleServicesMissing">Program wymaga instalacji Google Play Services :(</string>
 

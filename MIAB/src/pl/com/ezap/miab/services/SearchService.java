@@ -1,7 +1,9 @@
 
 package pl.com.ezap.miab.services;
 
+import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.shared.LocationHelper;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +15,12 @@ import android.location.LocationProvider;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class SearchService extends Service implements NetworkBroadcastReceiver.NetworkStateListener
 {
+  static final int SERVICE_ICON_NOTIFICATION_ID = 123;
   static final int GPS_CHECK_TIME_INTERVAL = 10000;
   private LocationManager locationManager;
   private LocationListener locationListener;
@@ -30,6 +34,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     locationManager = null;
     locationListener = null;
     maxGPSFoundTrials = 5;
+    showServiceIcon();
   }
 
   @Override
@@ -43,6 +48,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
       unregisterReceiver( networkReceiver );
       networkReceiver = null;
     }
+    removeServiceIcon();
   }
 
   @Override
@@ -173,4 +179,24 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     BottleSearcher.searchAtLocation( location, this.getApplicationContext() );
   }
 
+  private void showServiceIcon()
+  {
+    NotificationCompat.Builder notificationBuilder =
+        new NotificationCompat.Builder( this.getApplicationContext() )
+          .setSmallIcon( R.drawable.ic_stat_notify_searching )
+          .setContentTitle( getString( R.string.app_name ) )
+          .setContentText( getString( R.string.msgNotificationSearchingBottles ) )
+          .setAutoCancel( false )
+          .setOngoing( true );
+    NotificationManager notifier =
+        (NotificationManager)this.getApplicationContext().
+        getSystemService( Context.NOTIFICATION_SERVICE );
+    notifier.notify( SERVICE_ICON_NOTIFICATION_ID, notificationBuilder.build() );
+  }
+
+  private void removeServiceIcon()
+  {
+    ((NotificationManager)this.getApplicationContext().
+        getSystemService( Context.NOTIFICATION_SERVICE )).cancel( SERVICE_ICON_NOTIFICATION_ID );
+  }
 }

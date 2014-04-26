@@ -36,6 +36,7 @@
     <string name="msgNotificationGPSError">Error getting location :(</string>
     <string name="msgNotificationGrabError">Error searching bottles :(</string>
     <string name="msgNotificationNoBottleFound">No bottle found :(</string>
+    <string name="msgNotificationSearchingBottles">Searching for bottles.</string>
 
     <string name="msgGoogleServicesMissing">Google Play Services are required :(</string>
 
