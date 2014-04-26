@@ -18,6 +18,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:inputType="none"
         android:gravity="top"
+        android:scrollbars="vertical"
         style = "@style/messageFont" >
     </TextView>
     <TextView

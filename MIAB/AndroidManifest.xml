@@ -29,7 +29,8 @@
         <activity
             android:name="pl.com.ezap.miab.CreateMessageActivity"
             android:label="@string/title_activity_create_message"
-            android:parentActivityName="pl.com.ezap.miab.MainActivity" >
+            android:parentActivityName="pl.com.ezap.miab.MainActivity"
+            android:windowSoftInputMode="adjustResize" >
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
