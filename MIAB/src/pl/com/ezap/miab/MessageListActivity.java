@@ -135,6 +135,7 @@ public class MessageListActivity extends ListActivity
         return true;
       }
     } );
+
     setListAdapter( adapter );
     getLoaderManager().initLoader( 0, null, this );
   }
