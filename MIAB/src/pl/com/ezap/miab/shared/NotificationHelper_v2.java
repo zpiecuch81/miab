@@ -34,6 +34,14 @@ public class NotificationHelper_v2
   private Boolean progress;
   private PendingIntent pendingIntent;
 
+  static public String createMessageHead( String message ) {
+    if( message.length() > 30 ) {
+      return message.substring( 0, 27 ) + "..." ;
+    } else {
+      return message.substring( 0, message.length() );
+    }
+  }
+
   public NotificationHelper_v2( Context context, int notificationID, String title )
   {
     this.context = context;
@@ -96,7 +104,7 @@ public class NotificationHelper_v2
   private Cursor getUnreadMessages()
   {
     String[] projection =
-        { MIABSQLiteHelper.COLUMN_HEAD, MIABSQLiteHelper.COLUMN_ID };
+        { MIABSQLiteHelper.COLUMN_MESSAGE, MIABSQLiteHelper.COLUMN_ID };
     MIABSQLiteHelper dbHelper = new MIABSQLiteHelper( context );
     return dbHelper.getReadableDatabase().query(
         MIABSQLiteHelper.TABLE_MIABS,
@@ -111,9 +119,9 @@ public class NotificationHelper_v2
   private void createFoundContentText( Cursor cursor )
   {
     if( bottlesCount == 1 ) {
-      message =
+      message = createMessageHead(
           cursor.getString( cursor
-              .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_HEAD ) );
+              .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_MESSAGE ) ) );
     } else {
       message =
           context.getString( R.string.msgNotificationManyBottleContent )

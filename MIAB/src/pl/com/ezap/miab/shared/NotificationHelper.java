@@ -47,7 +47,7 @@ public class NotificationHelper
   private Cursor getUnreadMessages()
   {
     String[] projection =
-        { MIABSQLiteHelper.COLUMN_HEAD, MIABSQLiteHelper.COLUMN_ID };
+        { MIABSQLiteHelper.COLUMN_MESSAGE, MIABSQLiteHelper.COLUMN_ID };
     MIABSQLiteHelper dbHelper = new MIABSQLiteHelper( context );
     return dbHelper.getReadableDatabase().query(
         MIABSQLiteHelper.TABLE_MIABS,
@@ -62,9 +62,9 @@ public class NotificationHelper
   private void createFoundContentText( Cursor cursor )
   {
     if( unreadMessagesCount == 1 ) {
-      contentText =
+      contentText = NotificationHelper_v2.createMessageHead(
           cursor.getString( cursor
-              .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_HEAD ) );
+              .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_MESSAGE ) ) );
     } else {
       contentText =
           context.getString( R.string.msgNotificationManyBottleContent )

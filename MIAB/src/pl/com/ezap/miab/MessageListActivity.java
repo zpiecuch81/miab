@@ -2,6 +2,7 @@
 package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
+import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.app.ListActivity;
@@ -13,6 +14,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -108,26 +110,27 @@ public class MessageListActivity extends ListActivity
   {
     String[] from =
         new String[] {
-            MIABSQLiteHelper.COLUMN_HEAD,
+            MIABSQLiteHelper.COLUMN_MESSAGE,
+            MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP,
             MIABSQLiteHelper.COLUMN_ID,
             MIABSQLiteHelper.COLUMN_NOT_READ };
-    // Fields on the UI to which we map
-    int[] to = new int[] { R.id.label };
+    int[] to = new int[] { R.id.bottleRowHeader, R.id.bottleRowDate };
+
     adapter = new SimpleCursorAdapter( this, R.layout.miab_row, null, from, to, 0 );
     adapter.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
       public boolean setViewValue( View view, Cursor cursor, int columnIndex )
       {
-        if( view.getId() == R.id.label ) {
-          int isNotRead =
-              cursor.getInt( cursor
-                  .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_NOT_READ ) );
+        if( view.getId() == R.id.bottleRowHeader ) {
           TextView tv = (TextView)view;
-          if( isNotRead != 0 ) {
-            tv.setTypeface( null, Typeface.BOLD );
-          } else {
-            tv.setTypeface( null, Typeface.NORMAL );
-          }
-          tv.setText( cursor.getString( columnIndex ) );
+          tv.setTypeface( null, getTypeFaceStyle( cursor ) );
+          String message = NotificationHelper_v2.createMessageHead( cursor.getString( columnIndex ) );
+          tv.setText( message );
+        } else if( view.getId() == R.id.bottleRowDate ) {
+          TextView tv = (TextView)view;
+          tv.setTypeface( null, getTypeFaceStyle( cursor ) );
+          tv.setText( getString( R.string.msgMessageFound ) + " " +
+              DateFormat.getDateFormat( getApplicationContext() ).
+                format( new java.util.Date( cursor.getLong( columnIndex ) ) ) );
         }
         return true;
       }
@@ -153,8 +156,9 @@ public class MessageListActivity extends ListActivity
     String[] projection =
         {
             MIABSQLiteHelper.COLUMN_ID,
-            MIABSQLiteHelper.COLUMN_HEAD,
-            MIABSQLiteHelper.COLUMN_NOT_READ };
+            MIABSQLiteHelper.COLUMN_MESSAGE,
+            MIABSQLiteHelper.COLUMN_NOT_READ,
+            MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP };
     CursorLoader cursorLoader =
         new CursorLoader(
             this,
@@ -177,5 +181,20 @@ public class MessageListActivity extends ListActivity
   {
     // data is not available anymore, delete reference
     adapter.swapCursor( null );
+  }
+
+  private int getTypeFaceStyle( Cursor cursor )
+  {
+    if( isNewBottle( cursor ) ) {
+      return Typeface.BOLD;
+    } else {
+      return Typeface.NORMAL;
+    }
+  }
+
+  private boolean isNewBottle( Cursor cursor )
+  {
+    return cursor.getInt( cursor
+            .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_NOT_READ ) ) != 0;
   }
 }

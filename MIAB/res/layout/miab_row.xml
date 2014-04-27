@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="30dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/icon_main" >
-    </ImageView>
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/bottleRowHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:lines="1"
-        android:text="@+id/TextView01"
-        android:textSize="24sp" 
-        >
+        style = "@style/messageFont" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/bottleRowDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="25dp"
+        android:lines="1"
+        android:text="@string/action_settings"
+        style = "@style/messageDataFont" >
     </TextView>
 
 </LinearLayout> 

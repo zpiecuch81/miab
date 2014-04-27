@@ -217,10 +217,11 @@ containing a value of this type.
         public static final int rounded=0x7f020025;
     }
     public static final class id {
-        public static final int TextView01=0x7f060014;
         public static final int aboutInfo=0x7f060006;
-        public static final int action_about=0x7f060016;
-        public static final int action_scanning=0x7f060015;
+        public static final int action_about=0x7f060015;
+        public static final int action_scanning=0x7f060014;
+        public static final int bottleRowDate=0x7f060013;
+        public static final int bottleRowHeader=0x7f060012;
         public static final int buttonMessageReady=0x7f060009;
         public static final int button_digMsg=0x7f06000c;
         public static final int button_foundMsg=0x7f06000e;
@@ -231,8 +232,6 @@ containing a value of this type.
         public static final int editMessageText=0x7f060008;
         public static final int emptyText=0x01010000;
         public static final int hybrid=0x7f060004;
-        public static final int icon=0x7f060012;
-        public static final int label=0x7f060013;
         public static final int logoImage=0x7f060005;
         public static final int message_details=0x7f060011;
         public static final int message_view=0x7f060010;

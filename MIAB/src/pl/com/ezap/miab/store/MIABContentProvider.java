@@ -190,7 +190,6 @@ public class MIABContentProvider extends ContentProvider
     String[] available =
         {
             MIABSQLiteHelper.COLUMN_MESSAGE,
-            MIABSQLiteHelper.COLUMN_HEAD,
             MIABSQLiteHelper.COLUMN_MESSAGE_FLAG,
             MIABSQLiteHelper.COLUMN_DROP_TIME_STAMP,
             MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP,

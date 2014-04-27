@@ -12,7 +12,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
 {
   public static final String TABLE_MIABS = "miabs";
   public static final String COLUMN_ID = "_id";
-  public static final String COLUMN_HEAD = "head";
   public static final String COLUMN_NOT_READ = "notRead";
   public static final String COLUMN_MESSAGE = "message";
   public static final String COLUMN_MESSAGE_FLAG = "flags";
@@ -28,7 +27,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
   private static final String DATABASE_CREATE = "create table "
       + TABLE_MIABS + "("
       + COLUMN_ID + " integer primary key autoincrement, "
-      + COLUMN_HEAD + " text not null, "
       + COLUMN_NOT_READ + " int not null, "
       + COLUMN_MESSAGE + " text not null, "
       + COLUMN_MESSAGE_FLAG + " int not null, "
@@ -73,7 +71,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
             ? MIAB_FLAG_WAS_FLOWING
             : MIAB_FLAG_DEFAULT;
     ContentValues values = new ContentValues();
-    values.put( MIABSQLiteHelper.COLUMN_HEAD, createHead( foundDate, message ) );
     values.put( MIABSQLiteHelper.COLUMN_MESSAGE, message );
     values.put( MIABSQLiteHelper.COLUMN_DROP_TIME_STAMP, dropTimeStamp );
     values.put( MIABSQLiteHelper.COLUMN_FOUND_TIME_STAMP, foundDate );
@@ -110,18 +107,6 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
           MIABSQLiteHelper.class.getName(),
           "Exception while storing message: " + e.getMessage() );
     }
-  }
-
-  private String createHead( long date, String message )
-  {
-    final int MAX_HEAD_MESSAGE_PART = 20;
-    int end =
-        message.length() <= MAX_HEAD_MESSAGE_PART
-            ? message.length() - 1
-            : MAX_HEAD_MESSAGE_PART;
-    int beforeSpaceEnd = message.trim().lastIndexOf( ' ', end );
-    return new java.util.Date( date ).toString()
-        + ", " + message.substring( 0, beforeSpaceEnd == -1 ? end : beforeSpaceEnd ) + "...";
   }
 
   public void recreateTable()
