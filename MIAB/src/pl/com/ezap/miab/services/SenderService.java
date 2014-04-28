@@ -4,17 +4,13 @@ package pl.com.ezap.miab.services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
-import com.google.api.client.json.jackson.JacksonFactory;
-import pl.com.ezap.miab.CloudEndpointUtils;
 import pl.com.ezap.miab.R;
-import pl.com.ezap.miab.miabendpoint.Miabendpoint;
-import pl.com.ezap.miab.miabendpoint.model.GeoPt;
-import pl.com.ezap.miab.miabendpoint.model.MessageV1;
+import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
+import pl.com.ezap.miab.messagev1endpoint.model.GeoPt;
+import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
+import pl.com.ezap.miab.shared.MessageV1EndPoint;
 import pl.com.ezap.miab.shared.NotificationHelper;
 import android.app.Service;
 import android.content.Context;
@@ -44,18 +40,9 @@ public class SenderService extends Service
     @Override
     protected Long doInBackground( MessageV1... miabMsg )
     {
-      Miabendpoint.Builder endpointBuilder =
-          new Miabendpoint.Builder(
-              AndroidHttp.newCompatibleTransport(),
-              new JacksonFactory(),
-              new HttpRequestInitializer() {
-                public void initialize( HttpRequest httpRequest )
-                {}
-              } );
-      endpointBuilder.setApplicationName( "message-in-bottle" );
-      Miabendpoint endpoint = CloudEndpointUtils.updateBuilder( endpointBuilder ).build();
+      Messagev1endpoint endpoint = MessageV1EndPoint.get();
       try {
-        endpoint.insertMIAB( miabMsg[ 0 ] ).execute();
+        endpoint.insertMessageV1( miabMsg[ 0 ] ).execute();
       }
       catch( IOException e ) {
         e.printStackTrace();
