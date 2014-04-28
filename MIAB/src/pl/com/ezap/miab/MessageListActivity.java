@@ -108,6 +108,7 @@ public class MessageListActivity extends ListActivity
 
   private void fillData()
   {
+    showEmptyText( View.VISIBLE );
     String[] from =
         new String[] {
             MIABSQLiteHelper.COLUMN_MESSAGE,
@@ -120,6 +121,7 @@ public class MessageListActivity extends ListActivity
     adapter.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
       public boolean setViewValue( View view, Cursor cursor, int columnIndex )
       {
+        showEmptyText( View.INVISIBLE );
         if( view.getId() == R.id.bottleRowHeader ) {
           TextView tv = (TextView)view;
           tv.setTypeface( null, getTypeFaceStyle( cursor ) );
@@ -197,5 +199,10 @@ public class MessageListActivity extends ListActivity
   {
     return cursor.getInt( cursor
             .getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_NOT_READ ) ) != 0;
+  }
+
+  private void showEmptyText( int show )
+  {
+    findViewById( R.id.emptyText ).setVisibility( show );
   }
 }
