@@ -8,32 +8,26 @@ import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
 import pl.com.ezap.miab.messagev1endpoint.model.GeoPt;
 import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
+import pl.com.ezap.miab.shared.GPSHelper;
 import pl.com.ezap.miab.shared.GeoIndex;
-import pl.com.ezap.miab.shared.LocationHelper;
 import pl.com.ezap.miab.shared.MessageV1EndPoint;
 import pl.com.ezap.miab.shared.NotificationHelper;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 public class SenderService extends Service
+    implements GPSHelper.GPSListener
 {
   final static public String MESSAGE_KEY = "pl.com.ezap.miab.services.Message2Send";
   final static public String IS_HIDDEN_KEY = "pl.com.ezap.miab.services.IsHidden";
   final static public String IS_FLOWING_KEY = "pl.com.ezap.miab.services.IsFlowing";
   private ArrayList<MessageV1> messages2send;
-  private LocationManager locationManager;
-  private LocationListener locationListener;
+  private GPSHelper gpsHelper;
   private NotificationHelper notificationHelper;
-  private int maxGPSFoundTrials;
-  private boolean isSending;
 
   private class SendMessageTask extends AsyncTask<MessageV1, Integer, Long>
   {
@@ -58,7 +52,11 @@ public class SenderService extends Service
       if( result == 0 ) {
         messages2send.remove( 0 );
       }
-      isSending = false;
+      if( messages2send.isEmpty() ) {
+        finishService();
+      } else {
+        gpsHelper.start();
+      }
     }
   }
 
@@ -66,9 +64,7 @@ public class SenderService extends Service
   public void onCreate()
   {
     super.onCreate();
-    locationManager = null;
-    locationListener = null;
-    isSending = false;
+    gpsHelper = null;
     messages2send = new ArrayList<MessageV1>();
   }
 
@@ -90,6 +86,19 @@ public class SenderService extends Service
 
     startSendingBottles();
     return START_STICKY;
+  }
+
+
+  @Override
+  public void onLocationFound( Location foundLocation )
+  {
+    Log.d( "SenderService", "onLocationFound called, location = " + foundLocation.toString() );
+    sendNextMessage( foundLocation );
+  }
+
+  @Override
+  public void onGPSFailure()
+  {
   }
 
   private MessageV1 intent2message( Intent intent ){
@@ -122,72 +131,29 @@ public class SenderService extends Service
 
   private void startSendingBottles()
   {
-    if( locationManager != null ) {
+    if( gpsHelper != null ) {
       return; // already started
     }
 
-    maxGPSFoundTrials = 5;
-    locationListener = new LocationListener() {
-      @Override
-      public void onLocationChanged( Location location )
-      {
-        if( LocationHelper.isAccuracyEnough( location )
-            || --maxGPSFoundTrials < 0 ) {
-          sendNextMessage( location );
-          maxGPSFoundTrials = 5;
-        }
-      }
-
-      @Override
-      public void onProviderDisabled( String provider )
-      {
-        //if( provider.equals( LocationManager.GPS_PROVIDER ) ) {}
-      }
-
-      @Override
-      public void onProviderEnabled( String provider )
-      {
-        //if( provider.equals( LocationManager.GPS_PROVIDER ) ) {}
-      }
-
-      @Override
-      public void onStatusChanged( String provider, int status, Bundle extras )
-      {
-//        if( provider.equals( LocationManager.GPS_PROVIDER ) ) {
-//          switch( status ) {
-//            case LocationProvider.OUT_OF_SERVICE:
-//              break;
-//            case LocationProvider.TEMPORARILY_UNAVAILABLE:
-//              break;
-//            case LocationProvider.AVAILABLE:
-//              break;
-//          }
-//        }
-      }
-    };
+    gpsHelper = new GPSHelper( 
+        this.getApplication().getApplicationContext(),
+        this,
+        10000,
+        3 );
+    gpsHelper.start();
 
     notificationHelper = new NotificationHelper( this );
     notificationHelper.gpsSearchingStarted( getSendText( messages2send.get( 0 ) ) );
 
-    locationManager =
-        (LocationManager)this.getApplicationContext().getSystemService( Context.LOCATION_SERVICE );
-    locationManager.requestLocationUpdates(
-        LocationManager.GPS_PROVIDER,
-        100,
-        0,
-        locationListener );
   }
 
   private void sendNextMessage( Location location )
   {
-    if( isSending ) {
-      return;
-    }
+    gpsHelper.stop();
     if( messages2send.isEmpty() ) {
       finishService();
       return;
     }
-    isSending = true;
     addGeoData( messages2send.get( 0 ), location );
     new SendMessageTask().execute( messages2send.get( 0 ) );
   }
@@ -198,10 +164,10 @@ public class SenderService extends Service
     if( notificationHelper != null ) {
       notificationHelper.sendingFinished( getString( R.string.msgSendingDone ) );
     }
-    if( locationManager != null && locationListener != null ) {
-      locationManager.removeUpdates( locationListener );
+    if( gpsHelper != null ) {
+      gpsHelper.stop();
+      gpsHelper = null;
     }
-    locationManager = null;
     stopSelf();
   }
 
