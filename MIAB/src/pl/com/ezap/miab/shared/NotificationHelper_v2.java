@@ -154,7 +154,7 @@ public class NotificationHelper_v2
   {
     NotificationCompat.Builder notificationBuilder =
       new NotificationCompat.Builder( context )
-        .setSmallIcon( android.R.drawable.ic_dialog_email )
+        .setSmallIcon( R.drawable.ic_stat_notify_searching )
         .setLargeIcon( largeIcon )
         .setContentTitle( title )
         .setContentText( message )
