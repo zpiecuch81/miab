@@ -11,7 +11,7 @@ import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GPSHelper;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.MessageV1EndPoint;
-import pl.com.ezap.miab.shared.NotificationHelper;
+import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
@@ -27,7 +27,7 @@ public class SenderService extends Service
   final static public String IS_FLOWING_KEY = "pl.com.ezap.miab.services.IsFlowing";
   private ArrayList<MessageV1> messages2send;
   private GPSHelper gpsHelper;
-  private NotificationHelper notificationHelper;
+  private NotificationHelper_v2 notificationHelper;
 
   private class SendMessageTask extends AsyncTask<MessageV1, Integer, Long>
   {
@@ -142,8 +142,11 @@ public class SenderService extends Service
         3 );
     gpsHelper.start();
 
-    notificationHelper = new NotificationHelper( this );
-    notificationHelper.gpsSearchingStarted( getSendText( messages2send.get( 0 ) ) );
+    notificationHelper = new NotificationHelper_v2(
+        getApplicationContext(),
+        NotificationHelper_v2.SENDING_SERVICE_NOTIFICATION_ID,
+        getSendText( messages2send.get( 0 ) ) );
+    notificationHelper.createUpdateNotification( getString( R.string.msgAcquireCurrentLocation ) );
 
   }
 
@@ -162,7 +165,7 @@ public class SenderService extends Service
   {
     Log.i( "SenderService", "stopping service" );
     if( notificationHelper != null ) {
-      notificationHelper.sendingFinished( getString( R.string.msgSendingDone ) );
+      notificationHelper.finalNotification( getString( R.string.msgSendingDone ) );
     }
     if( gpsHelper != null ) {
       gpsHelper.stop();
@@ -173,7 +176,7 @@ public class SenderService extends Service
 
   private void addGeoData( MessageV1 miab, Location location )
   {
-    notificationHelper.messageSending( getSendText( miab ) );
+    notificationHelper.createUpdateNotification( getSendText( miab ) );
     GeoPt geoPt = new GeoPt();
     if( miab.getFlowing() ) {
       geoPt.setLatitude( (float)location.getLatitude() + miab.getDeltaLocation().getLatitude() );
@@ -192,7 +195,7 @@ public class SenderService extends Service
     int displayMessageID =
         message.getHidden()
             ? R.string.msgBurryingMessage : message .getFlowing()
-            ? R.string.msgThrowingMessage : R.string.msgLeavingMessage;
+                ? R.string.msgThrowingMessage : R.string.msgLeavingMessage;
     return getString( displayMessageID );
   }
 
