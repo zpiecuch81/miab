@@ -59,27 +59,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "messagev1endpoint.removeMessageV1" : {
-      "path" : "messagev1/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "messagev1endpoint.listMessageV1" : {
       "path" : "messagev1/{geoIndex}/{isHidden}",
       "httpMethod" : "GET",
@@ -111,6 +90,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "messagev1endpoint.removeMessageV1" : {
+      "path" : "messagev1/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "messagev1endpoint.getMessageV1" : {
@@ -221,12 +221,12 @@
           "$ref" : "MessageV1"
         }
       },
-      "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1" : {
-      },
       "pl.com.ezap.miab.MessageV1Endpoint.listMessageV1" : {
         "response" : {
           "$ref" : "CollectionResponse_MessageV1"
         }
+      },
+      "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1" : {
       },
       "pl.com.ezap.miab.MessageV1Endpoint.getMessageV1" : {
         "response" : {

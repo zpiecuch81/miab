@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/messagev1endpoint/v1/20140424194543/java/1.16.0-rc/com.pl-messagev1endpoint-v1-20140424194543-java-1.16.0-rc-sources.jar", 
-      "path": "com.pl-messagev1endpoint-v1-20140424194543-java-1.16.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/messagev1endpoint/v1/20140502212553/java/1.16.0-rc/com.pl-messagev1endpoint-v1-20140502212553-java-1.16.0-rc-sources.jar", 
+      "path": "com.pl-messagev1endpoint-v1-20140502212553-java-1.16.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-04-24 19:45"
+      "timestamp": "2014-05-02 21:25"
     }, 
     {
-      "path": "com.pl-messagev1endpoint-v1-20140424194543-java-1.16.0-rc.jar.properties", 
+      "path": "com.pl-messagev1endpoint-v1-20140502212553-java-1.16.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -702,5 +702,5 @@
   "packagePath": "ezap.miab", 
   "language_version": "1.16.0-rc", 
   "id": "messagev1endpoint:v1", 
-  "revision": 20140424194543
+  "revision": 20140502212553
 }
