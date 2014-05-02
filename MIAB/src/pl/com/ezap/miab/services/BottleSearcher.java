@@ -4,12 +4,13 @@ package pl.com.ezap.miab.services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
 import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.LocationHelper;
 import pl.com.ezap.miab.shared.MessageV1EndPoint;
-import pl.com.ezap.miab.shared.NotificationHelper;
+import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.content.Context;
 import android.location.Location;
@@ -56,7 +57,11 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
   protected void onPostExecute( List<DBMessage> result )
   {
     if( !result.isEmpty() ) {
-      new NotificationHelper( context ).updateFoundBottles();
+      new NotificationHelper_v2(
+          context,
+          NotificationHelper_v2.SEARCH_SERVICE_NOTIFICATION_ID,
+          context.getString( R.string.msgNotificationFoundBottleTitle ) ).
+              updateFoundBottles( true );
     }
   }
 

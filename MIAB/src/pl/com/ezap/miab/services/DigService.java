@@ -98,7 +98,7 @@ public class DigService extends Service
   {
     Log.d( "DigService", "onGrabFinished called, foundBottlesNumber = " + foundBottlesNumber );
     if( foundBottlesNumber > 0 ) {
-      notifications.updateFoundBottles();
+      notifications.updateFoundBottles( true );
     } else {
       notifications.finalNotification( getString( R.string.msgNotificationNoBottleFound ) );
     }

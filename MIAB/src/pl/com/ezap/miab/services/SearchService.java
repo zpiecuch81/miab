@@ -8,6 +8,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,6 +27,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
   private LocationManager locationManager;
   private LocationListener locationListener;
   private NetworkBroadcastReceiver networkReceiver;
+  private Bitmap largeIcon;
   private int maxGPSFoundTrials;
 
   @Override
@@ -34,6 +37,8 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     locationManager = null;
     locationListener = null;
     maxGPSFoundTrials = 5;
+    largeIcon = BitmapFactory.decodeResource(
+        getApplicationContext().getResources(), R.drawable.icon_main );
     showServiceIcon();
   }
 
@@ -184,6 +189,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
     NotificationCompat.Builder notificationBuilder =
         new NotificationCompat.Builder( this.getApplicationContext() )
           .setSmallIcon( R.drawable.ic_stat_notify_searching )
+          .setLargeIcon( largeIcon )
           .setContentTitle( getString( R.string.app_name ) )
           .setContentText( getString( R.string.msgNotificationSearchingBottles ) )
           .setAutoCancel( false )

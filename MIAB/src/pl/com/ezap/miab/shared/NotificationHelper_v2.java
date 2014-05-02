@@ -5,6 +5,7 @@ import pl.com.ezap.miab.MessageViewActivity;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -21,7 +22,7 @@ public class NotificationHelper_v2
   public static int DIG_SERVICE_NOTIFICATION_ID = 102;
   public static int SEARCH_SERVICE_NOTIFICATION_ID = 103;
   public static int SENDING_SERVICE_NOTIFICATION_ID = 104;
-  private static int FOUND_BOTTLES_NOTIFICAITON_ID = 105;
+  public static int FOUND_BOTTLES_NOTIFICAITON_ID = 105;
 
   private int notificationID;
   private Context context;
@@ -29,6 +30,7 @@ public class NotificationHelper_v2
   private String title;
   private String message;
   private int bottlesCount;
+  private int defaultVibrateAndAlarm;
   private Boolean autoCancel;
   private Boolean ongoing;
   private Boolean progress;
@@ -49,6 +51,7 @@ public class NotificationHelper_v2
     this.title = title;
     largeIcon = BitmapFactory.decodeResource( context.getResources(), R.drawable.icon_main );
     bottlesCount = 0;
+    defaultVibrateAndAlarm = 0;
     autoCancel = false;
     ongoing = true;
     progress = true;
@@ -80,13 +83,14 @@ public class NotificationHelper_v2
     notifyMgr.cancel( notificationID );
   }
 
-  public void updateFoundBottles()
+  public void updateFoundBottles( boolean alarm )
   {
     Log.d( getClass().getName(), "updateFoundBottles for ID = " + notificationID );
     closeNotification();
     Cursor cursor = getUnreadMessages();
     bottlesCount = cursor.getCount();
     if( bottlesCount == 0 ) {
+      cursor.close();
       return;
     }
     cursor.moveToFirst();
@@ -95,6 +99,7 @@ public class NotificationHelper_v2
     cursor.close();
 
     notificationID = FOUND_BOTTLES_NOTIFICAITON_ID;
+    defaultVibrateAndAlarm = alarm ? Notification.DEFAULT_ALL : 0;
     autoCancel = true;
     progress = false;
     ongoing = false;
@@ -161,7 +166,8 @@ public class NotificationHelper_v2
         .setWhen( new java.util.Date().getTime() )
         .setAutoCancel( autoCancel )
         .setOngoing( ongoing )
-        .setProgress( 0, 0, progress );
+        .setProgress( 0, 0, progress )
+        .setDefaults( defaultVibrateAndAlarm );
     if( pendingIntent != null ) {
       notificationBuilder.setContentIntent( pendingIntent );
     }

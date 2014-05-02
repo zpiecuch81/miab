@@ -2,6 +2,7 @@
 package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
+import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import pl.com.ezap.miab.store.MIABContentProvider;
 import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.app.ActionBar;
@@ -14,9 +15,6 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/*
- * TodoDetailActivity allows to enter a new todo item or to change an existing
- */
 public class MessageViewActivity extends Activity
 {
   private GeneralMenuHelper menuHelper;
@@ -87,10 +85,20 @@ public class MessageViewActivity extends Activity
       cursor.moveToFirst();
       new MIABSQLiteHelper( this ).setMessageRead(
           cursor.getInt( cursor.getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_ID ) ) );
+      updateNotification();
       setBackground( cursor );
       fillData( cursor );
       cursor.close();
     }
+  }
+
+  private void updateNotification()
+  {
+    new NotificationHelper_v2(
+      getApplicationContext(),
+      NotificationHelper_v2.FOUND_BOTTLES_NOTIFICAITON_ID,
+      getApplicationContext().getString( R.string.msgNotificationFoundBottleTitle ) ).
+          updateFoundBottles( false );
   }
 
   private Cursor getCursorToMIAB( Uri uri )
