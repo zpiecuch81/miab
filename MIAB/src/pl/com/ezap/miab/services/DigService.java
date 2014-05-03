@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
 import android.os.IBinder;
-import android.util.Log;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.shared.BottleGrabber;
 import pl.com.ezap.miab.shared.GPSHelper;
@@ -49,8 +48,6 @@ public class DigService extends Service
       return START_NOT_STICKY;
     }
 
-    Log.d( "DigService", "onStartCommand called" );
-
     notifications = new NotificationHelper_v2(
         getApplicationContext(),
         NotificationHelper_v2.DIG_SERVICE_NOTIFICATION_ID,
@@ -76,7 +73,6 @@ public class DigService extends Service
   @Override
   public void onLocationFound( Location foundLocation )
   {
-    Log.d( "DigService", "onLocationFound called, location = " + foundLocation.toString() );
     notifications.createUpdateNotification( getString( R.string.msgNotificationSearchingHidden ) );
     if( bottleGrabber == null ) {
       bottleGrabber = new BottleGrabber( this.getApplication().getApplicationContext(), this );
@@ -88,7 +84,6 @@ public class DigService extends Service
   @Override
   public void onGPSFailure()
   {
-    Log.d( "DigService", "onGPSFailure called" );
     notifications.finalNotification( getString( R.string.msgNotificationGPSError ) );
     stopSelf();
   }
@@ -96,7 +91,6 @@ public class DigService extends Service
   @Override
   public void onGrabFinished( int foundBottlesNumber )
   {
-    Log.d( "DigService", "onGrabFinished called, foundBottlesNumber = " + foundBottlesNumber );
     if( foundBottlesNumber > 0 ) {
       notifications.updateFoundBottles( true );
     } else {
@@ -108,7 +102,6 @@ public class DigService extends Service
   @Override
   public void onGrabFailure()
   {
-    Log.d( "DigService", "onGrabFailure called" );
     notifications.finalNotification( getString( R.string.msgNotificationGrabError ) );
     stopSelf();
   }
