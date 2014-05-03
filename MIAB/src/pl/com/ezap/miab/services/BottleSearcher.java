@@ -25,10 +25,12 @@ class DBMessage
 
 public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
 {
+  private long CACHE_EXPIRATION_TIME = 600 * 1000;
   private class MessageCache
   {
     public List<MessageV1> miabs;
     public long geoIndex;
+    public long timeStamp;
   }
 
   public BottleSearcher( Location location2search, Context context, boolean doDig )
@@ -75,6 +77,7 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     if( !doDig ) {
       cache.miabs = miabs;
       cache.geoIndex = geoIndex;
+      cache.timeStamp = new java.util.Date().getTime();
     }
     return miabs;
   }
@@ -84,7 +87,14 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     if( doDig ) {
       return false;
     }
-    return ( cache != null && cache.geoIndex == geoIndex );
+    if( cache == null || cache.geoIndex != geoIndex ) {
+      return false;
+    }
+    long currentTime = new java.util.Date().getTime();
+    if( currentTime - cache.timeStamp < CACHE_EXPIRATION_TIME ) {
+      return false;
+    }
+    return true;
   }
 
   private List<MessageV1> getFromDataStore()
