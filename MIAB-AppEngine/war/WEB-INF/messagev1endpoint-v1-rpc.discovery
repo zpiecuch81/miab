@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/0GjZ-9WirZfPsSJXAeyH6TYkCZU\"",
+ "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/UVqim0ANJ_H75lHTqB4fslTqTz4\"",
  "discoveryVersion": "v1",
  "id": "messagev1endpoint:v1",
  "name": "messagev1endpoint",
@@ -14,8 +14,8 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rpc",
- "rootUrl": "https://message-in-bottle.appspot.com/_ah/api/",
- "rpcUrl": "https://message-in-bottle.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://message-ina-bottle.appspot.com/_ah/api/",
+ "rpcUrl": "https://message-ina-bottle.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {

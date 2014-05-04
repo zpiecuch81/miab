@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/GEQbl7pigZLgOvrJ-S9QJXMunWo\"",
+ "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/aSoNs4rZ3fD9K_U5ykIR3T_CfXw\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -14,9 +14,9 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rest",
- "baseUrl": "https://message-in-bottle.appspot.com/_ah/api/miabendpoint/v1/",
+ "baseUrl": "https://message-ina-bottle.appspot.com/_ah/api/miabendpoint/v1/",
  "basePath": "/_ah/api/miabendpoint/v1/",
- "rootUrl": "https://message-in-bottle.appspot.com/_ah/api/",
+ "rootUrl": "https://message-ina-bottle.appspot.com/_ah/api/",
  "servicePath": "miabendpoint/v1/",
  "batchPath": "batch",
  "parameters": {

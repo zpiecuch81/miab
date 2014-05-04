@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://message-in-bottle.appspot.com/_ah/api",
+  "root" : "https://message-ina-bottle.appspot.com/_ah/api",
   "name" : "messagev1endpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://message-in-bottle.appspot.com/_ah/spi",
+    "bns" : "https://message-ina-bottle.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -59,6 +59,27 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "messagev1endpoint.removeMessageV1" : {
+      "path" : "messagev1/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "messagev1endpoint.listMessageV1" : {
       "path" : "messagev1/{geoIndex}/{isHidden}",
       "httpMethod" : "GET",
@@ -90,27 +111,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "messagev1endpoint.removeMessageV1" : {
-      "path" : "messagev1/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     },
     "messagev1endpoint.getMessageV1" : {
@@ -221,12 +221,12 @@
           "$ref" : "MessageV1"
         }
       },
+      "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1" : {
+      },
       "pl.com.ezap.miab.MessageV1Endpoint.listMessageV1" : {
         "response" : {
           "$ref" : "CollectionResponse_MessageV1"
         }
-      },
-      "pl.com.ezap.miab.MessageV1Endpoint.removeMessageV1" : {
       },
       "pl.com.ezap.miab.MessageV1Endpoint.getMessageV1" : {
         "response" : {
