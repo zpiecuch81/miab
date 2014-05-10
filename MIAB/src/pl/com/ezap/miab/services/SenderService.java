@@ -99,6 +99,7 @@ public class SenderService extends Service
   @Override
   public void onGPSFailure()
   {
+    Log.d( "SenderService", "onGPSFailure called" );
   }
 
   private MessageV1 intent2message( Intent intent ){

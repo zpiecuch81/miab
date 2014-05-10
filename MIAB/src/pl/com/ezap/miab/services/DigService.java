@@ -77,11 +77,11 @@ public class DigService extends Service
   public void onLocationFound( Location foundLocation )
   {
     Log.d( "DigService", "onLocationFound called, location = " + foundLocation.toString() );
+    gpsHelper.stop();
     notifications.createUpdateNotification( getString( R.string.msgNotificationSearchingHidden ) );
     if( bottleGrabber == null ) {
       bottleGrabber = new BottleGrabber( this.getApplication().getApplicationContext(), this );
     }
-    gpsHelper.stop();
     bottleGrabber.dig( foundLocation );
   }
 
