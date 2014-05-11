@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/GEQbl7pigZLgOvrJ-S9QJXMunWo\"",
+ "etag": "\"ADiYQGKhdYR9rpbhIFHih-UBYRs/aSoNs4rZ3fD9K_U5ykIR3T_CfXw\"",
  "discoveryVersion": "v1",
  "id": "miabendpoint:v1",
  "name": "miabendpoint",
@@ -14,8 +14,8 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rpc",
- "rootUrl": "https://message-in-bottle.appspot.com/_ah/api/",
- "rpcUrl": "https://message-in-bottle.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://message-ina-bottle.appspot.com/_ah/api/",
+ "rpcUrl": "https://message-ina-bottle.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {
