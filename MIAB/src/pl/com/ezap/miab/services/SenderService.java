@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.util.Log;
 
 public class SenderService extends Service
     implements GPSHelper.GPSListener
@@ -48,7 +47,6 @@ public class SenderService extends Service
     @Override
     protected void onPostExecute( Long result )
     {
-      Log.d( "SendMessageTask", "onPostExecute, result " + result );
       if( result == 0 ) {
         messages2send.remove( 0 );
       }
@@ -81,7 +79,6 @@ public class SenderService extends Service
       return START_STICKY;
     }
     MessageV1 miabMessage = intent2message( intent );
-    Log.i( "SenderService", "Adding message to queue" );
     messages2send.add( miabMessage );
 
     startSendingBottles();
@@ -92,14 +89,12 @@ public class SenderService extends Service
   @Override
   public void onLocationFound( Location foundLocation )
   {
-    Log.d( "SenderService", "onLocationFound called, location = " + foundLocation.toString() );
     sendNextMessage( foundLocation );
   }
 
   @Override
   public void onGPSFailure()
   {
-    Log.d( "SenderService", "onGPSFailure called" );
   }
 
   private MessageV1 intent2message( Intent intent ){
@@ -164,7 +159,6 @@ public class SenderService extends Service
 
   private void finishService()
   {
-    Log.i( "SenderService", "stopping service" );
     if( notificationHelper != null ) {
       notificationHelper.finalNotification( getString( R.string.msgSendingDone ) );
     }

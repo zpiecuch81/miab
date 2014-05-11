@@ -15,7 +15,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 public class NotificationHelper_v2
 {
@@ -60,14 +59,12 @@ public class NotificationHelper_v2
 
   public void createUpdateNotification( String message )
   {
-    Log.d( getClass().getName(), "createUpdateNotification for ID = " + notificationID );
     this.message = message;
     showNotification();
   }
 
   public void finalNotification( String message )
   {
-    Log.d( getClass().getName(), "finalNotification for ID = " + notificationID );
     this.message = message;
     autoCancel = true;
     progress = false;
@@ -77,7 +74,6 @@ public class NotificationHelper_v2
 
   public void closeNotification()
   {
-    Log.d( getClass().getName(), "closeNotification for ID = " + notificationID );
     NotificationManager notifyMgr =
         (NotificationManager)context.getSystemService( Context.NOTIFICATION_SERVICE );
     notifyMgr.cancel( notificationID );
@@ -85,7 +81,6 @@ public class NotificationHelper_v2
 
   public void updateFoundBottles( boolean alarm )
   {
-    Log.d( getClass().getName(), "updateFoundBottles for ID = " + notificationID );
     closeNotification();
     Cursor cursor = getUnreadMessages();
     bottlesCount = cursor.getCount();

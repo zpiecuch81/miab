@@ -9,7 +9,6 @@ import pl.com.ezap.miab.store.MIABSQLiteHelper;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class BottleGrabber
 {
@@ -120,10 +119,6 @@ public class BottleGrabber
         if( bottles == null ) {
           bottles = new ArrayList<MessageV1>();
         }
-        Log.d( "BottleGrabber", "Received list of "
-            + bottles.size()
-            + " MIABs with index "
-            + geoIndex );
         return bottles;
       }
 
@@ -148,13 +143,9 @@ public class BottleGrabber
               MessageV1 gotBottle = endpoint.getMessageV1( miab.getId() ).execute();
               if( gotBottle != null ) {
                 downloadedBottles.add( gotBottle );
-                Log.d(
-                    "BottleGrabber",
-                    "Downloaded MessageV1, id =  " + gotBottle.getId() );
               }
             }
             catch( IOException e ) {
-              Log.e( "BottleGrabber", e.getMessage() );
             }
           }
         }
@@ -176,10 +167,6 @@ public class BottleGrabber
           if( storeID != -1 ) {
             storedBottles.add( bottle );
           }
-          Log.d( "BottleGrabber", "Message id "
-              + bottle.getId()
-              + ", store ID = "
-              + storeID );
         }
         return storedBottles;
       }
@@ -196,7 +183,6 @@ public class BottleGrabber
             endpoint.removeMessageV1( bottle.getId() ).execute();
           }
           catch( IOException e ) {
-            Log.e( "BottleGrabber", e.getMessage() );
           }
           // clean also from cache
           if( bottlesCache != null ) {

@@ -18,7 +18,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 public class SearchService extends Service implements NetworkBroadcastReceiver.NetworkStateListener
 {
@@ -59,7 +58,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
   @Override
   public int onStartCommand( Intent intent, int flags, int startId )
   {
-    Log.i( "MIABService", "onStartCommand called" );
     if( locationManager != null ) {
       return START_STICKY;
     }
@@ -80,14 +78,12 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
   @Override
   public void onNetwoorkAvailable()
   {
-    Log.i( "MIABService", "onNetwoorkAvailable" );
     startGPSListening();
   }
 
   @Override
   public void onNetwoorkUnavailable()
   {
-    Log.i( "MIABService", "onNetwoorkUnavailable" );
     stopGPSListening();
   }
 
@@ -120,7 +116,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
         @Override
         public void onLocationChanged( Location location )
         {
-          Log.i( "MIABService", "onLocationChanged" );
           if( LocationHelper.isAccuracyEnough( location ) || --maxGPSFoundTrials < 0 ) {
             searchMessage( location );
             maxGPSFoundTrials = 3;
@@ -131,7 +126,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
         public void onProviderDisabled( String provider )
         {
           if( provider.equals( LocationManager.GPS_PROVIDER ) ) {
-            Log.i( "MIABService", "onProviderDisabled" );
           }
         }
 
@@ -139,7 +133,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
         public void onProviderEnabled( String provider )
         {
           if( provider.equals( LocationManager.GPS_PROVIDER ) ) {
-            Log.i( "MIABService", "onProviderEnabled" );
           }
         }
 
@@ -151,19 +144,10 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
           if( provider.equals( LocationManager.GPS_PROVIDER ) ) {
             switch( status ) {
               case LocationProvider.OUT_OF_SERVICE:
-                Log.i(
-                    "MIABService",
-                    "onStatusChanged: LocationProvider.OUT_OF_SERVICE" );
                 break;
               case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                Log.i(
-                    "MIABService",
-                    "onStatusChanged: LocationProvider.TEMPORARILY_UNAVAILABLE" );
                 break;
               case LocationProvider.AVAILABLE:
-                Log.i(
-                    "MIABService",
-                    "onStatusChanged: LocationProvider.AVAILABLE" );
                 break;
             }
           }
@@ -179,8 +163,6 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
 
   private void searchMessage( Location location )
   {
-    Log.i( "MIABService", "searchMessage on location "
-        + location.getLatitude() + "," + location.getLongitude() );
     BottleSearcher.searchAtLocation( location, this.getApplicationContext() );
   }
 
