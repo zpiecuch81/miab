@@ -5,3 +5,5 @@ MIAB/gen/com*
 MIAB/gen/pl*
 MIAB_test/bin/*
 MIAB-AppEngine/bin/*
+MIAB-AppEngine/war/WEB-INF/classes/*
+!MIAB-AppEngine/war/WEB-INF/classes/.*
