@@ -1,4 +1,7 @@
 .metadata/*
 MIAB/bin/*
+MIAB/endpoint-libs/lib*
+MIAB/gen/com*
+MIAB/gen/pl*
 MIAB_test/bin/*
 MIAB-AppEngine/bin/*
