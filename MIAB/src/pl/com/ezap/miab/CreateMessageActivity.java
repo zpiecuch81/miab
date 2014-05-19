@@ -3,9 +3,6 @@ package pl.com.ezap.miab;
 
 import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
-import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -110,7 +107,7 @@ public class CreateMessageActivity extends Activity
 
   private void messageReady()
   {
-    if( !checkDeviceSendRequirements() )
+    if( !SenderService.isHardwareReady( this, true ) )
     {
       return;
     }
@@ -143,30 +140,6 @@ public class CreateMessageActivity extends Activity
   {
     SharedPreferences settings = getSharedPreferences( GeneralMenuHelper.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
     return settings.getString( MESSAGE_SHARED_PREF_KEY, "" );
-  }
-
-  private boolean checkDeviceSendRequirements()
-  {
-    final LocationManager manager =
-        (LocationManager)getSystemService( Context.LOCATION_SERVICE );
-    if( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-      Toast.makeText(
-          getApplicationContext(),
-          R.string.msgEnableGPSToast,
-          Toast.LENGTH_LONG ).show();
-      return false;
-    }
-    final ConnectivityManager cm =
-        (ConnectivityManager)getSystemService( Context.CONNECTIVITY_SERVICE );
-    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-    if( netInfo == null || !netInfo.isConnected() ) {
-      Toast.makeText(
-          getApplicationContext(),
-          R.string.msgEnableNetToast,
-          Toast.LENGTH_LONG ).show();
-      return false;
-    }
-    return true;
   }
 
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+//import android.location.LocationManager;
 import android.util.Log;
 
 public class MIABSQLiteHelper extends SQLiteOpenHelper
@@ -111,25 +112,25 @@ public class MIABSQLiteHelper extends SQLiteOpenHelper
 
   public void recreateTable()
   {
-    // try{
-    // getWritableDatabase().execSQL(DATABASE_DROP);
-    // getWritableDatabase().execSQL(DATABASE_CREATE);
-    // }
-    // catch(Exception e)
-    // {
-    // Log.i(MIABSQLiteHelper.class.getName(), "table didn't exists" );
-    // return;
-    // }
-    //
-    // //test data
-    // storeMessage( "first test message", 1L, false, true, new
-    // Location(LocationManager.GPS_PROVIDER) );
-    // storeMessage(
-    // "this is some quite long example of what could happen when long text was inputed to the line so stay"
-    // +
-    // " tune for what is happenenning with this text, second test massage",
-    // 1L, true, false, new Location(LocationManager.GPS_PROVIDER) );
-    // storeMessage( "third test massage", 1L, false, false, new
-    // Location(LocationManager.GPS_PROVIDER) );
+//     try{
+//     getWritableDatabase().execSQL(DATABASE_DROP);
+//     getWritableDatabase().execSQL(DATABASE_CREATE);
+//     }
+//     catch(Exception e)
+//     {
+//     Log.i(MIABSQLiteHelper.class.getName(), "table didn't exists" );
+//     return;
+//     }
+//    
+//     //test data
+//     storeMessage( "first test message", 1L, false, true, new
+//     Location(LocationManager.GPS_PROVIDER) );
+//     storeMessage(
+//     "this is some quite long example of what could happen when long text was inputed to the line so stay"
+//     +
+//     " tune for what is happenenning with this text, second test massage",
+//     1L, true, false, new Location(LocationManager.GPS_PROVIDER) );
+//     storeMessage( "third test massage", 1L, false, false, new
+//     Location(LocationManager.GPS_PROVIDER) );
   }
 }
