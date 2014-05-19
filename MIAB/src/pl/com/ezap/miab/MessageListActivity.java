@@ -1,6 +1,7 @@
 
 package pl.com.ezap.miab;
 
+import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import pl.com.ezap.miab.store.MIABContentProvider;
@@ -31,6 +32,9 @@ public class MessageListActivity extends ListActivity
 {
   private GeneralMenuHelper menuHelper;
   private static final int DELETE_ID = Menu.FIRST + 1;
+  private static final int LEAVE_ID = Menu.FIRST + 2;
+  private static final int THROW_ID = Menu.FIRST + 3;
+  private static final int HIDE_ID = Menu.FIRST + 4;
   private SimpleCursorAdapter adapter;
 
   @Override
@@ -91,6 +95,15 @@ public class MessageListActivity extends ListActivity
         getContentResolver().delete( uri, null, null );
         fillData();
         return true;
+      case LEAVE_ID:
+        leaveMessage( item, false, false );
+        return true;
+      case THROW_ID:
+        leaveMessage( item, true, false );
+        return true;
+      case HIDE_ID:
+        leaveMessage( item, false, true );
+        return true;
     }
     return super.onContextItemSelected( item );
   }
@@ -150,6 +163,9 @@ public class MessageListActivity extends ListActivity
   {
     super.onCreateContextMenu( menu, v, menuInfo );
     menu.add( 0, DELETE_ID, 0, R.string.menu_delete );
+    menu.add( 0, LEAVE_ID, 0, R.string.menu_leave );
+    menu.add( 0, THROW_ID, 0, R.string.menu_throw );
+    menu.add( 0, HIDE_ID, 0, R.string.menu_hide );
   }
 
   // creates a new loader after the initLoader () call
@@ -204,5 +220,32 @@ public class MessageListActivity extends ListActivity
   private void showEmptyText( int show )
   {
     findViewById( R.id.emptyText ).setVisibility( show );
+  }
+
+  private void leaveMessage( MenuItem item, boolean isFlowing, boolean isHidden )
+  {
+    if( SenderService.isHardwareReady( this, true ) ) {
+      AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+      Uri uri = Uri.parse( MIABContentProvider.CONTENT_URI + "/" + info.id );
+      Cursor cursor = 
+          getContentResolver().query(
+              uri, new String[]{
+                  MIABSQLiteHelper.COLUMN_ID,
+                  MIABSQLiteHelper.COLUMN_MESSAGE},
+              null, null, null );
+      if( cursor != null ) {
+        cursor.moveToFirst();
+        int index = cursor.getColumnIndexOrThrow( MIABSQLiteHelper.COLUMN_MESSAGE );
+        String message = cursor.getString( index );
+        Intent sendMessageIntent = new Intent( getApplicationContext(), SenderService.class );
+        sendMessageIntent.putExtra( SenderService.IS_FLOWING_KEY, isFlowing );
+        sendMessageIntent.putExtra( SenderService.IS_HIDDEN_KEY, isHidden );
+        sendMessageIntent.putExtra( SenderService.MESSAGE_KEY, message );
+        startService( sendMessageIntent );
+        cursor.close();
+        getContentResolver().delete( uri, null, null );
+        fillData();
+      }
+    }
   }
 }

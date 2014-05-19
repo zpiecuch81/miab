@@ -12,6 +12,9 @@
     <string name="action_about">O programie</string>
 
     <string name="menu_delete">Usuń butelkę</string>
+    <string name="menu_leave">Zostaw butelkę</string>
+    <string name="menu_throw">Rzuć butelkę</string>
+    <string name="menu_hide">Schowaj butelkę</string>
 
     <string name="button_leaveMsg">Zostaw butelkę</string>
     <string name="button_throwMsg">Rzuć butelkę</string>

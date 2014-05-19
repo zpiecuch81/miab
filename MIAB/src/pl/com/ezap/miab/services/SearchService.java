@@ -1,9 +1,11 @@
 
 package pl.com.ezap.miab.services;
 
+import pl.com.ezap.miab.MainActivity;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.shared.LocationHelper;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -168,6 +170,7 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
 
   private void showServiceIcon()
   {
+    Intent resultIntent = new Intent( this, MainActivity.class );
     NotificationCompat.Builder notificationBuilder =
         new NotificationCompat.Builder( this.getApplicationContext() )
           .setSmallIcon( R.drawable.ic_stat_notify_searching )
@@ -175,7 +178,9 @@ public class SearchService extends Service implements NetworkBroadcastReceiver.N
           .setContentTitle( getString( R.string.app_name ) )
           .setContentText( getString( R.string.msgNotificationSearchingBottles ) )
           .setAutoCancel( false )
-          .setOngoing( true );
+          .setOngoing( true )
+          .setContentIntent( PendingIntent.getActivity(
+              this, 0, resultIntent, PendingIntent.FLAG_CANCEL_CURRENT ) );
     NotificationManager notifier =
         (NotificationManager)this.getApplicationContext().
         getSystemService( Context.NOTIFICATION_SERVICE );

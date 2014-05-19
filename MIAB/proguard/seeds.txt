@@ -85,7 +85,6 @@ com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode valueOf(j
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender[] values()
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender valueOf(java.lang.String)
 com.google.android.gms.R$attr: int adSize
-com.google.android.gms.R$attr: int adSizes
 com.google.android.gms.R$attr: int adUnitId
 com.google.android.gms.R$attr: int cameraBearing
 com.google.android.gms.R$attr: int cameraTargetLat
@@ -173,10 +172,8 @@ com.google.android.gms.R$string: int common_google_play_services_update_text
 com.google.android.gms.R$string: int common_google_play_services_update_title
 com.google.android.gms.R$string: int common_signin_button_text
 com.google.android.gms.R$string: int common_signin_button_text_long
-com.google.android.gms.R$string: int location_client_powered_by_google
 com.google.android.gms.R$styleable: int[] AdsAttrs
 com.google.android.gms.R$styleable: int AdsAttrs_adSize
-com.google.android.gms.R$styleable: int AdsAttrs_adSizes
 com.google.android.gms.R$styleable: int AdsAttrs_adUnitId
 com.google.android.gms.R$styleable: int[] MapAttrs
 com.google.android.gms.R$styleable: int MapAttrs_cameraBearing
@@ -199,118 +196,17 @@ com.google.android.gms.ads.AdView: java.lang.String getAdUnitId()
 com.google.android.gms.ads.AdView: void setAdListener(com.google.android.gms.ads.AdListener)
 com.google.android.gms.ads.AdView: void setAdSize(com.google.android.gms.ads.AdSize)
 com.google.android.gms.ads.AdView: void setAdUnitId(java.lang.String)
-com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdListener getAdListener()
-com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdSize getAdSize()
-com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.AdSize[] getAdSizes()
-com.google.android.gms.ads.doubleclick.PublisherAdView: java.lang.String getAdUnitId()
-com.google.android.gms.ads.doubleclick.PublisherAdView: com.google.android.gms.ads.doubleclick.AppEventListener getAppEventListener()
-com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdListener(com.google.android.gms.ads.AdListener)
-com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdSizes(com.google.android.gms.ads.AdSize[])
-com.google.android.gms.ads.doubleclick.PublisherAdView: void setAdUnitId(java.lang.String)
-com.google.android.gms.ads.doubleclick.PublisherAdView: void setAppEventListener(com.google.android.gms.ads.doubleclick.AppEventListener)
-com.google.android.gms.ads.search.SearchAdView: com.google.android.gms.ads.AdListener getAdListener()
-com.google.android.gms.ads.search.SearchAdView: com.google.android.gms.ads.AdSize getAdSize()
-com.google.android.gms.ads.search.SearchAdView: java.lang.String getAdUnitId()
-com.google.android.gms.ads.search.SearchAdView: void setAdListener(com.google.android.gms.ads.AdListener)
-com.google.android.gms.ads.search.SearchAdView: void setAdSize(com.google.android.gms.ads.AdSize)
-com.google.android.gms.ads.search.SearchAdView: void setAdUnitId(java.lang.String)
-com.google.android.gms.analytics.s$a: com.google.android.gms.analytics.s$a[] values()
-com.google.android.gms.analytics.s$a: com.google.android.gms.analytics.s$a valueOf(java.lang.String)
-com.google.android.gms.analytics.u$a: com.google.android.gms.analytics.u$a[] values()
-com.google.android.gms.analytics.u$a: com.google.android.gms.analytics.u$a valueOf(java.lang.String)
-com.google.android.gms.cast.ApplicationMetadata
-com.google.android.gms.cast.ApplicationMetadata: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.cast.CastDevice
-com.google.android.gms.cast.CastDevice: android.os.Parcelable$Creator CREATOR
+com.google.android.gms.auth.RecoveryDecision
+com.google.android.gms.auth.RecoveryDecision: com.google.android.gms.auth.RecoveryDecisionCreator CREATOR
 com.google.android.gms.common.SignInButton: void setSize(int)
 com.google.android.gms.common.SignInButton: void setColorScheme(int)
 com.google.android.gms.common.SignInButton: void setOnClickListener(android.view.View$OnClickListener)
 com.google.android.gms.common.SignInButton: void setEnabled(boolean)
-com.google.android.gms.common.api.Status
-com.google.android.gms.common.api.Status: com.google.android.gms.common.api.StatusCreator CREATOR
-com.google.android.gms.common.data.DataHolder
-com.google.android.gms.common.data.DataHolder: com.google.android.gms.common.data.DataHolderCreator CREATOR
+com.google.android.gms.common.data.d
+com.google.android.gms.common.data.d: com.google.android.gms.common.data.e CREATOR
 com.google.android.gms.common.images.ImageManager$ImageReceiver
-com.google.android.gms.common.images.WebImage
-com.google.android.gms.common.images.WebImage: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.common.internal.safeparcel.SafeParcelable
 com.google.android.gms.common.internal.safeparcel.SafeParcelable: java.lang.String NULL
-com.google.android.gms.drive.Contents
-com.google.android.gms.drive.Contents: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.DriveId
-com.google.android.gms.drive.DriveId: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.events.ChangeEvent
-com.google.android.gms.drive.events.ChangeEvent: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.events.ConflictEvent
-com.google.android.gms.drive.events.ConflictEvent: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.events.DriveEvent
-com.google.android.gms.drive.events.ResourceEvent
-com.google.android.gms.drive.internal.AddEventListenerRequest
-com.google.android.gms.drive.internal.AddEventListenerRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.AuthorizeAccessRequest
-com.google.android.gms.drive.internal.AuthorizeAccessRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CloseContentsAndUpdateMetadataRequest
-com.google.android.gms.drive.internal.CloseContentsAndUpdateMetadataRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CloseContentsRequest
-com.google.android.gms.drive.internal.CloseContentsRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CreateContentsRequest
-com.google.android.gms.drive.internal.CreateContentsRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CreateFileIntentSenderRequest
-com.google.android.gms.drive.internal.CreateFileIntentSenderRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CreateFileRequest
-com.google.android.gms.drive.internal.CreateFileRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.CreateFolderRequest
-com.google.android.gms.drive.internal.CreateFolderRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.DisconnectRequest
-com.google.android.gms.drive.internal.DisconnectRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.GetMetadataRequest
-com.google.android.gms.drive.internal.GetMetadataRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.ListParentsRequest
-com.google.android.gms.drive.internal.ListParentsRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnContentsResponse
-com.google.android.gms.drive.internal.OnContentsResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnDownloadProgressResponse
-com.google.android.gms.drive.internal.OnDownloadProgressResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnDriveIdResponse
-com.google.android.gms.drive.internal.OnDriveIdResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnEventResponse
-com.google.android.gms.drive.internal.OnEventResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnListEntriesResponse
-com.google.android.gms.drive.internal.OnListEntriesResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnListParentsResponse
-com.google.android.gms.drive.internal.OnListParentsResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OnMetadataResponse
-com.google.android.gms.drive.internal.OnMetadataResponse: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OpenContentsRequest
-com.google.android.gms.drive.internal.OpenContentsRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.OpenFileIntentSenderRequest
-com.google.android.gms.drive.internal.OpenFileIntentSenderRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.QueryRequest
-com.google.android.gms.drive.internal.QueryRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.RemoveEventListenerRequest
-com.google.android.gms.drive.internal.RemoveEventListenerRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.TrashResourceRequest
-com.google.android.gms.drive.internal.TrashResourceRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.internal.UpdateMetadataRequest
-com.google.android.gms.drive.internal.UpdateMetadataRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.metadata.internal.MetadataBundle
-com.google.android.gms.drive.metadata.internal.MetadataBundle: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.Query
-com.google.android.gms.drive.query.Query: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.internal.ComparisonFilter
-com.google.android.gms.drive.query.internal.ComparisonFilter: com.google.android.gms.drive.query.internal.a CREATOR
-com.google.android.gms.drive.query.internal.FieldOnlyFilter
-com.google.android.gms.drive.query.internal.FieldOnlyFilter: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.internal.FilterHolder
-com.google.android.gms.drive.query.internal.FilterHolder: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.internal.InFilter
-com.google.android.gms.drive.query.internal.InFilter: com.google.android.gms.drive.query.internal.e CREATOR
-com.google.android.gms.drive.query.internal.LogicalFilter
-com.google.android.gms.drive.query.internal.LogicalFilter: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.internal.NotFilter
-com.google.android.gms.drive.query.internal.NotFilter: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.drive.query.internal.Operator
-com.google.android.gms.drive.query.internal.Operator: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.games.Game
 com.google.android.gms.games.GameEntity
 com.google.android.gms.games.GameEntity: android.os.Parcelable$Creator CREATOR
@@ -325,8 +221,6 @@ com.google.android.gms.games.multiplayer.InvitationEntity: android.os.Parcelable
 com.google.android.gms.games.multiplayer.Participant
 com.google.android.gms.games.multiplayer.ParticipantEntity
 com.google.android.gms.games.multiplayer.ParticipantEntity: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.games.multiplayer.ParticipantResult
-com.google.android.gms.games.multiplayer.ParticipantResult: com.google.android.gms.games.multiplayer.ParticipantResultCreator CREATOR
 com.google.android.gms.games.multiplayer.b
 com.google.android.gms.games.multiplayer.d
 com.google.android.gms.games.multiplayer.realtime.RealTimeMessage
@@ -335,135 +229,73 @@ com.google.android.gms.games.multiplayer.realtime.Room
 com.google.android.gms.games.multiplayer.realtime.RoomEntity
 com.google.android.gms.games.multiplayer.realtime.RoomEntity: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.games.multiplayer.realtime.c
-com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatch
-com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntity
-com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntity: com.google.android.gms.games.multiplayer.turnbased.TurnBasedMatchEntityCreator CREATOR
-com.google.android.gms.games.multiplayer.turnbased.a
-com.google.android.gms.games.request.GameRequest
-com.google.android.gms.games.request.GameRequestEntity
-com.google.android.gms.games.request.GameRequestEntity: com.google.android.gms.games.request.GameRequestEntityCreator CREATOR
-com.google.android.gms.games.request.a
-com.google.android.gms.identity.intents.UserAddressRequest
-com.google.android.gms.identity.intents.UserAddressRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.identity.intents.model.CountrySpecification
-com.google.android.gms.identity.intents.model.CountrySpecification: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.identity.intents.model.UserAddress
-com.google.android.gms.identity.intents.model.UserAddress: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.a: com.google.android.gms.internal.a[] values()
-com.google.android.gms.internal.a: com.google.android.gms.internal.a valueOf(java.lang.String)
-com.google.android.gms.internal.ab
-com.google.android.gms.internal.ab: com.google.android.gms.internal.ac CREATOR
-com.google.android.gms.internal.am
-com.google.android.gms.internal.am: com.google.android.gms.internal.an CREATOR
-com.google.android.gms.internal.b: com.google.android.gms.internal.b[] values()
-com.google.android.gms.internal.b: com.google.android.gms.internal.b valueOf(java.lang.String)
-com.google.android.gms.internal.bn
-com.google.android.gms.internal.bn: com.google.android.gms.internal.bm CREATOR
-com.google.android.gms.internal.bq
-com.google.android.gms.internal.bq: com.google.android.gms.internal.bp CREATOR
-com.google.android.gms.internal.cd
-com.google.android.gms.internal.cd: com.google.android.gms.internal.ce CREATOR
-com.google.android.gms.internal.cf
-com.google.android.gms.internal.cf: com.google.android.gms.internal.cg CREATOR
-com.google.android.gms.internal.db
-com.google.android.gms.internal.db: com.google.android.gms.internal.dc CREATOR
-com.google.android.gms.internal.dd: void setContext(android.content.Context)
-com.google.android.gms.internal.di
-com.google.android.gms.internal.di: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.do: com.google.android.gms.internal.do[] values()
-com.google.android.gms.internal.do: com.google.android.gms.internal.do valueOf(java.lang.String)
-com.google.android.gms.internal.ee$a
-com.google.android.gms.internal.ee$a: com.google.android.gms.internal.eq CREATOR
-com.google.android.gms.internal.eg
-com.google.android.gms.internal.ew
-com.google.android.gms.internal.ew: com.google.android.gms.internal.ex CREATOR
-com.google.android.gms.internal.ey
-com.google.android.gms.internal.ey: com.google.android.gms.internal.ez CREATOR
-com.google.android.gms.internal.ey$a
-com.google.android.gms.internal.ey$a: com.google.android.gms.internal.fa CREATOR
-com.google.android.gms.internal.fb$a
-com.google.android.gms.internal.fb$a: com.google.android.gms.internal.fc CREATOR
-com.google.android.gms.internal.fe
-com.google.android.gms.internal.fe: com.google.android.gms.internal.ff CREATOR
-com.google.android.gms.internal.fe$a
-com.google.android.gms.internal.fe$a: com.google.android.gms.internal.fg CREATOR
-com.google.android.gms.internal.fe$b
-com.google.android.gms.internal.fe$b: com.google.android.gms.internal.fd CREATOR
-com.google.android.gms.internal.fh
-com.google.android.gms.internal.fh: com.google.android.gms.internal.fi CREATOR
-com.google.android.gms.internal.fy
-com.google.android.gms.internal.gy
-com.google.android.gms.internal.gy: com.google.android.gms.internal.gx CREATOR
-com.google.android.gms.internal.gz
-com.google.android.gms.internal.gz: com.google.android.gms.internal.ha CREATOR
-com.google.android.gms.internal.hj
-com.google.android.gms.internal.hj: com.google.android.gms.internal.hk CREATOR
-com.google.android.gms.internal.hn
-com.google.android.gms.internal.hn: com.google.android.gms.internal.ho CREATOR
-com.google.android.gms.internal.hp
-com.google.android.gms.internal.hp: com.google.android.gms.internal.hq CREATOR
-com.google.android.gms.internal.hr
-com.google.android.gms.internal.hr: com.google.android.gms.internal.hs CREATOR
-com.google.android.gms.internal.ht
-com.google.android.gms.internal.ht: com.google.android.gms.internal.hu CREATOR
-com.google.android.gms.internal.hx
-com.google.android.gms.internal.hx: com.google.android.gms.internal.hy CREATOR
-com.google.android.gms.internal.hx$a
-com.google.android.gms.internal.hx$a: com.google.android.gms.internal.hw CREATOR
-com.google.android.gms.internal.hz
-com.google.android.gms.internal.hz: com.google.android.gms.internal.ia CREATOR
-com.google.android.gms.internal.id
-com.google.android.gms.internal.id: com.google.android.gms.internal.ie CREATOR
-com.google.android.gms.internal.im
-com.google.android.gms.internal.im: com.google.android.gms.internal.in CREATOR
-com.google.android.gms.internal.io
-com.google.android.gms.internal.io: com.google.android.gms.internal.ip CREATOR
-com.google.android.gms.internal.ir
-com.google.android.gms.internal.ir: com.google.android.gms.internal.is CREATOR
-com.google.android.gms.internal.ir$a
-com.google.android.gms.internal.ir$a: com.google.android.gms.internal.it CREATOR
-com.google.android.gms.internal.ir$b
-com.google.android.gms.internal.ir$b: com.google.android.gms.internal.iu CREATOR
-com.google.android.gms.internal.ir$b$a
-com.google.android.gms.internal.ir$b$a: com.google.android.gms.internal.iv CREATOR
-com.google.android.gms.internal.ir$b$b
-com.google.android.gms.internal.ir$b$b: com.google.android.gms.internal.iw CREATOR
-com.google.android.gms.internal.ir$c
-com.google.android.gms.internal.ir$c: com.google.android.gms.internal.ix CREATOR
-com.google.android.gms.internal.ir$d
-com.google.android.gms.internal.ir$d: com.google.android.gms.internal.iy CREATOR
-com.google.android.gms.internal.ir$f
-com.google.android.gms.internal.ir$f: com.google.android.gms.internal.iz CREATOR
-com.google.android.gms.internal.ir$g
-com.google.android.gms.internal.ir$g: com.google.android.gms.internal.ja CREATOR
-com.google.android.gms.internal.ir$h
-com.google.android.gms.internal.ir$h: com.google.android.gms.internal.jb CREATOR
-com.google.android.gms.internal.jh
-com.google.android.gms.internal.jh: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jj
-com.google.android.gms.internal.jj: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jl
-com.google.android.gms.internal.jl: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jm
-com.google.android.gms.internal.jm: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jp
-com.google.android.gms.internal.jp: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jr
-com.google.android.gms.internal.jr: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jt
-com.google.android.gms.internal.jt: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.jv
-com.google.android.gms.internal.jv: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.internal.z
-com.google.android.gms.internal.z: com.google.android.gms.internal.aa CREATOR
+com.google.android.gms.internal.be
+com.google.android.gms.internal.be: com.google.android.gms.internal.bd CREATOR
+com.google.android.gms.internal.bh
+com.google.android.gms.internal.bh: com.google.android.gms.internal.bg CREATOR
+com.google.android.gms.internal.bu
+com.google.android.gms.internal.bu: com.google.android.gms.internal.bv CREATOR
+com.google.android.gms.internal.bw
+com.google.android.gms.internal.bw: com.google.android.gms.internal.bx CREATOR
+com.google.android.gms.internal.co
+com.google.android.gms.internal.co: com.google.android.gms.internal.cp CREATOR
+com.google.android.gms.internal.cq: void setContext(android.content.Context)
+com.google.android.gms.internal.dd
+com.google.android.gms.internal.dr
+com.google.android.gms.internal.dr: com.google.android.gms.internal.ds CREATOR
+com.google.android.gms.internal.dt
+com.google.android.gms.internal.dt: com.google.android.gms.internal.du CREATOR
+com.google.android.gms.internal.dt$a
+com.google.android.gms.internal.dt$a: com.google.android.gms.internal.dv CREATOR
+com.google.android.gms.internal.dw$a
+com.google.android.gms.internal.dw$a: com.google.android.gms.internal.dx CREATOR
+com.google.android.gms.internal.dz
+com.google.android.gms.internal.dz: com.google.android.gms.internal.ea CREATOR
+com.google.android.gms.internal.dz$a
+com.google.android.gms.internal.dz$a: com.google.android.gms.internal.eb CREATOR
+com.google.android.gms.internal.dz$b
+com.google.android.gms.internal.dz$b: com.google.android.gms.internal.dy CREATOR
+com.google.android.gms.internal.ec
+com.google.android.gms.internal.ec: com.google.android.gms.internal.ed CREATOR
+com.google.android.gms.internal.en
+com.google.android.gms.internal.fa
+com.google.android.gms.internal.fa: com.google.android.gms.internal.fb CREATOR
+com.google.android.gms.internal.fn
+com.google.android.gms.internal.fn: com.google.android.gms.internal.fp CREATOR
+com.google.android.gms.internal.fq
+com.google.android.gms.internal.fq: com.google.android.gms.internal.fr CREATOR
+com.google.android.gms.internal.fs
+com.google.android.gms.internal.fs: com.google.android.gms.internal.ft CREATOR
+com.google.android.gms.internal.fv
+com.google.android.gms.internal.fv: com.google.android.gms.internal.fw CREATOR
+com.google.android.gms.internal.fv$a
+com.google.android.gms.internal.fv$a: com.google.android.gms.internal.fx CREATOR
+com.google.android.gms.internal.fv$b
+com.google.android.gms.internal.fv$b: com.google.android.gms.internal.fy CREATOR
+com.google.android.gms.internal.fv$b$a
+com.google.android.gms.internal.fv$b$a: com.google.android.gms.internal.fz CREATOR
+com.google.android.gms.internal.fv$b$b
+com.google.android.gms.internal.fv$b$b: com.google.android.gms.internal.ga CREATOR
+com.google.android.gms.internal.fv$c
+com.google.android.gms.internal.fv$c: com.google.android.gms.internal.gb CREATOR
+com.google.android.gms.internal.fv$d
+com.google.android.gms.internal.fv$d: com.google.android.gms.internal.gc CREATOR
+com.google.android.gms.internal.fv$f
+com.google.android.gms.internal.fv$f: com.google.android.gms.internal.gd CREATOR
+com.google.android.gms.internal.fv$g
+com.google.android.gms.internal.fv$g: com.google.android.gms.internal.ge CREATOR
+com.google.android.gms.internal.fv$h
+com.google.android.gms.internal.fv$h: com.google.android.gms.internal.gf CREATOR
+com.google.android.gms.internal.v
+com.google.android.gms.internal.v: com.google.android.gms.internal.w CREATOR
+com.google.android.gms.internal.x
+com.google.android.gms.internal.x: com.google.android.gms.internal.y CREATOR
 com.google.android.gms.location.ActivityRecognitionResult
 com.google.android.gms.location.ActivityRecognitionResult: com.google.android.gms.location.ActivityRecognitionResultCreator CREATOR
 com.google.android.gms.location.DetectedActivity
 com.google.android.gms.location.DetectedActivity: com.google.android.gms.location.DetectedActivityCreator CREATOR
 com.google.android.gms.location.LocationRequest
 com.google.android.gms.location.LocationRequest: com.google.android.gms.location.LocationRequestCreator CREATOR
-com.google.android.gms.location.b
-com.google.android.gms.location.b: com.google.android.gms.location.c CREATOR
 com.google.android.gms.maps.GoogleMapOptions
 com.google.android.gms.maps.GoogleMapOptions: com.google.android.gms.maps.GoogleMapOptionsCreator CREATOR
 com.google.android.gms.maps.MapView: com.google.android.gms.maps.GoogleMap getMap()
@@ -492,28 +324,18 @@ com.google.android.gms.maps.model.VisibleRegion: com.google.android.gms.maps.mod
 com.google.android.gms.plus.PlusOneButton: void setOnPlusOneClickListener(com.google.android.gms.plus.PlusOneButton$OnPlusOneClickListener)
 com.google.android.gms.plus.PlusOneButton: void setAnnotation(int)
 com.google.android.gms.plus.PlusOneButton: void setSize(int)
-com.google.android.gms.plus.internal.PlusCommonExtras
-com.google.android.gms.plus.internal.PlusCommonExtras: com.google.android.gms.plus.internal.f CREATOR
-com.google.android.gms.plus.internal.h
-com.google.android.gms.plus.internal.h: com.google.android.gms.plus.internal.j CREATOR
-com.google.android.gms.tagmanager.az$a: com.google.android.gms.tagmanager.az$a[] values()
-com.google.android.gms.tagmanager.az$a: com.google.android.gms.tagmanager.az$a valueOf(java.lang.String)
-com.google.android.gms.tagmanager.bg$a: com.google.android.gms.tagmanager.bg$a[] values()
-com.google.android.gms.tagmanager.bg$a: com.google.android.gms.tagmanager.bg$a valueOf(java.lang.String)
-com.google.android.gms.tagmanager.ce$a: com.google.android.gms.tagmanager.ce$a[] values()
-com.google.android.gms.tagmanager.ce$a: com.google.android.gms.tagmanager.ce$a valueOf(java.lang.String)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setOnClickListener(android.view.View$OnClickListener)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setAnnotation(int)
+com.google.android.gms.plus.PlusOneButtonWithPopup: void setSize(int)
+com.google.android.gms.plus.PlusOneButtonWithPopup: android.app.PendingIntent getResolution()
 com.google.android.gms.wallet.Address
 com.google.android.gms.wallet.Address: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.Cart
 com.google.android.gms.wallet.Cart: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.wallet.CountrySpecification
-com.google.android.gms.wallet.CountrySpecification: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.FullWallet
 com.google.android.gms.wallet.FullWallet: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.FullWalletRequest
 com.google.android.gms.wallet.FullWalletRequest: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.wallet.InstrumentInfo
-com.google.android.gms.wallet.InstrumentInfo: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.LineItem
 com.google.android.gms.wallet.LineItem: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.LoyaltyWalletObject
@@ -528,8 +350,6 @@ com.google.android.gms.wallet.OfferWalletObject
 com.google.android.gms.wallet.OfferWalletObject: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.wallet.ProxyCard
 com.google.android.gms.wallet.ProxyCard: android.os.Parcelable$Creator CREATOR
-com.google.android.gms.wallet.d
-com.google.android.gms.wallet.d: android.os.Parcelable$Creator CREATOR
 com.google.api.client.auth.oauth.OAuthAuthorizeTemporaryTokenUrl: java.lang.String temporaryToken
 com.google.api.client.auth.oauth.OAuthCallbackUrl: java.lang.String token
 com.google.api.client.auth.oauth.OAuthCallbackUrl: java.lang.String verifier
@@ -710,7 +530,6 @@ pl.com.ezap.miab.MessageListActivity: MessageListActivity()
 pl.com.ezap.miab.MessageViewActivity
 pl.com.ezap.miab.MessageViewActivity: MessageViewActivity()
 pl.com.ezap.miab.R$attr: int adSize
-pl.com.ezap.miab.R$attr: int adSizes
 pl.com.ezap.miab.R$attr: int adUnitId
 pl.com.ezap.miab.R$attr: int cameraBearing
 pl.com.ezap.miab.R$attr: int cameraTargetLat
@@ -847,8 +666,10 @@ pl.com.ezap.miab.R$string: int common_google_play_services_update_text
 pl.com.ezap.miab.R$string: int common_google_play_services_update_title
 pl.com.ezap.miab.R$string: int common_signin_button_text
 pl.com.ezap.miab.R$string: int common_signin_button_text_long
-pl.com.ezap.miab.R$string: int location_client_powered_by_google
 pl.com.ezap.miab.R$string: int menu_delete
+pl.com.ezap.miab.R$string: int menu_hide
+pl.com.ezap.miab.R$string: int menu_leave
+pl.com.ezap.miab.R$string: int menu_throw
 pl.com.ezap.miab.R$string: int msgAcquireCurrentLocation
 pl.com.ezap.miab.R$string: int msgBurryingMessage
 pl.com.ezap.miab.R$string: int msgCreatedBy
@@ -891,7 +712,6 @@ pl.com.ezap.miab.R$style: int messageDataFont
 pl.com.ezap.miab.R$style: int messageFont
 pl.com.ezap.miab.R$styleable: int[] AdsAttrs
 pl.com.ezap.miab.R$styleable: int AdsAttrs_adSize
-pl.com.ezap.miab.R$styleable: int AdsAttrs_adSizes
 pl.com.ezap.miab.R$styleable: int AdsAttrs_adUnitId
 pl.com.ezap.miab.R$styleable: int[] MapAttrs
 pl.com.ezap.miab.R$styleable: int MapAttrs_cameraBearing
@@ -938,32 +758,6 @@ pl.com.ezap.miab.messagev1endpoint.model.MessageV1: java.lang.Long id
 pl.com.ezap.miab.messagev1endpoint.model.MessageV1: pl.com.ezap.miab.messagev1endpoint.model.GeoPt location
 pl.com.ezap.miab.messagev1endpoint.model.MessageV1: java.lang.String message
 pl.com.ezap.miab.messagev1endpoint.model.MessageV1: java.lang.Long timeStamp
-pl.com.ezap.miab.miabendpoint.Miabendpoint$GetMIAB: java.lang.Long id
-pl.com.ezap.miab.miabendpoint.Miabendpoint$ListMessages: java.lang.Long geoIndex
-pl.com.ezap.miab.miabendpoint.Miabendpoint$ListMessages: java.lang.Boolean isHidden
-pl.com.ezap.miab.miabendpoint.Miabendpoint$ListMessages: java.lang.String cursor
-pl.com.ezap.miab.miabendpoint.Miabendpoint$ListMessages: java.lang.Integer limit
-pl.com.ezap.miab.miabendpoint.Miabendpoint$RemoveMIAB: java.lang.Long id
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String alt
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String fields
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String key
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String oauthToken
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.Boolean prettyPrint
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String quotaUser
-pl.com.ezap.miab.miabendpoint.MiabendpointRequest: java.lang.String userIp
-pl.com.ezap.miab.miabendpoint.model.CollectionResponseMessageV1: java.util.List items
-pl.com.ezap.miab.miabendpoint.model.CollectionResponseMessageV1: java.lang.String nextPageToken
-pl.com.ezap.miab.miabendpoint.model.GeoPt: java.lang.Float latitude
-pl.com.ezap.miab.miabendpoint.model.GeoPt: java.lang.Float longitude
-pl.com.ezap.miab.miabendpoint.model.MessageV1: pl.com.ezap.miab.miabendpoint.model.GeoPt deltaLocation
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Long flowStamp
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Boolean flowing
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Long geoIndex
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Boolean hidden
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Long id
-pl.com.ezap.miab.miabendpoint.model.MessageV1: pl.com.ezap.miab.miabendpoint.model.GeoPt location
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.String message
-pl.com.ezap.miab.miabendpoint.model.MessageV1: java.lang.Long timeStamp
 pl.com.ezap.miab.services.DigService
 pl.com.ezap.miab.services.DigService: DigService()
 pl.com.ezap.miab.services.SearchService

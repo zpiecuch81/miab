@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+//import android.location.LocationManager;
 
 public class MIABSQLiteHelper extends SQLiteOpenHelper
 {

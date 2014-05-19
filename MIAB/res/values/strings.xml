@@ -13,6 +13,9 @@
     <string name="action_about">About</string>
 
     <string name="menu_delete">Delete bottle</string>
+    <string name="menu_leave">Leave bottle</string>
+    <string name="menu_throw">Throw bottle</string>
+    <string name="menu_hide">Hide bottle</string>
 
     <string name="button_leaveMsg">Leave a bottle</string>
     <string name="button_throwMsg">Throw a bottle</string>

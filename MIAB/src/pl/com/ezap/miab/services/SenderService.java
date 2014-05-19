@@ -13,10 +13,15 @@ import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.MessageV1EndPoint;
 import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.widget.Toast;
 
 public class SenderService extends Service
     implements GPSHelper.GPSListener
@@ -56,6 +61,34 @@ public class SenderService extends Service
         gpsHelper.start();
       }
     }
+  }
+
+  static public boolean isHardwareReady( Context context, boolean displayToasts )
+  {
+    final LocationManager manager =
+        (LocationManager)context.getSystemService( Context.LOCATION_SERVICE );
+    if( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+      if( displayToasts ) {
+        Toast.makeText(
+            context.getApplicationContext(),
+            R.string.msgEnableGPSToast,
+            Toast.LENGTH_LONG ).show();
+      }
+      return false;
+    }
+    final ConnectivityManager cm =
+        (ConnectivityManager)context.getSystemService( Context.CONNECTIVITY_SERVICE );
+    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+    if( netInfo == null || !netInfo.isConnected() ) {
+      if( displayToasts ) {
+        Toast.makeText(
+            context.getApplicationContext(),
+            R.string.msgEnableNetToast,
+            Toast.LENGTH_LONG ).show();
+      }
+      return false;
+    }
+    return true;
   }
 
   @Override
