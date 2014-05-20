@@ -3,11 +3,15 @@
 	- git init
 	- git config --global user.name "Your Name Here"
 	- git config --global user.email "your_email@example.com"
-	- git remote add origin https://github.com/zpiecuch81/miab2.git
+	- git remote add origin https://github.com/zpiecuch81/miab.git
 	- git config --global credential.helper "cache --timeout=3600"
 	- git fetch origin
 	- git checkout alpha
 	
+	Merging master to release branch, master is not deleted.
+	- git checkout release
+	- git rebase master
+
 3. Add google play sirvices library in ADT:
 	- File/Import...
 	- General/Existing Projects into Workspace
