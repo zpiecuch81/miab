@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 public class SimpleEula
 {
   private static final String EULA_KEY = "MIAB_EULA_KEY";
+  private static final int EULA_VERSION_NUMBER = 4;
   private Activity mActivity;
 
   public SimpleEula( Activity context )
@@ -41,7 +42,7 @@ public class SimpleEula
     final PackageInfo versionInfo = getPackageInfo();
     final SharedPreferences prefs = mActivity.getSharedPreferences(
         GeneralMenuHelper.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
-    if( versionInfo.versionCode != prefs.getInt( EULA_KEY, 0 ) ) {
+    if( EULA_VERSION_NUMBER != prefs.getInt( EULA_KEY, 0 ) ) {
       String title =
           mActivity.getString( R.string.app_name )
               + " v"
@@ -60,7 +61,7 @@ public class SimpleEula
                 {
                   // Mark this version as read.
                   SharedPreferences.Editor editor = prefs.edit();
-                  editor.putInt( EULA_KEY, versionInfo.versionCode );
+                  editor.putInt( EULA_KEY, EULA_VERSION_NUMBER );
                   editor.commit();
                   dialogInterface.dismiss();
                 }
