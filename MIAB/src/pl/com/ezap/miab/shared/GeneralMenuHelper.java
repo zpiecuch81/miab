@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -34,6 +35,13 @@ public class GeneralMenuHelper
       case R.id.action_scanning:
         switchMIABService();
         activity.invalidateOptionsMenu();
+        return true;
+      case R.id.action_help:
+        Intent helpIntent = new Intent();
+        helpIntent.setAction(Intent.ACTION_VIEW);
+        helpIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+        helpIntent.setData(Uri.parse(activity.getString( R.string.action_help_url )));
+        activity.startActivity(helpIntent);
         return true;
       case R.id.action_about:
         Intent intent = new Intent( activity, AboutActivity.class );

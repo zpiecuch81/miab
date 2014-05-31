@@ -9,6 +9,8 @@
 
     <string name="action_settings">Opcje</string>
     <string name="action_scanning">Wyłącz rozglądanie</string>
+    <string name="action_help">Pomoc</string>
+    <string name="action_help_url">http://miab.ezap.com.pl/index_pl.html</string>
     <string name="action_about">O programie</string>
 
     <string name="menu_delete">Usuń butelkę</string>
