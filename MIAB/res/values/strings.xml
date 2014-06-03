@@ -25,6 +25,12 @@
     <string name="button_searchDigMsg">Search hidden bottles</string>
     <string name="button_foundMsg">Found bottles</string>
     <string name="buttonMessageReady">Leave bottle</string>
+    <string name="button_rateNoThanks">No, thanks.</string>
+    <string name="button_rateLater">Remind me later.</string>
+    <string name="button_rateNow">Rate \0</string>
+
+    <string name="msgRateDialog">If you enjoy using Message In A Bottle, please take a moment to rate it.
+        Thanks for your support!</string>
 
     <string name="msgThrowingMessage">Throwing bottle</string>
     <string name="msgLeavingMessage">Leaving bottle</string>

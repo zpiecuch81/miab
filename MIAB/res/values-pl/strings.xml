@@ -24,6 +24,12 @@
     <string name="button_searchDigMsg">Szukaj ukrytych butelek</string>
     <string name="button_foundMsg">Znalezione butelki</string>
     <string name="buttonMessageReady">Zostaw butelkę</string>
+    <string name="button_rateNoThanks">Nie, dziękuję.</string>
+    <string name="button_rateLater">Przypomnij mi później.</string>
+    <string name="button_rateNow">Oceń \0</string>
+
+    <string name="msgRateDialog">Jeśli podoba ci się Wiadomość W Butelce, proszę poświęć chwilę i oceń ją.
+        Dziękuję za wsparcie!</string>
 
     <string name="msgThrowingMessage">Rzucam butelkę</string>
     <string name="msgLeavingMessage">Zostawiam butelkę</string>

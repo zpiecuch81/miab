@@ -4,6 +4,7 @@ package pl.com.ezap.miab;
 import pl.com.ezap.miab.services.DigService;
 import pl.com.ezap.miab.services.SenderService;
 import pl.com.ezap.miab.shared.GeneralMenuHelper;
+import pl.com.ezap.miab.shared.RateApp;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import android.location.LocationManager;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity
     setContentView( R.layout.activity_main );
 
     new SimpleEula(this).show();
+    RateApp.app_launched( this );
 
     menuHelper = new GeneralMenuHelper( this );
 
