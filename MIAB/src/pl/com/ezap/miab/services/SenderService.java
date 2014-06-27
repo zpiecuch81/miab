@@ -57,11 +57,11 @@ public class SenderService extends Service
       if( result == 0 ) {
         messages2send.remove( 0 );
       }
-      if( messages2send.isEmpty() ) {
+      //if( messages2send.isEmpty() ) {
         finishService();
-      } else {
-        gpsHelper.start();
-      }
+      //} else {
+        //gpsHelper.start();
+      //}
     }
   }
 
@@ -169,18 +169,18 @@ public class SenderService extends Service
       return; // already started
     }
 
-    gpsHelper = new GPSHelper( 
-        this.getApplication().getApplicationContext(),
-        this,
-        10000,
-        3 );
-    gpsHelper.start();
-
     notificationHelper = new NotificationHelper_v2(
         getApplicationContext(),
         NotificationHelper_v2.SENDING_SERVICE_NOTIFICATION_ID,
         getSendText( messages2send.get( 0 ) ) );
     notificationHelper.createUpdateNotification( getString( R.string.msgAcquireCurrentLocation ) );
+
+    gpsHelper = new GPSHelper( 
+        this.getApplication().getApplicationContext(),
+        this,
+        1000,
+        10 );
+    gpsHelper.start();
 
   }
 

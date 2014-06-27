@@ -60,7 +60,7 @@ public class DigService extends Service
     gpsHelper = new GPSHelper( 
         this.getApplication().getApplicationContext(),
         this,
-        10000,
+        3000,
         3 );
     gpsHelper.start();
 
@@ -89,8 +89,8 @@ public class DigService extends Service
   public void onGPSFailure()
   {
     Log.d( "DigService", "onGPSFailure called" );
-    notifications.finalNotification( getString( R.string.msgNotificationGPSError ) );
-    stopSelf();
+//    notifications.finalNotification( getString( R.string.msgNotificationGPSError ) );
+//    stopSelf();
   }
 
   @Override
