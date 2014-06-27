@@ -13,7 +13,7 @@ public class MessageV1EndPoint
             AndroidHttp.newCompatibleTransport(),
             new GsonFactory(),
             null );
-    builder.setApplicationName( "message-in-bottle" );
+    builder.setApplicationName( "message-ina-bottle" );
     return builder.build();
   }
 }
