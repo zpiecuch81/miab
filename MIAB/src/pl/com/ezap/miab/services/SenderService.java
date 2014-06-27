@@ -4,17 +4,20 @@ package pl.com.ezap.miab.services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import pl.com.ezap.miab.CreateMessageActivity;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
 import pl.com.ezap.miab.messagev1endpoint.model.GeoPt;
 import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
 import pl.com.ezap.miab.shared.GPSHelper;
+import pl.com.ezap.miab.shared.GeneralMenuHelper;
 import pl.com.ezap.miab.shared.GeoIndex;
 import pl.com.ezap.miab.shared.MessageV1EndPoint;
 import pl.com.ezap.miab.shared.NotificationHelper_v2;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -54,11 +57,14 @@ public class SenderService extends Service
     protected void onPostExecute( Long result )
     {
       Log.d( "SendMessageTask", "onPostExecute, result " + result );
-      if( result == 0 ) {
-        messages2send.remove( 0 );
+      if( result != 0 ) {
+        SharedPreferences settings = getSharedPreferences( GeneralMenuHelper.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE );
+        SharedPreferences.Editor settingsEditor = settings.edit();
+        settingsEditor.putString( CreateMessageActivity.MESSAGE_SHARED_PREF_KEY, messages2send.get( 0 ).getMessage() );
+        settingsEditor.commit();
       }
       //if( messages2send.isEmpty() ) {
-        finishService();
+        finishService( result == 0 );
       //} else {
         //gpsHelper.start();
       //}
@@ -188,18 +194,19 @@ public class SenderService extends Service
   {
     gpsHelper.stop();
     if( messages2send.isEmpty() ) {
-      finishService();
+      finishService(true);
       return;
     }
     addGeoData( messages2send.get( 0 ), location );
     new SendMessageTask().execute( messages2send.get( 0 ) );
   }
 
-  private void finishService()
+  private void finishService(boolean success)
   {
     Log.i( "SenderService", "stopping service" );
     if( notificationHelper != null ) {
-      notificationHelper.finalNotification( getString( R.string.msgSendingDone ) );
+      notificationHelper.finalNotification(
+          getString( success ? R.string.msgSendingDone : R.string.msgSendingError ) );
     }
     if( gpsHelper != null ) {
       gpsHelper.stop();

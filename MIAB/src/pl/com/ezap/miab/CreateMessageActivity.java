@@ -22,7 +22,7 @@ public class CreateMessageActivity extends Activity
 {
   private static final int MIN_MESSAGE_LENGTH = 10;
   private static final int MAX_MESSAGE_LENGTH = 1500;
-  private static final String MESSAGE_SHARED_PREF_KEY = "message2Send"; 
+  public static final String MESSAGE_SHARED_PREF_KEY = "message2Send"; 
 
   private GeneralMenuHelper menuHelper;
   private boolean isFlowing;
