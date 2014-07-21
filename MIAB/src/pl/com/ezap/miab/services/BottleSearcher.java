@@ -4,6 +4,7 @@ package pl.com.ezap.miab.services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import pl.com.ezap.miab.R;
 import pl.com.ezap.miab.messagev1endpoint.Messagev1endpoint;
 import pl.com.ezap.miab.messagev1endpoint.model.MessageV1;
@@ -50,6 +51,9 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
     List<MessageV1> miabs2Check = getMIABsWithCurrentGeoIndex();
     List<MessageV1> miabs2Download = selectCurrentLocationMIABS( miabs2Check );
     List<MessageV1> downloadedMIABs = downloadMIABs( miabs2Download );
+    if( downloadedMIABs.isEmpty() ) {
+      downloadedMIABs = tryLuskyStrike();
+    }
     List<DBMessage> storedMIABS = storeDownloadedMIABs( downloadedMIABs );
     removeStoredMessages( storedMIABS );
     return storedMIABS;
@@ -203,6 +207,28 @@ public class BottleSearcher extends AsyncTask<Void, Integer, List<DBMessage>>
         }
       }
     }
+  }
+
+  private List<MessageV1> tryLuskyStrike()
+  {
+    List<MessageV1> downloadedMIABs = new ArrayList<MessageV1>();
+    if( !doDig ){
+      Random r = new Random();
+      if( r.nextInt(100)%13 == 0) {
+        Messagev1endpoint endpoint = MessageV1EndPoint.get();
+        MessageV1 miab = null;
+        try {
+          miab = endpoint.getFlowingMessage().execute();
+        }
+        catch( IOException e ) {
+          e.printStackTrace();
+        }
+        if( miab != null ) {
+          downloadedMIABs.add( miab );
+        }
+      }
+    }
+    return downloadedMIABs;
   }
 
   static public void searchAtLocation( Location location, Context context )

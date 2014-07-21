@@ -8,8 +8,8 @@ import android.util.Log;
 
 public class LocationHelper
 {
-  private final static float SAME_POINT_ACCURACY = 10.0f;
-  private final static float GPS_ACCURACY = 8.1f;
+  private final static float SAME_POINT_ACCURACY = 15.1f;
+  private final static float GPS_ACCURACY = 15.1f;
 
   public static Location geoPt2Location( GeoPt geoPt )
   {

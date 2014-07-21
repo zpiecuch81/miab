@@ -23,6 +23,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 @Api( name = "messagev1endpoint", namespace = @ApiNamespace(
     ownerDomain = "com.pl",
@@ -163,6 +165,33 @@ public class MessageV1Endpoint
     finally {
       mgr.close();
     }
+  }
+
+  @ApiMethod( name = "getFlowingMessage" )
+  public MessageV1 getFlowingMessage()
+  {
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query allEntities = new Query("MessageV1");
+    allEntities.setFilter( new FilterPredicate( "flowStamp", FilterOperator.NOT_EQUAL, null ) );
+    allEntities.addSort( "flowStamp", SortDirection.DESCENDING );
+    PreparedQuery pq = datastore.prepare(allEntities);
+    long currentTimeStamp = new java.util.Date().getTime();
+    for( Entity entity : pq.asIterable() ) {
+      long timeStamp = (long)entity.getProperty( "timeStamp" );
+      long duration = currentTimeStamp - timeStamp;
+      if( duration < 1000 * 3600 * 24 ) {
+        continue;
+      }
+      MessageV1 message = new MessageV1();;
+      message.setTimeStamp( timeStamp );
+      message.setID( (long)entity.getKey().getId() );
+      message.setLocation( (GeoPt)entity.getProperty( "location" ) );
+      message.setGeoIndex( (Long)entity.getProperty( "geoIndex") );
+      message.setFlowing( true );
+      message.setMessage( (String)entity.getProperty( "message" ) );
+      return message;
+    }
+    return null;
   }
 
   private boolean containsMessageV1( MessageV1 messagev1 )
